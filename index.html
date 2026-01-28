@@ -2,16 +2,22 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Portafolio – Seguridad Informática</title>
+  <title>Portafolio | Seguridad Informática</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
-  <h1>Portafolio Digital</h1>
-  <p>CNO V - Seguridad Informática</p>
+<!-- HERO -->
+<header class="hero">
+  <div class="overlay">
+    <h1>UNIDAD DE SEGURIDAD CIBERNÉTICA</h1>
+    <p>CNO V – Seguridad Informática</p>
+    <span class="alias">Alias: dark.lotus</span>
+  </div>
 </header>
 
+<!-- NAV -->
 <nav>
   <a href="https://elisaaagh.github.io/">Inicio</a>
   <a href="https://elisaaagh.github.io/parcial1.html">Parcial 1</a>
@@ -20,58 +26,66 @@
   <a href="#contacto">Contacto</a>
 </nav>
 
-<section id="header">
-  <h2>Encabezado</h2>
-  <p><strong>Nombre</strong>: Elisa Alejandra Arellano Wratny</p>
-  <p><strong>Alias</strong>: dark.lotus</p>
-  <p><strong>Asignatura</strong>: CNO V - Seguridad Informática</p>
-  <p><strong>Institución</strong>: Universidad Politécnica de San Luis Potosí</p>
-  <p><strong>Semestre</strong>: Noveno</p>		
-</section>	
+<!-- PERFIL -->
+<section class="card">
+  <h2>📁 Expediente del Estudiante</h2>
+  <p><strong>Nombre:</strong> Elisa Alejandra Arellano Wratny</p>
+  <p><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí</p>
+  <p><strong>Semestre:</strong> Noveno</p>
+  <p><strong>Asignatura:</strong> CNO V - Seguridad Informática</p>
+</section>
 
-<section id="inicio">
-  <h2>Presentación del portafolio</h2>
+<!-- PRESENTACIÓN -->
+<section class="card">
+  <h2>🛡️ Misión del Portafolio</h2>
   <p>
-    El presente portafolio digital tiene como propósito recopilar y presentar de forma organizada las evidencias académicas desarrolladas durante el curso de CNO V - Seguridad Informática, funcionando como un sitio web accesible y estructurado.</p>
-<p>El portafolio está enfocado en el análisis y aplicación de conceptos relacionados con la seguridad informática, tales como el análisis de vulnerabilidades y las pruebas de penetración, abordados desde un enfoque técnico y ético.</p>
-<p>Este espacio representa una evidencia del proceso de aprendizaje, permitiendo documentar de manera progresiva el desarrollo de conocimientos y habilidades adquiridas a lo largo del curso, así como servir de base para la incorporación de contenidos en los siguientes parciales y la entrega final.
+    Este portafolio digital documenta el análisis y aplicación de conceptos de seguridad informática,
+    abordando vulnerabilidades, pruebas de penetración y buenas prácticas desde un enfoque técnico,
+    ético y preventivo.
+  </p>
+  <p>
+    Funciona como evidencia del aprendizaje progresivo durante el curso y como base para la
+    incorporación de contenidos en los distintos parciales.
   </p>
 </section>
 
-<section id="perfil">
-  <h2>Perfil del estudiante</h2>
+<!-- PERFIL PROFESIONAL -->
+<section class="card">
+  <h2>👩‍💻 Perfil Profesional</h2>
   <p>
-    Estudiante de Ingeniería en Tecnologías de la Información, con experiencia en áreas técnicas y de análisis de datos, como bases de datos y conceptos de inteligencia artificial. Cuento con conocimientos en programación de alto nivel en múltiples lenguajes, así como nociones de seguridad informática, aplicadas al desarrollo de páginas web y formularios digitales.</p>
-<p>Presento un gran interés en el ámbito de la ciberseguridad, especialmente en temas como seguridad de la información, gestión de accesos, protección de datos, concientización en buenas prácticas de seguridad y el estudio de amenazas digitales desde una perspectiva preventiva y ética.
+    Estudiante de Ingeniería en Tecnologías de la Información con experiencia en programación,
+    bases de datos e inteligencia artificial.
+  </p>
+  <p>
+    Interesada en ciberseguridad, protección de datos, gestión de accesos y concientización en
+    buenas prácticas de seguridad digital.
   </p>
 </section>
 
-<section id="tecnico">
-  <h2>Información técnica</h2>
+<!-- INFO TÉCNICA -->
+<section class="card">
+  <h2>⚙️ Información Técnica</h2>
   <ul>
-    <li><strong>Tecnologías:</strong> HTML5 y CSS3</li>
-    <li><strong>Plataforma:</strong> GitHub Pages</li>
-    <li><strong>Control de versiones:</strong> Git y GitHub</li>
+    <li>HTML5 & CSS3</li>
+    <li>GitHub Pages</li>
+    <li>Control de versiones con Git & GitHub</li>
   </ul>
 </section>
 
-<section id="contacto">
-  <h2>Contacto</h2>
- <form id="contact-form">
-  <input type="text" name="nombre" placeholder="Nombre" required>
-  <input type="email" name="email" placeholder="Correo electrónico" required>
-  <textarea name="mensaje" placeholder="Mensaje" required></textarea>
-  <button type="submit">Enviar</button>
-</form>
+<!-- CONTACTO -->
+<section class="card" id="contacto">
+  <h2>🚨 Enviar Reporte</h2>
+  <form id="contact-form">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="email" name="email" placeholder="Correo electrónico" required>
+    <textarea name="mensaje" placeholder="Describe el incidente..." required></textarea>
+    <button type="submit">Enviar Reporte</button>
+  </form>
 </section>
 
 <footer>
-  <p>Elisa Alejandra Arellano Wratny</p>
-  <p>© Portafolio Seguridad Informática</p>
-  <p>UPSLP</p>
+  <p>© Elisa Alejandra Arellano Wratny | UPSLP</p>
 </footer>
-
-</body>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
@@ -81,25 +95,11 @@
 
 document.getElementById("contact-form").addEventListener("submit", function(e) {
   e.preventDefault();
-
-  emailjs.sendForm(
-    "service_ta9ylqa",
-    "template_xug6c2l",
-    this
-  ).then(
-    function() {
-      alert("Mensaje enviado correctamente");
-    },
-    function(error) {
-      alert("Error al enviar el mensaje");
-      console.error(error);
-    }
-  );
+  emailjs.sendForm("service_ta9ylqa", "template_xug6c2l", this)
+    .then(() => alert("Reporte enviado con éxito"))
+    .catch(() => alert("Error al enviar el reporte"));
 });
 </script>
 
-
-
+</body>
 </html>
-
-
