@@ -22,3 +22,13 @@ window.addEventListener("scroll", () => {
   const textScale = 1.1 - progress * 0.1;
   hero.style.setProperty("--text-scale", textScale);
 });
+
+history.scrollRestoration = "manual";
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
+
+window.addEventListener("load", function() {
+  window.scrollTo(0, 0);
+});
