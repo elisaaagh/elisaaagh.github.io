@@ -123,11 +123,11 @@ nav {
   background: rgba(10, 10, 25, 0.95);
   backdrop-filter: blur(10px);
 
-  background: linear-gradient(
-    to bottom,
-    rgba(15,15,35,0.98),
-    rgba(10,10,25,0.95)
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px 0;
 }
 
 /*nav a {
@@ -141,13 +141,9 @@ nav a:hover {
   color: #ffffff;
 }
 
-nav a {
-  position: relative;
-  z-index: 10000;
-  color: #c7c7ff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 500;
+nav {
+  gap: 30px;
+  display: inline-block;
 }
 
 section {
