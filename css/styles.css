@@ -253,7 +253,10 @@ footer {
 }
 
 #contact-form textarea {
+  width: 100%;
+  min-height: 140px;
   resize: none;
+  font-family: inherit;
 }
 
 /* Fondo base para páginas simples */
