@@ -1,18 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
-body {
+/*body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   background: #0b0b0f;
   color: #eaeaea;
   line-height: 1.6;
-}
+}*/
 
 /*header {
   background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
   padding: 60px 20px;
   text-align: center;
 }*/
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0a0a;
+  color: white;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 400px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fondo */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../images/background.jpg") center/cover no-repeat;
+  z-index: -1;
+
+  transform: scale(var(--bg-scale, 1.2));
+  transition: transform 0.1s linear;
+}
+
+/* Contenido */
+.hero-content {
+  text-align: center;
+  transform: scale(var(--text-scale, 1.1));
+  transition: transform 0.1s linear;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  opacity: 0.9;
+}
+
+/* Contenido normal */
+.content {
+  padding: 60px 20px;
+}
 
 header {
   background:
