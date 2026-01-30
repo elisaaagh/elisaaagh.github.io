@@ -259,6 +259,10 @@ footer {
 
 }
 
+#contact-form button {
+  width: 100%;
+}
+
 /* Fondo base para páginas simples */
 .page-bg {
   min-height: 100vh;
