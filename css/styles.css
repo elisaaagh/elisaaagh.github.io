@@ -297,32 +297,3 @@ footer {
   z-index: -1;
 }
 
-#header-info {
-  padding: 80px 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.info-card {
-  width: 100%;
-  max-width: 900px;
-  padding: 40px;
-  border-radius: 14px;
-  background: rgba(15, 15, 30, 0.55);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.info-card h2 {
-  margin-bottom: 20px;
-}
-
-.info-card p {
-  margin: 10px 0;
-}
-
-.info-card:hover {
-  box-shadow:
-    0 0 35px rgba(0, 255, 200, 0.15),
-    inset 0 0 25px rgba(0, 255, 200, 0.05);
-}
