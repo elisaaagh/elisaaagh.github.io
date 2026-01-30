@@ -184,6 +184,8 @@ footer {
 
 #contact-form {
   position: relative;
+  z-index: 2; 
+
   max-width: 500px;
   margin: 40px auto;
   padding: 35px;
@@ -209,4 +211,5 @@ footer {
 
   z-index: 0;
 }
+
 
