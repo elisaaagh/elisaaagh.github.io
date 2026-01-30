@@ -74,7 +74,10 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
-    AOS.init();
+    AOS.init({
+      duration: 1800,
+      easing: 'ease-out-cubic'
+    });
   </script>
   
 </body>
@@ -107,6 +110,7 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 </html>
+
 
 
 
