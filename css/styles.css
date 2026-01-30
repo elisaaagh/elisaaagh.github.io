@@ -252,12 +252,9 @@ footer {
   z-index: 3;
 }
 
-/*#contact-form textarea {
-  width: 100%;
-  min-height: 140px;
+#contact-form textarea {
   resize: none;
-
-}*/
+}
 
 #contact-form input,
 #contact-form textarea,
