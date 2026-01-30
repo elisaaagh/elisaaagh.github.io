@@ -4,6 +4,10 @@
   #contacto {
     padding: 20px;
   }
+  .encabezado-contenedor {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 @keyframes fadeUp {
