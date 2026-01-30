@@ -106,16 +106,31 @@ header p {
   font-size: 1.1rem;
 }
 
-nav {
+/*nav {
   position: sticky;
   top: 0;
   background: rgba(15, 15, 25, 0.9);
   padding: 15px;
   text-align: center;
   backdrop-filter: blur(8px);
+}*/
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  background: rgba(10, 10, 25, 0.95);
+  backdrop-filter: blur(10px);
+
+  background: linear-gradient(
+    to bottom,
+    rgba(15,15,35,0.98),
+    rgba(10,10,25,0.95)
+  );
 }
 
-nav a {
+/*nav a {
   color: #c7c7ff;
   margin: 0 15px;
   text-decoration: none;
@@ -124,6 +139,11 @@ nav a {
 
 nav a:hover {
   color: #ffffff;
+}*/
+
+nav a {
+  position: relative;
+  z-index: 10000;
 }
 
 section {
