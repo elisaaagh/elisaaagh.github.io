@@ -135,6 +135,17 @@ h2 {
   margin-bottom: 15px;
   border-left: 4px solid #c77dff;
   padding-left: 10px;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 40px;
+  height: 3px;
+  background: #00ffd5;
 }
 
 ul li {
