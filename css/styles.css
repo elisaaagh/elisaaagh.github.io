@@ -252,6 +252,10 @@ footer {
   z-index: 3;
 }
 
+#contact-form textarea {
+  resize: none;
+}
+
 /* Fondo base para páginas simples */
 .page-bg {
   min-height: 100vh;
