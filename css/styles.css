@@ -109,6 +109,7 @@ section {
   max-width: 900px;
   margin: 60px auto;
   padding: 0 20px;
+  scroll-margin-top: 120px;
 }
 
 h2 {
