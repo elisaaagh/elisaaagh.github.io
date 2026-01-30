@@ -5,6 +5,7 @@
   <title>Portafolio – Seguridad Informática</title>
   <link rel="icon" href="/images/favicon.ico">
   <link rel="stylesheet" href="styles.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -39,7 +40,7 @@
   </p>
 </section>
 
-<section id="perfil">
+<section id="perfil"  data-aos="fade-up">
   <h2>Perfil del estudiante</h2>
   <p>
     Estudiante de Ingeniería en Tecnologías de la Información, con experiencia en áreas técnicas y de análisis de datos, como bases de datos y conceptos de inteligencia artificial. Cuento con conocimientos en programación de alto nivel en múltiples lenguajes, así como nociones de seguridad informática, aplicadas al desarrollo de páginas web y formularios digitales.</p>
@@ -47,7 +48,7 @@
   </p>
 </section>
 
-<section id="tecnico">
+<section id="tecnico" data-aos="fade-left">
   <h2>Información técnica</h2>
   <ul>
     <li><strong>Tecnologías:</strong> HTML5 y CSS3</li>
@@ -56,7 +57,7 @@
   </ul>
 </section>
 
-<section id="contacto">
+<section id="contacto" data-aos="zoom-in">
   <h2>Contacto</h2>
  <form id="contact-form">
   <input type="text" name="nombre" placeholder="Nombre" required>
@@ -70,6 +71,12 @@
   <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
 </footer>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init();
+  </script>
+  
 </body>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -100,6 +107,7 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 </html>
+
 
 
 
