@@ -9,7 +9,7 @@ window.addEventListener("scroll", () => {
 
   // Cambiar altura hero
   const minHeight = 70;
-  const maxHeight = 80;
+  const maxHeight = 100;
 
   const newHeight = maxHeight - (maxHeight - minHeight) * progress;
   hero.style.height = newHeight + "vh";
