@@ -298,37 +298,27 @@ footer {
 }
 
 #header-info {
-  padding: 100px 20px;
+  padding: 80px 20px;
   display: flex;
   justify-content: center;
 }
 
 .info-card {
   width: 100%;
-  max-width: 800px;
-
-  padding: 50px;
-
-  border-radius: 20px;
-
-  background: rgba(15, 15, 30, 0.65);
-  backdrop-filter: blur(12px);
-
-  border: 1px solid rgba(0, 255, 200, 0.15);
-
-  box-shadow:
-    0 0 25px rgba(0, 255, 200, 0.08),
-    inset 0 0 20px rgba(0, 255, 200, 0.03);
+  max-width: 900px;
+  padding: 40px;
+  border-radius: 14px;
+  background: rgba(15, 15, 30, 0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .info-card h2 {
-  color: #c084fc;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .info-card p {
-  margin: 12px 0;
-  color: #e5e7ff;
+  margin: 10px 0;
 }
 
 .info-card:hover {
