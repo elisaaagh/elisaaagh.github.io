@@ -110,6 +110,41 @@ header p {
   font-size: 1.1rem;
 }
 
+#header {
+  padding: 80px 20px;
+}
+
+/* CONTENEDOR */
+.encabezado-contenedor {
+  display: flex;
+  align-items: center;      /* centra vertical */
+  justify-content: center;  /* centra el bloque completo */
+  gap: 60px;                /* espacio entre texto e imagen */
+  flex-wrap: wrap;          /* para celular */
+}
+
+/* TEXTO */
+.encabezado-texto {
+  max-width: 500px;
+  text-align: left;
+}
+
+/* IMAGEN */
+.encabezado-imagen img {
+  width: 280px;
+  max-width: 100%;
+  border-radius: 15px;
+  opacity: 0.9;
+}
+
+.encabezado-imagen img {
+  width: 280px;
+  border-radius: 15px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 10px rgba(140, 0, 255, 0.4));
+}
+
+
 nav {
   position: sticky;
   top: 0;
