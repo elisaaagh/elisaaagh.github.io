@@ -271,3 +271,12 @@ footer {
 .page-parcial3 {
   background-image: url("../images/beta.png");
 }
+
+.page-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,15,0.65);
+  z-index: -1;
+}
+
