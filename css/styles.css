@@ -212,4 +212,10 @@ footer {
   z-index: 0;
 }
 
-
+#contact-form input,
+#contact-form textarea,
+#contact-form button,
+#contact-form label {
+  position: relative;
+  z-index: 3;
+}
