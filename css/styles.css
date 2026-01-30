@@ -141,7 +141,7 @@ h2 {
   position: relative;
 }
 
-h2::after {
+/*h2::after {
   content: "";
   position: absolute;
   left: 0;
@@ -149,7 +149,7 @@ h2::after {
   width: 40px;
   height: 3px;
   background: #00ffd5;
-}
+}*/
 
 ul li {
   margin-bottom: 8px;
