@@ -134,7 +134,7 @@ header p {
 }
 
 /* IMAGEN */
-.encabezado-imagen img {
+/*.encabezado-imagen img {
   width: 280px;
   max-width: 100%;
   border-radius: 15px;
@@ -146,6 +146,17 @@ header p {
   border-radius: 15px;
   opacity: 0.9;
   filter: drop-shadow(0 0 10px rgba(140, 0, 255, 0.4));
+}
+*/
+.encabezado-imagen img {
+  width: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 15px;
+
+  box-shadow:
+    0 0 15px rgba(140, 0, 255, 0.4),
+    0 0 30px rgba(0, 255, 200, 0.15);
 }
 
 
