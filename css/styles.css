@@ -106,7 +106,7 @@ header p {
   font-size: 1.1rem;
 }
 
-/*nav {
+nav {
   position: sticky;
   top: 0;
   z-index: 9999;
@@ -116,7 +116,7 @@ header p {
   backdrop-filter: blur(8px);
 }
 
-nav a {
+/*nav a {
   color: #c7c7ff;
   margin: 0 15px;
   text-decoration: none;
