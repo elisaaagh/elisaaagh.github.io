@@ -170,6 +170,7 @@ section {
   margin: 60px auto;
   padding: 0 20px;
   scroll-margin-top: 60px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 h2 {
