@@ -38,7 +38,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/background.jpg") center/cover no-repeat;
+  background: url("images/header.png") center/cover no-repeat;
   z-index: -1;
 
   transform: scale(var(--bg-scale, 1.2));
