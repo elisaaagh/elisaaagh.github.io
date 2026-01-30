@@ -259,3 +259,15 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.page-parcial1 {
+  background-image: url("../images/beta.png");
+}
+
+.page-parcial2 {
+  background-image: url("../images/beta.png");
+}
+
+.page-parcial3 {
+  background-image: url("../images/beta.png");
+}
