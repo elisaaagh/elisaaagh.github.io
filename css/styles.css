@@ -570,3 +570,15 @@ footer {
 
 .card h3 {
     color: #c77dff;
+    margin-bottom: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border: 1px solid #c77dff;
+}
+
+.card:active {
+    transform: scale(0.98);
+}
