@@ -496,3 +496,78 @@ footer {
 .btn-ver:hover {
   transform: scale(1.05);
 }
+
+/* =========================
+   HERO PARCIAL
+========================= */
+.parcial-hero {
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #12002b, #1f0047);
+    text-align: center;
+}
+
+.parcial-hero h1 {
+    font-size: 3rem;
+    color: #c77dff;
+    margin-bottom: 10px;
+}
+
+.parcial-hero p {
+    color: white;
+    opacity: 0.8;
+}
+
+
+/* =========================
+   NAVBAR STICKY
+========================= */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: rgba(10, 10, 20, 0.95);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    z-index: 1000;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #c77dff;
+}
+
+
+/* =========================
+   TARJETAS
+========================= */
+.cards-container {
+    padding: 60px 10%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #1a1a2e;
+    border-radius: 12px;
+    padding: 25px;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.card h3 {
+    color: #c77dff;
+
