@@ -1,72 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Parcial 1</title>
-
-  <!-- OJO: subimos un nivel y entramos a css -->
-  <link rel="stylesheet" href="../css/styles.css">
+    <meta charset="UTF-8">
+    <title>Parcial 1</title>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
 
-<nav>
-  <a href="../index.html">Inicio</a>
-  <a href="index.html">Parcial 1</a>
-  <a href="../parcial2.html">Parcial 2</a>
-  <a href="../parcial3.html">Parcial 3</a>
-  <a href="../index.html#contacto">Contacto</a>
-</nav>
+    <!-- HERO -->
+    <header class="parcial-hero">
+        <h1>Parcial 1</h1>
+        <p>Actividades y evidencias de Seguridad Informática</p>
+    </header>
 
-<section class="parcial-container">
 
-  <h2>Parcial 1 – Actividades</h2>
+    <!-- NAV -->
+    <nav class="navbar">
+        <a href="../index.html">Inicio</a>
+        <a href="#">Parcial 1</a>
+    </nav>
 
-  <p class="parcial-info">
-    Selecciona una actividad para visualizar su desarrollo técnico, 
-    evidencias, reflexión y referencias.
-  </p>
 
-  <div class="parcial-grid">
+    <!-- ACTIVIDADES -->
+    <section class="cards-container">
 
-    <!-- ACT 1 -->
-    <div class="parcial-card">
-      <h3>Actividad 01</h3>
-      <p>Análisis de grupo de ciberataque real y su impacto empresarial.</p>
-      <a href="act1/index.html" class="btn-ver">Ver actividad</a>
-    </div>
+        <a href="act1/index.html" class="card">
+            <h3>Actividad 1</h3>
+            <p>Análisis de ciberataque real</p>
+        </a>
 
-    <!-- ACT 2 -->
-    <div class="parcial-card">
-      <h3>Actividad 02</h3>
-      <p>Análisis de servicios de seguridad de acuerdo con X.800 y RFC 4949.</p>
-      <a href="act2/index.html" class="btn-ver">Ver actividad</a>
-    </div>
+        <a href="act2/index.html" class="card">
+            <h3>Actividad 2</h3>
+            <p>Análisis de servicios de seguridad</p>
+        </a>
 
-    <!-- ACT 3 -->
-    <div class="parcial-card">
-      <h3>Actividad 03</h3>
-      <p>Interpretación y traducción de políticas de filtrado en iptables.</p>
-      <a href="act3/index.html" class="btn-ver">Ver actividad</a>
-    </div>
+        <a href="act3/index.html" class="card">
+            <h3>Actividad 3</h3>
+            <p>Traducción de políticas de filtrado</p>
+        </a>
 
-    <!-- ACT 4 -->
-    <div class="parcial-card">
-      <h3>Actividad 04</h3>
-      <p>Mecanismos de defensa en red.</p>
-      <a href="act4/index.html" class="btn-ver">Ver actividad</a>
-    </div>
+        <a href="act4/index.html" class="card">
+            <h3>Actividad 4</h3>
+            <p>Comparativa de metodologías</p>
+        </a>
 
-    <!-- ACT 5 -->
-    <div class="parcial-card">
-      <h3>Actividad 05</h3>
-      <p>Categorización de pentesting y comparación de metodologías.</p>
-      <a href="act5/index.html" class="btn-ver">Ver actividad</a>
-    </div>
+        <a href="act5/index.html" class="card">
+            <h3>Actividad 5</h3>
+            <p>Implementación de IPsec VPN</p>
+        </a>
 
-  </div>
-
-</section>
+    </section>
 
 </body>
 </html>
