@@ -570,3 +570,50 @@ footer {
 
 .card h3 {
     color: #c77dff;
+
+  /* =========================
+   CUADROS ACTIVIDADES
+========================= */
+
+.cuadros-container {
+    padding: 70px 10%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+/* para que en celular sea 1 por fila */
+@media (max-width: 600px) {
+    .cuadros-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cuadro {
+    aspect-ratio: 1 / 1;   /* 🔥 los hace cuadrados */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background: #16162a;
+    border-radius: 12px;
+
+    color: #c77dff;
+    font-weight: bold;
+    text-decoration: none;
+
+    transition: 0.25s ease;
+    border: 1px solid rgba(199,125,255,0.2);
+}
+
+.cuadro:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border-color: #c77dff;
+}
+
+.cuadro:active {
+    transform: scale(0.97);
+}
+
