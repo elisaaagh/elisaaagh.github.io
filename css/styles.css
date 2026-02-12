@@ -571,3 +571,60 @@ footer {
 .card h3 {
     color: #c77dff;
 
+/* =========================
+   TARJETAS PRO
+========================= */
+
+.card {
+    background: #141428;
+    border-radius: 14px;
+    padding: 25px;
+    text-decoration: none;
+    color: white;
+    transition: 0.25s ease;
+    border: 1px solid rgba(199,125,255,0.15);
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+    border-color: #c77dff;
+}
+
+.card:active {
+    transform: scale(0.97);
+}
+
+.card h3 {
+    color: #c77dff;
+    margin: 15px 0 5px;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-top i {
+    font-size: 20px;
+    color: #c77dff;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: gray;
+}
+
+.badge.done {
+    background: linear-gradient(90deg, #00c853, #69f0ae);
+    color: black;
+}
