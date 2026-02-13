@@ -649,6 +649,7 @@ footer {
 .card h3 {
   color: #c7c7ff;
   transition: 0.3s ease;
+  text-align: center;
 }
 
 .card:hover h3 {
