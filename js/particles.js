@@ -26,7 +26,7 @@ for (let i = 0; i < amount; i++) {
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(199,125,255,0.7)"; // moradito ✨
+  ctx.fillStyle = "rgba(199,125,255,0.18)";
 
   particles.forEach(p => {
     p.x += p.speedX;
