@@ -23,7 +23,7 @@
   <div class="parcial-hero">
     
   <h1>Actividad 1</h1>
-  <p>Nombre o tema de la práctica</p>
+  <p>Análisis en grupo de un ciberataque real y su impacto empresarial</p>
 </div>
 
   <div class="section-divider"></div>
@@ -34,20 +34,55 @@
   <!-- INTRO -->
   <div class="lab-card intro">
     <h2>Introducción</h2>
-    <p>
-      Aquí explicas el contexto del tema, su importancia dentro de la
-      seguridad informática y el objetivo de la práctica.
-    </p>
+    <p style="text-align: justify;">
+      En 2021, Colonial Pipeline, operador del sistema de transporte de combustible más
+      grande de Estados Unidos, sufrió un ataque de ransomware que impactó su red
+      corporativa y provocó la suspensión preventiva de la infraestructura operativa.
+      </p>
+      
+      <p style="text-align: justify;">
+      El incidente evidenció cómo vulnerabilidades aparentemente básicas, como la
+      ausencia de autenticación multifactor (MFA) y la mala gestión de credenciales,
+      pueden escalar hasta convertirse en una crisis económica y de seguridad nacional.
+      </p>
+      
+      <p style="text-align: justify;">
+      Esta actividad analiza el ataque desde una perspectiva técnica, estratégica y
+      financiera, destacando la importancia de implementar controles de ciberseguridad
+      que garanticen la continuidad del negocio.
+      </p>
+
   </div>
 
 
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-    <p>
-      Procedimientos realizados, configuraciones, comandos,
-      herramientas utilizadas y explicación paso a paso.
-    </p>
+      <h3>Vector de entrada</h3>
+        <p style="text-align: justify;">El acceso inicial ocurrió mediante una VPN utilizando credenciales comprometidas.
+        La cuenta no contaba con autenticación multifactor.</p>
+        
+        <h3>Tipo de ataque</h3>
+        <p style="text-align: justify;">Ransomware bajo el modelo de doble extorsión: cifrado de sistemas y amenaza
+        de publicación de datos robados.</p>
+        
+        <h3>Acciones del atacante</h3>
+        <ul>
+        <li>Movimiento lateral dentro de la red corporativa.</li>
+        <li>Exfiltración de aproximadamente 100 GB de información.</li>
+        <li>Despliegue del ransomware en sistemas críticos de TI.</li>
+        </ul>
+        
+        <h3>Respuesta de la empresa</h3>
+        <ul>
+        <li>Aislamiento de redes.</li>
+        <li>Apagado preventivo del sistema OT.</li>
+        <li>Activación de protocolos federales.</li>
+        </ul>
+        
+        <h3>Duración</h3>
+        <p style="text-align: justify;">Del 29 de abril al 15 de mayo de 2021.</p>
+
   </div>
 
 
@@ -61,10 +96,20 @@
   <!-- REFLEXIÓN -->
   <div class="lab-card reflexion">
     <h2>Opinión / reflexión técnica</h2>
-    <p>
-      Relación del ejercicio con escenarios reales, riesgos y aplicaciones
-      prácticas en la ciberseguridad.
-    </p>
+    <p style="text-align: justify;">
+      Desde una perspectiva profesional, el incidente demuestra que la ciberseguridad
+      en infraestructura crítica debe tratarse como un componente estratégico del negocio.
+      La falta de MFA y la débil supervisión de accesos remotos evidencian brechas de
+      gobernanza más que fallas puramente tecnológicas.
+      </p>
+      
+      <p style="text-align: justify;">
+      Además, el caso confirma que los modelos de ransomware como servicio permiten
+      a actores con capacidades limitadas generar impactos nacionales, por lo que las
+      organizaciones deben migrar hacia arquitecturas Zero Trust, monitoreo continuo
+      y planes de respuesta a incidentes probados mediante simulaciones.
+      </p>
+
   </div>
 
 
