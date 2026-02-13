@@ -213,7 +213,7 @@ header p {
     transparent 80%
   );
 
-  animation: shine 5s infinite;
+  animation: shine 8s infinite;
   pointer-events: none;
 }
 
@@ -262,9 +262,9 @@ nav a:hover{
 .matrix-bg{
   position: absolute;
   inset: 0;
-  background: url("../images/hacker.jpg") center/cover no-repeat;
+  background: url("../images/matrix.jpg") top center / cover no-repeat;
 
-  opacity: 0.05;   /* casi invisible */
+  opacity: 0.15;   
   pointer-events: none;
 }
 
