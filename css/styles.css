@@ -88,6 +88,40 @@ body {
   opacity: 0.9;
 }
 
+/* =========================
+   BARRA SUPERIOR
+========================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 20px;
+    height: 60px;
+
+    background: rgba(10, 10, 20, 0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(199,125,255,0.2);
+}
+
+.logo-uni {
+    height: 40px;
+}
+
+.foto-alumna {
+    height: 42px;
+    width: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #c77dff;
+}
+
+
 /* Contenido normal */
 .content {
   padding: 60px 20px;
