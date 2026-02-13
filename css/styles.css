@@ -412,7 +412,7 @@ footer {
 }
 
 /* Fondo base para páginas simples */
-.page-bg {
+/*.page-bg {
   min-height: 100vh;
   background-size: cover;
   background-position: center;
@@ -437,7 +437,7 @@ footer {
   inset: 0;
   background: rgba(5,5,15,0.65);
   z-index: -1;
-}
+}*/
 
 .section-divider {
   width: 100%;
