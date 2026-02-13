@@ -235,9 +235,11 @@ nav a:hover::after {
   background: rgba(10,10,20,0.98);
   backdrop-filter: blur(10px);
 
-  /* 👇 quitamos la separación fuerte */
   border-bottom: none;
+
+  overflow: hidden;
 }
+
 
 
 /* brillo */
