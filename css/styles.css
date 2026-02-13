@@ -96,11 +96,18 @@ body {
    BRILLO TOPBAR
 ========================= */
 
-.topbar {
+/*.topbar {
     position: sticky;
     top: 0;
     z-index: 2000;
     overflow: hidden; /* necesario para el brillo */
+}*/
+
+.topbar{
+  position: sticky;
+  top: 0;
+  height: 60px;
+  z-index: 2000;
 }
 
 /* línea de brillo */
@@ -218,17 +225,17 @@ header p {
     0 0 30px rgba(0, 255, 200, 0.15);
 }
 
-
-nav {
+nav{
   position: sticky;
-  top: 60px;   
+  top: 60px;
   z-index: 1500;
-  /*z-index: 9999;*/
-  background: rgba(15, 15, 25, 0.9);
-  padding: 15px;
-  text-align: center;
+
+  background: rgba(10, 10, 20, 0.95);
   backdrop-filter: blur(8px);
+
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
+
 
 /*nav a {
   color: #c7c7ff;
