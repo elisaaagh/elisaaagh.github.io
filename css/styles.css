@@ -888,7 +888,7 @@ footer {
 .btn-volver-top{
   position: absolute;
   top: 20px;
-  right: 30px;   /* cámbialo a left si lo quieres del otro lado */
+  left: 120px;
 
   color: white;
   text-decoration: none;
