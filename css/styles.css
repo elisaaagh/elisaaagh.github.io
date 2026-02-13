@@ -884,3 +884,28 @@ footer {
   color: white;
 }
 
+.btn-volver-top{
+  position: absolute;
+  top: 20px;
+  right: 30px;   /* cámbialo a left si lo quieres del otro lado */
+
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+
+  padding: 8px 14px;
+  border-radius: 8px;
+
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  backdrop-filter: blur(6px);
+  transition: all .25s ease;
+}
+
+.btn-volver-top:hover{
+  background: rgba(140,0,255,0.35);
+  box-shadow: 0 0 10px rgba(140,0,255,0.5);
+}
+
