@@ -676,3 +676,65 @@ footer {
   z-index: -1;
   pointer-events: none;
 }
+
+
+/*================================================================*/
+/*==                       ACTIVIDADES                          ==*/
+/*================================================================*/
+
+/* =========================
+   ACTIVIDAD / ARTICULO
+========================= */
+
+.actividad{
+  max-width: 950px;
+  margin: 60px auto;
+  padding: 40px;
+
+  background: rgba(15,15,30,0.65);
+  backdrop-filter: blur(8px);
+
+  border-radius: 15px;
+  border: 1px solid rgba(199,125,255,0.15);
+
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.08);
+}
+
+
+/* títulos */
+.actividad h2{
+  margin-top: 30px;
+  color: #c77dff;
+  border-left: 4px solid #c77dff;
+  padding-left: 12px;
+}
+
+
+/* párrafos */
+.actividad p{
+  color: #d6d6ff;
+  line-height: 1.7;
+}
+
+
+/* listas */
+.actividad li{
+  color: #d6d6ff;
+  margin-bottom: 6px;
+}
+
+
+/* imágenes */
+.actividad img{
+  margin-top: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+
+/* botón pdf centrado */
+.actividad .btn-ver{
+  font-size: 1rem;
+  padding: 12px 22px;
+}
