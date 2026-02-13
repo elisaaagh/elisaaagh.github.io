@@ -220,10 +220,9 @@ header p {
 
 @keyframes shine{
   0%{ left: -120%; }
-  40%{ left: 120%; }
+  50%{ left: 120%; }
   100%{ left: 120%; }
 }
-
 
 
 /* ===== NAV ===== */
