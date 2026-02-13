@@ -887,8 +887,8 @@ footer {
 
 .btn-volver-top{
   position: absolute;
-  top: 20px;
-  left: 120px;
+  top: 0px;
+  left: 60px;
 
   color: white;
   text-decoration: none;
