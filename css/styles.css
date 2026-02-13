@@ -209,8 +209,7 @@ header p {
   background: linear-gradient(
     120deg,
     transparent 20%,
-    rgba(0, 170, 255, 0.25)
-    /*rgba(0,255,170,0.25),*/
+    rgba(0,255,170,0.25),
     transparent 80%
   );
 
