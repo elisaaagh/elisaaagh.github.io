@@ -147,21 +147,6 @@ header p {
   text-align: left;
 }
 
-/* IMAGEN */
-/*.encabezado-imagen img {
-  width: 280px;
-  max-width: 100%;
-  border-radius: 15px;
-  opacity: 0.9;
-}
-
-.encabezado-imagen img {
-  width: 280px;
-  border-radius: 15px;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 10px rgba(140, 0, 255, 0.4));
-}
-*/
 .encabezado-imagen img {
   width: 280px;
   aspect-ratio: 1 / 1;
@@ -205,14 +190,18 @@ header p {
   height: 100%;
 
   background: linear-gradient(
-    120deg,
-    transparent 20%,
-    rgba(0,255,170,0.25),
-    transparent 80%
-  );
+  120deg,
+  transparent 10%,
+  rgba(199, 125, 255, 0.45),
+  transparent 90%
+);
 
   animation: shine 8s infinite;
   pointer-events: none;
+}
+
+.topbar:hover {
+  box-shadow: 0 0 20px rgba(199,125,255,0.25);
 }
 
 
