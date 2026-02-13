@@ -92,22 +92,46 @@ body {
    BARRA SUPERIOR
 ========================= */
 
+/* =========================
+   BRILLO TOPBAR
+========================= */
+
 .topbar {
     position: sticky;
     top: 0;
     z-index: 2000;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 8px 20px;
-    height: 60px;
-
-    background: rgba(10, 10, 20, 0.95);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(199,125,255,0.2);
+    overflow: hidden; /* necesario para el brillo */
 }
+
+/* línea de brillo */
+.topbar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(199,125,255,0.25),
+        transparent
+    );
+
+    animation: brilloMove 5s infinite;
+}
+
+/* animación */
+@keyframes brilloMove {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 120%;
+    }
+}
+
 
 .logo-uni {
     height: 40px;
