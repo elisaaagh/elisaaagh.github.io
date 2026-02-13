@@ -1,6 +1,9 @@
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
+ctx.shadowBlur = 8;
+ctx.shadowColor = "rgba(199,125,255,0.4)";
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
