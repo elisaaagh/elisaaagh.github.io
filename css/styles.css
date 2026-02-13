@@ -247,8 +247,24 @@ nav{
 nav a:hover {
   color: #ffffff;
 }*/
+nav{
+  position: sticky;
+  top: 60px;
+  z-index: 1500;
 
-nav a {
+  background: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+/* cuando ya está fijo arriba */
+nav.scrolled{
+  background: rgba(10, 10, 20, 0.98);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/*nav a {
   position: relative;
   color: #c7c7ff;
   margin: 0 15px;
@@ -279,7 +295,7 @@ nav a:hover {
 
 nav a:hover::after {
   width: 100%;
-}
+}*/
 
 
 section {
