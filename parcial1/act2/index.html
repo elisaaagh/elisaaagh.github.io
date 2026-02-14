@@ -54,8 +54,12 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
+    <!-- Escenario 1 -->
+  <div class="accordion">
+    <button class="accordion-btn">Escenario 01</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 01.</strong> En múltiples incidentes atribuidos al grupo LockBit, organizaciones públicas y privadas han sufrido el cifrado masivo de servidores tras un acceso inicial no autorizado. Antes de ejecutar el ransomware, los atacantes exfiltraron información sensible y posteriormente amenazaron con su publicación, evidenciando un compromiso simultáneo de la confidencialidad, la integridad y la disponibilidad. Desde el enfoque del RFC 4949, el incidente se clasifica como un multi-stage attack con data breach y availability attack, donde la indisponibilidad del sistema es solo una fase final del daño. La ausencia de respaldos inmutables y de detección temprana permitió que el impacto fuera total.
+      En múltiples incidentes atribuidos al grupo LockBit, organizaciones públicas y privadas han sufrido el cifrado masivo de servidores tras un acceso inicial no autorizado. Antes de ejecutar el ransomware, los atacantes exfiltraron información sensible y posteriormente amenazaron con su publicación, evidenciando un compromiso simultáneo de la confidencialidad, la integridad y la disponibilidad. Desde el enfoque del RFC 4949, el incidente se clasifica como un multi-stage attack con data breach y availability attack, donde la indisponibilidad del sistema es solo una fase final del daño. La ausencia de respaldos inmutables y de detección temprana permitió que el impacto fuera total.
     </p>
 <table>
   <tr>
@@ -103,9 +107,14 @@ Gestión continua de vulnerabilidades y parches en servicios expuestos.
 Planes de respuesta a incidentes específicos para ransomware y doble extorsión.</td>
   </tr>
 </table>
-    
+      </div>
+  </div>
+
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 02</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 02.</strong> En diversos casos documentados, bases de datos completas quedaron accesibles públicamente debido a errores de configuración en servicios de almacenamiento en la nube. No existió una explotación técnica sofisticada, sino una falla en el control de acceso, lo que derivó directamente en la pérdida de confidencialidad de los datos. El RFC 4949 describe este tipo de incidentes como misconfiguration y exposure, subrayando que la amenaza no siempre implica malware o intrusión activa. El impacto suele ser legal y reputacional, aun cuando no se pueda demostrar acceso malicioso.
+      En diversos casos documentados, bases de datos completas quedaron accesibles públicamente debido a errores de configuración en servicios de almacenamiento en la nube. No existió una explotación técnica sofisticada, sino una falla en el control de acceso, lo que derivó directamente en la pérdida de confidencialidad de los datos. El RFC 4949 describe este tipo de incidentes como misconfiguration y exposure, subrayando que la amenaza no siempre implica malware o intrusión activa. El impacto suele ser legal y reputacional, aun cuando no se pueda demostrar acceso malicioso.
     </p>
     <table>
       <tr>
@@ -149,9 +158,14 @@ Clasificación de la información y aplicación de controles acordes a su nivel 
 Capacitación técnica del personal en buenas prácticas de configuración segura en entornos cloud.</td>
       </tr>
     </table>
+</div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 03</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 03.</strong> Un proveedor legítimo de software fue comprometido y distribuyó una actualización que incluía código malicioso, afectando a cientos de organizaciones que confiaban en él Este escenario refleja una violación grave de la integridad de los sistemas y, en muchos casos, de la confidencialidad al permitir accesos no autorizados posteriores El RFC 4949 lo identifica como supply chain attack destacando el abuso de relaciones de confianza El daño es particularmente crítico porque rompe el supuesto de legitimidad del software firmado.
+      Un proveedor legítimo de software fue comprometido y distribuyó una actualización que incluía código malicioso, afectando a cientos de organizaciones que confiaban en él Este escenario refleja una violación grave de la integridad de los sistemas y, en muchos casos, de la confidencialidad al permitir accesos no autorizados posteriores El RFC 4949 lo identifica como supply chain attack destacando el abuso de relaciones de confianza El daño es particularmente crítico porque rompe el supuesto de legitimidad del software firmado.
     </p>
     <table>
       <tr>
@@ -201,9 +215,14 @@ Evaluaciones de seguridad y auditorías periódicas a proveedores.
 Planes de respuesta específicos para ataques a la cadena de suministro.</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 04</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 04.</strong> Mediante campañas de phishing, atacantes obtuvieron credenciales válidas y accedieron a sistemas corporativos durante meses sin levantar alertas Aunque la autenticación funcionó técnicamente, el servicio de autenticación fue comprometido al basarse en credenciales robadas, afectando también el control de acceso Según el RFC 4949 se trata de un credential compromise con authentication failure conceptual, no técnica La falta de MFA y de monitoreo de comportamiento facilitó la persistencia del atacante.
+      Mediante campañas de phishing, atacantes obtuvieron credenciales válidas y accedieron a sistemas corporativos durante meses sin levantar alertas Aunque la autenticación funcionó técnicamente, el servicio de autenticación fue comprometido al basarse en credenciales robadas, afectando también el control de acceso Según el RFC 4949 se trata de un credential compromise con authentication failure conceptual, no técnica La falta de MFA y de monitoreo de comportamiento facilitó la persistencia del atacante.
     </p>
     <table>
       <tr>
@@ -252,9 +271,14 @@ Limitación de privilegios y revisión periódica de accesos.
 Alertas por patrones atípicos (horarios, ubicaciones, volúmenes de acceso).</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 05</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 05.</strong> En ataques de ransomware avanzados, los atacantes eliminaron o cifraron los respaldos antes de afectar los sistemas productivos Este hecho compromete directamente la disponibilidad y la integridad de la información, al impedir la recuperación El RFC 4949 clasifica este comportamiento como data destruction y availability attack evidenciando intención deliberada de maximizar el daño La inexistencia de respaldos offline o inmutables convierte el incidente en catastrófico.
+      En ataques de ransomware avanzados, los atacantes eliminaron o cifraron los respaldos antes de afectar los sistemas productivos Este hecho compromete directamente la disponibilidad y la integridad de la información, al impedir la recuperación El RFC 4949 clasifica este comportamiento como data destruction y availability attack evidenciando intención deliberada de maximizar el daño La inexistencia de respaldos offline o inmutables convierte el incidente en catastrófico.
     </p>
     <table>
       <tr>
@@ -300,9 +324,14 @@ Pruebas periódicas de restauración para validar la efectividad de los respaldo
 Principio de mínimo privilegio aplicado a la infraestructura de backup.</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 06</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 06.</strong> Un empleado con acceso legítimo extrajo bases de datos completas y las vendió a terceros, sin explotar vulnerabilidades técnicas El servicio afectado fue principalmente la confidencialidad junto con fallas en el control de acceso por exceso de privilegios El RFC 4949 define este escenario como insider threat destacando que el riesgo interno puede ser tan grave como el externo La carencia de monitoreo y de políticas de mínimo privilegio fue determinante.
+      Un empleado con acceso legítimo extrajo bases de datos completas y las vendió a terceros, sin explotar vulnerabilidades técnicas El servicio afectado fue principalmente la confidencialidad junto con fallas en el control de acceso por exceso de privilegios El RFC 4949 define este escenario como insider threat destacando que el riesgo interno puede ser tan grave como el externo La carencia de monitoreo y de políticas de mínimo privilegio fue determinante.
     </p>
     <table>
       <tr>
@@ -348,9 +377,14 @@ Auditorías periódicas de accesos y permisos.
 Políticas claras de manejo de información y concientización interna.</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 07</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 07.</strong> Tras un ataque, los registros del sistema quedaron cifrados o alterados, impidiendo reconstruir la secuencia de eventos Esto compromete la integridad de los datos y el no repudio ya que no es posible demostrar qué ocurrió ni quién fue responsable Desde el RFC 4949 se trata de una violación de evidentiary integrity y del audit trail El impacto no solo es técnico, sino también probatorio y legal.
+      Tras un ataque, los registros del sistema quedaron cifrados o alterados, impidiendo reconstruir la secuencia de eventos Esto compromete la integridad de los datos y el no repudio ya que no es posible demostrar qué ocurrió ni quién fue responsable Desde el RFC 4949 se trata de una violación de evidentiary integrity y del audit trail El impacto no solo es técnico, sino también probatorio y legal.
     </p>
     <table>
       <tr>
@@ -396,9 +430,14 @@ Monitoreo de integridad de logs y alertas ante modificaciones.
 Planes de respuesta a incidentes con preservación de evidencia.</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 08</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 08.</strong> Una actualización mal ejecutada provocó la caída simultánea de múltiples servicios críticos a nivel global, Aunque no existió un atacante, el servicio de disponibilidad fue gravemente afectado El RFC 4949 contempla estos eventos como operational failure recordando que la seguridad también se ve afectada por errores internos La falta de pruebas previas y planes de reversión amplificó el impacto.
+      Una actualización mal ejecutada provocó la caída simultánea de múltiples servicios críticos a nivel global, Aunque no existió un atacante, el servicio de disponibilidad fue gravemente afectado El RFC 4949 contempla estos eventos como operational failure recordando que la seguridad también se ve afectada por errores internos La falta de pruebas previas y planes de reversión amplificó el impacto.
     </p>
     <table>
       <tr>
@@ -444,9 +483,14 @@ Despliegues progresivos.
 Planes de continuidad del negocio (BCP) y recuperación ante desastres (DRP).</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 09</button>
+    <div class="accordion-content">
      <p style="text-align:justify;">
-       <strong>Escenario 09.</strong> Atacantes replicaron sitios y correos oficiales para engañar a ciudadanos y obtener información sensible Este escenario afecta la autenticación al suplantar identidades legítimas, y la confidencialidad de los datos recolectados El RFC 4949 lo clasifica como masquerade y phishing subrayando el componente de ingeniería social La ausencia de mecanismos de autenticación del dominio y de concientización facilitó el éxito del ataque
+       Atacantes replicaron sitios y correos oficiales para engañar a ciudadanos y obtener información sensible Este escenario afecta la autenticación al suplantar identidades legítimas, y la confidencialidad de los datos recolectados El RFC 4949 lo clasifica como masquerade y phishing subrayando el componente de ingeniería social La ausencia de mecanismos de autenticación del dominio y de concientización facilitó el éxito del ataque
      </p>
     <table>
       <tr>
@@ -492,9 +536,14 @@ Filtros avanzados anti-phishing y detección de dominios similares.
 Políticas claras de comunicación institucional.</td>
       </tr>
     </table>
+      </div>
+  </div>
 
+    <div class="accordion">
+    <button class="accordion-btn">Escenario 10</button>
+    <div class="accordion-content">
     <p style="text-align:justify;">
-      <strong>Escenario 10.</strong> En algunos incidentes, tras exfiltrar información, los atacantes ejecutaron acciones destructivas para borrar sistemas completos y eliminar rastros Se produce un compromiso total de la confidencialidad la integridad y la disponibilidad configurando uno de los peores escenarios posibles El RFC 4949 describe este patrón como destructive attack donde el objetivo no es solo el lucro, sino el daño irreversible La detección tardía impidió cualquier contención efectiva.
+      En algunos incidentes, tras exfiltrar información, los atacantes ejecutaron acciones destructivas para borrar sistemas completos y eliminar rastros Se produce un compromiso total de la confidencialidad la integridad y la disponibilidad configurando uno de los peores escenarios posibles El RFC 4949 describe este patrón como destructive attack donde el objetivo no es solo el lucro, sino el daño irreversible La detección tardía impidió cualquier contención efectiva.
     </p>
     <table>
       <tr>
@@ -544,6 +593,8 @@ Planes de respuesta a incidentes y recuperación ante desastres.
 Simulacros de ataque destructivo.</td>
       </tr>
     </table>
+       </div>
+  </div>
     
   </div>
 
@@ -607,6 +658,22 @@ Simulacros de ataque destructivo.</td>
     });
   </script>
     <script src="../../js/particles.js"></script>
+  
+<script>
+  const acc = document.querySelectorAll(".accordion-btn");
+
+  acc.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling;
+
+      if(content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
