@@ -792,25 +792,26 @@ footer {
 .lab{
   width: min(1200px, 92%);
   margin: 60px auto 100px;
-  align-items: start;
 
   display: grid;
   gap: 25px;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
 
   grid-template-areas:
     "intro intro"
     "desarrollo desarrollo"
     "referencias reflexion"
     "referencias multimedia";
+
+  align-items: stretch;
 }
 
 /* posiciones */
 .intro { grid-area: intro; }
 .desarrollo { grid-area: desarrollo; }
 .referencias { grid-area: referencias; }
-.reflexion { grid-area: reflexion; }
+.reflexion { grid-area: reflexion; }   
 .multimedia { grid-area: multimedia; }
 .lab-export{ grid-area: export; text-align:center; }
 
