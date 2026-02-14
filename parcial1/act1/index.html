@@ -58,9 +58,252 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-      <h3>Vector de entrada</h3>
-        <p style="text-align: justify;">El acceso inicial ocurrió mediante una VPN utilizando credenciales comprometidas.
-        La cuenta no contaba con autenticación multifactor.</p>
+      <h3>Fase 1: Investigación y documentación</h3>
+        <h4>Fase 1: Pre-intrusión e intrusión inicial</h4>
+          <ul>
+            <li><b>29-abr-2021 (D-9):</b> Acceso inicial a la red corporativa mediante VPN con 
+              credenciales comprometidas. MFA no estaba habilitado. Permitió movimientos
+              internos previos a la detección. 
+              (Fuente: <a href="https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_Colonial-Pipeline.pdf">CyOTE</a>)</li>
+            <li><b>06-may-2021 (D-1):</b> Movimiento lateral y exfiltración de ~100 GB de datos 
+              corporativos. Preparación para la doble extorsión. 
+              (Fuente: <a href="https://new.c9lab.com/case-study/colonial-pipeline-ransomware-attack-infrastructure-impact-and-response/">C9 Lab</a>)</li>
+          </ul>
+      <h4>Fase de escalamiento: Crisis pública y respuesta gubernamental</h4>
+            <ul>
+              <li><b>08-may-2021 (D+1):</b> Comunicación pública; desabasto regional y pánico en mercados. 
+                (Fuente: <a href="https://www.cisa.gov/news-events/news/attack-colonial-pipeline-what-weve-learned-what-weve-done-over-past-two-years">CISA</a>)</li>
+              <li><b>09-may-2021 (D+2):</b> El gobierno trata el incidente como amenaza a infraestructura crítica nacional; 
+                activación de marcos de respuesta interinstitucional. 
+                (Fuente: <a href="https://www.cisa.gov/news-events/news/attack-colonial-pipeline-what-weve-learned-what-weve-done-over-past-two-years">CISA</a>)</li>
+              <li><b>10-may-2021 (D+3):</b> Atribución del ataque a DarkSide/RaaS; evidencia de 
+                actores no estatales capaces de generar impactos estratégicos. 
+                (Fuente: <s href="https://www.reuters.com/business/colonial-pipeline-ceo-tells-senate-cyber-defenses-were-compromised-ahead-hack-2021-06-08/">Reuters</s>)</li>
+              <li><b>11-may-2021 (D+4):</b> Publicación de análisis técnico y recomendaciones: MFA, segmentación de redes 
+                y respuesta formal a incidentes. 
+                (Fuente: <a href="https://www.cisa.gov/news-events/news/attack-colonial-pipeline-what-weve-learned-what-weve-done-over-past-two-years">CISA</a>, Cyber Defense Review)</li>
+            </ul>
+      <h4>Fase de restauración: Reinicio y estabilización</h4>
+            <ul>
+              <li><b>12-may-2021 (D+5):</b> Inicio de restauración tras seis días de interrupción; 
+                recuperación de sistemas críticos. 
+                (Fuente: <a href="https://thehackernews.com/2021/05/colonial-pipeline-paid-nearly-5-million.html">The Hacker News</a>, 
+                <a href="https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_Colonial-Pipeline.pdf">CyOTE</a>)</li>
+              <li><b>13-may-2021 (D+6):</b> Reanudación parcial de operaciones y mitigación de desabasto mediante excepciones 
+                regulatorias temporales. 
+                (Fuente: <a href="https://thehackernews.com/2021/05/colonial-pipeline-paid-nearly-5-million.html">The Hacker News</a>)</li>
+              <li><b>15-may-2021 (D+8):</b> Normalización de operaciones y 
+                auditoría forense posterior. 
+                (Fuente: <a href="https://www.cisa.gov/news-events/news/attack-colonial-pipeline-what-weve-learned-what-weve-done-over-past-two-years">CISA</a>)</li>      
+            </ul>
+      <h4>Decisiones de negocio y evidencia financiera</h4>
+            <ul>
+              <li><b>18-may-2021 (D+11):</b> Pago de 75 BTC (USD 4.4 M aprox.) ante 
+                riesgo crítico de continuidad de suministro. 
+                (Fuente: <a href="https://cyote.inl.gov/content/uploads/24/2025/12/CyOTE-Case-Study_Colonial-Pipeline.pdf">CyOTE</a>)</li>
+              <li><b>19-may-2021 (D+12):</b> CEO justifica públicamente el pago 
+                del rescate en testimonio oficial. 
+                (Fuente: <a href="https://thehackernews.com/2021/05/colonial-pipeline-paid-nearly-5-million.html">The Hacker News</a>)</li>      
+            </ul>
+      <h4>Respuesta regulatoria y seguimiento</h4>
+            <ul>
+              <li><b>27-may-2021:</b> TSA publica Security Directive para pipelines: 
+                reporte obligatorio a CISA, coordinador de ciberseguridad 24/7 y 
+                plan de remediación reportable. 
+                (Fuente: <a href="https://ec.europa.eu/newsroom/cipr/items/722542/en">European Commission</a>)</li>
+              <li>07-jun-2021: DOJ incauta 63.7 BTC 
+                (USD 2.3 M apox.) vinculados al rescate; seguimiento de fondos para 
+                aumentar riesgo del modelo ransomware. 
+                (Fuente: <a href="https://www.justice.gov/archives/opa/pr/department-justice-seizes-23-million-cryptocurrency-paid-ransomware-extortionists-darkside">Departamento de Justicia</a>)</li>      
+            </ul>
+      <h4>Vulnerabilidades y factores clave</h4>
+            <ul>
+              <li><b>Vector inicial:</b> credencial comprometida en VPN. 
+                (<a href="https://www.reuters.com/business/colonial-pipeline-ceo-tells-senate-cyber-defenses-were-compromised-ahead-hack-2021-06-08/">Reuters</a>)</li>
+              <li><b>Controles débiles:</b> ausencia de MFA, 
+                gestión insuficiente de cuentas y privilegios heredados. 
+                (<a href="https://www.reuters.com/business/colonial-pipeline-ceo-tells-senate-cyber-defenses-were-compromised-ahead-hack-2021-06-08/">Reuters</a>)</li>      
+              <li><b>Dependencia de TI:</b> impacto en sistemas corporativos 
+                provocó shutdown de infraestructura crítica. 
+                (<a href="https://www.axios.com/2021/05/08/cyberattack-shutdown-colonial-pipeline">Axios</a>)</li>
+              <li><b>Segmentación limitada:</b> necesidad de cierre 
+                rápido sugiere falta de certeza operativa sobre confinamiento. 
+                (<a href="https://www.axios.com/2021/05/08/cyberattack-shutdown-colonial-pipeline">Axios</a>)</li>
+            </ul>
+      <h3>Fase 2. Análisis técnico, impacto económico y estratégico</h3>
+        <h4>1. Contexto general del ataque</h4>
+          <p style="text-align: justify;">
+            En 2021, en Estados Unidos, la Colonial Pipeline Company, operadora del 
+            oleoducto más grande del país y responsable del 45% del suministro de combustible 
+            de la Costa Este, sufrió un ciberataque crítico que afectó su red corporativa de 
+            TI y obligó a desconectar preventivamente su red de OT. Antes del incidente, la 
+            empresa presentaba debilidades de ciberseguridad como cuentas heredadas no 
+            monitoreadas y la ausencia de autenticación multifactor (MFA) en accesos remotos, 
+            lo que permitió que una credencial comprometida fuera utilizada para ingresar a la
+            red. El ataque se facilitó por una combinación de factores: fallas técnicas, 
+            humanas/procedimentales (reutilización de contraseñas filtradas previamente, 
+            permitiendo credential stuffing) y del ecosistema de amenazas (uso del modelo RaaS,
+            que habilita a actores con habilidades limitadas para ejecutar ataques de alto
+            impacto).Tabla técnica del ataque.
+          </p>
+      <h4>2. Tabla técnica del ataque</h4>
+        <table>
+          <tr>
+            <th>Elemento</th>
+            <th>Descripción</th>
+          </tr>
+          <tr>
+            <td>Tipo de ataque</td>
+            <td>Ransomware de doble extorsión</td>
+          </tr>
+          <tr>
+            <td>Actor o grupo atacante</td>
+            <td>DarkSide</td>
+          </tr>
+          <tr>
+            <td>Vector de entrada</td>
+            <td>Acceso remoto vía VPN con credenciales comprometidas</td>
+          </tr>
+          <tr>
+            <td>Vulnerabilidad explotada</td>
+            <td>Fallo de configuración: Ausencia de MFA en cuenta activa</td>
+          </tr>
+          <tr>
+            <td>Etapas del ataque</td>
+            <td>Infiltración, Exfiltración, Ejecución y Extorsión.</td>
+          </tr>
+          <tr>
+            <td>Sistemas o servicios comprometidos</td>
+            <td>Red IT y facturación, apagado preventivo de red OT</td>
+          </tr>
+          <tr>
+            <td>Duración del incidente</td>
+            <td>17 Días (29-abril al 15-mayo)</td>
+          </tr>
+          <tr>
+            <td>Mecanismos de detección y respuesta</td>
+            <td>Auditoría Mandiant, pago del rescate, intervención FBI/CISA y backups</td>
+          </tr>
+        </table>
+      <h4>3. Evaluación del impacto (Modelo CIA)</h4>
+        <table>
+          <tr>
+            <th>Principio</th>
+            <th>Descripción del impacto</th>
+            <th>Evidencia del caso</th>
+          </tr>
+          <tr>
+            <td>Confidencialidad</td>
+            <td>Exfiltración de datos corporativos sensibles utilizados 
+              como mecanismo de double extortion.</td>
+            <td>Reportes indican robo de entre 100 GB hasta cerca de 
+              1 TB de datos corporativos sensible. 
+              (<a href="www.forbes.com/sites/christopherhelman/2021/05/10/fbi-colonial-pipeline-hacked-by-apolitical-group-darkside">Forbes</a>)</td>
+          </tr>
+          <tr>
+            <td>Integridad</td>
+            <td>Cifrado de sistemas TI corporativos, 
+              comprometiendo la confiabilidad y operatividad de la información.</td>
+            <td>El ransomware bloqueó múltiples sistemas corporativos, incluyendo el 
+              sistema de facturación, generando incertidumbre sobre la confiabilidad 
+              operativa y financiera.
+              (<a href="https://inldigitallibrary.inl.gov/sites/sti/sti/Sort_61422.pdf">INL</a>)</td>
+          </tr>
+          <tr>
+            <td>Disponibilidad</td>
+            <td>Suspensión total preventiva de operaciones del pipeline 
+              (infraestructura crítica energética), causando impacto económico y social masivo.</td>
+            <td>El 7 mayo 2021: detección del ransomware 05:00 ET suspensión operaciones 05:55 
+              ET shutdown total 06:10 ET. El sistema permaneció cerrado varios días.
+              (<a href="https://inldigitallibrary.inl.gov/sites/sti/sti/Sort_61422.pdf">INL</a>)</td>
+          </tr>
+        </table>
+      <h4>4. Marco económico</h4>
+        <table>
+          <tr>
+            <th>Tipo de costo</th>
+            <th>Descripción</th>
+            <th>Estimación (MXN)</th>
+          </tr>
+          <tr>
+            <td>Pérdidas operativas</td>
+            <td>Interrupción del oleoducto durante varios días por ataque ransomware</td>
+            <td>$80 millones MXN</td>
+          </tr>
+          <tr>
+            <td>Daños reputacionales</td>
+            <td>Pérdida de confianza pública, impacto en el sector energético y percepción de seguridad</td>
+            <td>$20 millones MXN</td>
+          </tr>
+          <tr>
+            <td>Costos ténicos</td>
+            <td>Respuesta al incidente, recuperación de sistemas, consultoría especializada en ciberseguridad</td>
+            <td>$40 millones MXN</td>
+          </tr>
+          <tr>
+            <td>Costos legales/regulatorios</td>
+            <td>Asesoría legal, cumplimiento normativo y revisión de seguridad</td>
+            <td>$10 millones MXN</td>
+          </tr>
+          <tr>
+            <td>Pago de rescate o extorxión</td>
+            <td>Pago de rescate por ataque ransomware</td>
+            <td>$85 millones MXN</td>
+          </tr>
+          <tr>
+            <td>Total estimado</td>
+            <td>Suma total del impacto económico aproximado</td>
+            <td>$235 millones MXN</td>
+          </tr>
+        </table>
+        <p style="text-align: justify;">
+          Tipo de cambio MXN/USD              Costo USD a MXN = 20.18
+        </p>
+        <p style="text-align: justify;">
+          COMPARACIÓN
+        </p>
+        <p style="text-align: justify;">
+          El costo promedio de un incidente grave de ransomware suele superar ampliamente 
+          la inversión anual en ciberseguridad, especialmente en sectores de infraestructura 
+          crítica como el energético.
+        </p>
+        <p style="text-align: justify;">
+          De acuerdo con IBM, la ausencia de controles preventivos maduros, planes de respuesta a 
+          incidentes y una adecuada segmentación de redes incrementa significativamente el impacto 
+          económico. En el caso de Colonial Pipeline, las pérdidas no se limitaron al pago del 
+          rescate, sino que incluyeron la interrupción de operaciones críticas, costos de 
+          recuperación técnica, gastos legales y regulatorios, así como daños reputacionales y 
+          pérdida de confianza pública.
+        </p>
+      <h4>5. Relación con marcos normativos (ISO 27001, NIST CSF, GDPR)</h4>
+        <p style="text-align: justify;">
+          El ciberataque a Colonial Pipeline (2021) puede analizarse mediante los marcos internacionales NIST Cybersecurity Framework (CSF) e ISO/IEC 27001, ampliamente aplicables en infraestructura crítica. Bajo el NIST CSF, se evidenciaron debilidades en Identify (gestión insuficiente de riesgos en accesos remotos y cuentas heredadas), Protect (ausencia de MFA en accesos críticos), y Detect (intrusión inicial no detectada durante nueve días), mientras que las funciones Respond y Recover mostraron fortalezas al ejecutar aislamiento preventivo de la red OT y restauración progresiva del servicio. Según ISO 27001, los dominios más afectados fueron Control de Accesos (A.9), Seguridad en Operaciones (A.12), Gestión de Incidentes (A.16) y Continuidad del Negocio (A.17). La implementación madura de estos controles, como autenticación multifactor, monitoreo continuo y planes formales de respuesta y recuperación, habría reducido la probabilidad del ataque y limitado significativamente su impacto operativo y económico, mientras que los principios de protección de datos del GDPR, aunque no aplicables directamente, refuerzan la importancia de gestionar la confidencialidad y el riesgo reputacional frente a la exfiltración de información.
+        </p>
+      <h4>6. Lecciones aprendidas y recomendaciones</h4>
+        <p style="text-align: justify;">El ataque evidenció fallas técnicas como la ausencia de autenticación multifactor en accesos remotos críticos, monitoreo insuficiente de cuentas heredadas, detección tardía del acceso no autorizado y alta dependencia entre sistemas IT corporativos y la operación física del oleoducto. A nivel humano y procedimental, se identificó reutilización de credenciales previamente filtradas, falta de revisiones periódicas de accesos y subestimación del ransomware como amenaza real para infraestructura crítica.</p>
+        <p style="text-align: justify;">El impacto pudo haberse mitigado mediante la implementación obligatoria de MFA en accesos remotos y privilegiados, eliminación y auditoría continua de cuentas legacy, monitoreo continuo mediante SOC/SIEM, segmentación estricta entre redes IT y OT, realización de simulacros de respuesta a incidentes y adopción de modelos de seguridad Zero Trust para accesos administrativos y remotos.</p>
+        <p style="text-align: justify;">En Latinoamérica se recomienda tratar la ciberseguridad como un riesgo estratégico y operativo, priorizar la protección de accesos remotos en sectores críticos como energía, transporte y finanzas, adoptar marcos internacionales como NIST CSF o ISO 27001 aunque no sean obligatorios, fortalecer la coordinación con organismos nacionales de ciberseguridad (CSIRT/CERT) y aumentar la inversión en prevención, considerando que el costo de recuperación de un incidente suele ser mucho mayor que la inversión preventiva.</p>
+    <h3>Cierre ejecutivo</h3>
+      <p style="text-align: justify;">El caso Colonial Pipeline demuestra que un incidente de ciberseguridad puede escalar rápidamente de un problema técnico a una crisis económica, social y de seguridad nacional cuando afecta infraestructura crítica. La principal lección es que las fallas básicas, como la ausencia de MFA, mala gestión de identidades y monitoreo insuficiente, pueden generar impactos sistémicos cuando se combinan con modelos criminales modernos como el RaaS. Esto evidencia que la ciberseguridad ya no debe verse como un gasto tecnológico, sino como un componente esencial de la continuidad operativa y la estabilidad económica.</p>
+      <p style="text-align: justify;">En el contexto latinoamericano, donde muchas organizaciones aún presentan brechas en madurez de ciberseguridad, es fundamental adoptar marcos como NIST CSF o ISO 27001, fortalecer la protección de accesos remotos, mejorar la coordinación con organismos nacionales de respuesta a incidentes y priorizar la inversión en prevención sobre la reacción. Como propuesta estratégica, los países de la región deben integrar la ciberseguridad dentro de sus políticas de infraestructura crítica y seguridad nacional, promoviendo estándares mínimos obligatorios y programas de capacitación continua, para reducir la probabilidad de incidentes con impacto masivo en servicios esenciales.</p>
+    <h3>Bibliografía</h3>
+      <ul>
+        <li>Banco de México. (s. f.). Serie histórica del tipo de cambio (CF102). Sistema de Información Económica (SIE). https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF102&locale=es
+        <li>CrowdStrike. (2021). DarkSide: The new face of ransomware-as-a-service. CrowdStrike Intelligence Report.
+        <li>Cybersecurity and Infrastructure Security Agency [CISA], & Federal Bureau of Investigation [FBI]. (2021, 11 de mayo). DarkSide ransomware: Best practices for preventing business disruption from ransomware attacks (Alert AA21-131A). https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-131a</li>
+        <li>Federal Bureau of Investigation. (2021, 10 de mayo). FBI statement on compromise of Colonial Pipeline networks. FBI National Press Office. https://www.fbi.gov/news/press-releases/fbi-statement-on-compromise-of-colonial-pipeline-networks</li>
+        <li>FireEye, Inc. (Mandiant). (2021). Shining a light on DarkSide ransomware operations. Mandiant Threat Intelligence.</li>
+        <li>Grealish, G. (2021, 3 de agosto). Colonial Pipeline hack and zero trust security. IBM Community. https://community.ibm.com/community/user/blogs/gerry-grealish1/2021/08/03/colonial-pipeline-hack-and-zero-trust-security</li>
+        <li>IBM Security X-Force. (2021). Threat intelligence index 2022: Ransomware's pivot to manufacturing and energy. IBM.</li>
+        <li>Kaspersky. (s. f.). What is cybercrime?. Kaspersky Resource Center. https://latam.kaspersky.com/resource-center/threats/what-is-cybercrime</li>
+        <li>Reeder, J. R., & Hall, T. (2021). Cybersecurity’s Pearl Harbor moment: Lessons learned from the Colonial Pipeline ransomware attack. The Cyber Defense Review, 6(3), 9–11. https://cyberdefensereview.army.mil</li>
+        <li>U.S. Department of Energy. (2021). Colonial Pipeline cyber incident: DOE response and timeline. Office of Cybersecurity, Energy Security, and Emergency Response.</li>
+      </ul>
+        
+          <p style="text-align: justify;">
+            El acceso inicial ocurrió mediante una VPN utilizando credenciales comprometidas.
+            La cuenta no contaba con autenticación multifactor.
+          </p>
         
         <h3>Tipo de ataque</h3>
         <p style="text-align: justify;">Ransomware bajo el modelo de doble extorsión: cifrado de sistemas y amenaza
