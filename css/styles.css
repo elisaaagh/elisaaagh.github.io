@@ -792,6 +792,7 @@ footer {
 .lab{
   width: min(1200px, 92%);
   margin: 60px auto 100px;
+  align-items: stretch;
 
   display: grid;
   gap: 25px;
