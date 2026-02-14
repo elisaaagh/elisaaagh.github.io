@@ -809,7 +809,7 @@ footer {
 .intro { grid-area: intro; }
 .desarrollo { grid-area: desarrollo; }
 .referencias { grid-area: referencias; }
-.relflexion { grid-area: relflexion; }
+.reflexion { grid-area: reflexion; }
 .multimedia { grid-area: multimedia; }
 .lab-export{ grid-area: export; text-align:center; }
 
