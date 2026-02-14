@@ -790,28 +790,13 @@ footer {
 ========================= */
 
 .lab{
-  width: min(1200px, 92%);
+  width: min(1100px, 92%);
   margin: 60px auto 100px;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;  /* uno debajo del otro */
   gap: 25px;
-
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    "intro intro"
-    "desarrollo desarrollo"
-    "referencias reflexion"
-    "referencias multimedia"
-    "export export";
 }
-
-/* posiciones */
-.intro{ grid-area: intro; }
-.desarrollo{ grid-area: desarrollo; }
-.referencias{ grid-area: referencias; }
-.reflexion{ grid-area: reflexion; }
-.multimedia{ grid-area: multimedia; }
-.lab-export{ grid-area: export; text-align:center; }
 
 /* tarjetas */
 .lab-card{
@@ -840,6 +825,7 @@ footer {
   color: #dcdcff;
   line-height: 1.6;
 }
+
 
 /* imagen */
 .multimedia img{
