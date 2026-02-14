@@ -797,13 +797,16 @@ footer {
   gap: 25px;
 
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto auto auto auto;
-
   grid-template-areas:
     "intro intro"
     "desarrollo desarrollo"
-    "referencias reflexion"
-    "referencias multimedia";
+    "referencias side";
+}
+.side{
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 /* posiciones */
