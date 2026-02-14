@@ -856,9 +856,9 @@ footer {
     grid-template-areas:
       "intro"
       "desarrollo"
-      "multimedia"
-      "reflexion"
       "referencias"
+      "reflexion"
+      "multimedia"
       "export";
   }
 }
