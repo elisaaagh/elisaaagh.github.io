@@ -954,3 +954,43 @@ a:hover{
   color: white;
   text-shadow: 0 0 8px #a855f7;
 }
+
+/* =========================
+   ACORDEÓN
+========================= */
+
+.accordion{
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(167,139,250,0.2);
+}
+
+.accordion-btn{
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(140,0,255,0.15);
+  color: #e0d7ff;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.accordion-btn:hover{
+  background: rgba(140,0,255,0.3);
+  box-shadow: 0 0 15px rgba(140,0,255,0.3);
+}
+
+.accordion-content{
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(10,10,25,0.6);
+  transition: max-height 0.4s ease;
+  padding: 0 20px;
+}
+
+.accordion-content p{
+  margin: 15px 0;
+}
