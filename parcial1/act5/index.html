@@ -43,17 +43,106 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-    <p>
-      Procedimientos realizados, configuraciones, comandos,
-      herramientas utilizadas y explicación paso a paso.
-    </p>
+      <h3>Tabla de comparación</h3>
+    <table>
+      <tr>
+        <th></th>
+        <th>MTRE ATT&CK</th>
+        <th>OWASP WSTG</th>
+        <th>NIST SP 800-115</th>
+        <th>OSSTMM</th>
+        <th>PTES</th>
+        <th>ISSAF</th>
+      </tr>
+      <tr>
+        <td>Descripción breve de la metodología</td>
+        <td>Marco de conocimiento de tácticas, técnicas y procedimientos (TTPs) usados por adversarios para modelar ataques reales.</td>
+        <td>Guía de pruebas de seguridad para aplicaciones web (Web Security Testing Guide).</td>
+        <td>Guía técnica para pruebas de seguridad y evaluación de sistemas de información.</td>
+        <td>Manual abierto de pruebas de seguridad que cubre redes, sistemas, personas y procesos.</td>
+        <td>Estándar para ejecución de pruebas de penetración con fases claras y prácticas.</td>
+        <td>Marco de evaluación de seguridad de sistemas con guía amplia de pruebas.</td>
+      </tr>
+      <tr>
+        <td>Frases de implementación</td>
+        <td>Es una matriz de tácticas y técnicas que cubre todo el ciclo de vida del ataque.</td>
+        <td>Suele organizarse en secciones de requisitos de pruebas, pero como guía técnica no sigue fases rígidas.</td>
+        <td>Planificación, recopilación de información, análisis de vulnerabilidades, explotación y reporte.</td>
+        <td>Identificación, análisis de vulnerabilidades, evaluación física/humana y reporte.</td>
+        <td>Pre-engagement, inteligencia, modelado de amenaza, snálisis de vulnerabilidades, explotación, post-explotación, reporte.</td>
+        <td>Incluye gestión de proyecto, pre-/post-assessment, técnica de pruebas, análisis, reportes y best practices.</td>
+      </tr>
+      <tr>
+        <td>Objetivo principal</td>
+        <td>Documentar y mapear técnicas de ataque para simulación, detección y respuesta.</td>
+        <td>Detectar vulnerabilidades en aplicaciones web.</td>
+        <td>Proveer un enfoque estructurado, repetible y documentado para pruebas técnicas.</td>
+        <td>Evaluación completa de seguridad operativa con métricas cuantificables.</td>
+        <td>Estandarizar el proceso de pentesting y guiar al tester en todas sus etapas.</td>
+        <td>Evaluar seguridad incluyendo procesos, controles y vulnerabilidades técnicas.</td>
+      </tr>
+      <tr>
+        <td>Escenarios en los que se utiliza</td>
+        <td>Red teaming, threat hunting, simulación de adversaries, pruebas de defensa y evaluación de controles.</td>
+        <td>Pentesting de aplicaciones web, APIs y servicios web.</td>
+        <td>Organizaciones que requieren cumplimiento normativo y evaluación formal (gobierno, empresas).</td>
+        <td>Seguridad organizacional amplia: redes, comunicaciones, físico y humano.</td>
+        <td>Pentesting general (redes, sistemas y aplicaciones integradas).</td>
+        <td>Empresas que buscan evaluación integral (técnica y organizacional).</td>
+      </tr>
+      <tr>
+        <td>Orientación</td>
+        <td>Defensa y evaluación.</td>
+        <td>Evaluación técnica enfocada al ataque de aplicaciones web.</td>
+        <td>Evaluación técnica con enfoque en cumplimiento y documentación.</td>
+        <td>Evaluación de seguridad, con fuerte rigor y medición (puede apoyar ataque y defensa).</td>
+        <td>Ataque y evaluación técnica estructurada.</td>
+        <td>Evaluación completa (técnica y organizativa).</td>
+      </tr>
+      <tr>
+        <td>Autores u organismos responsables</td>
+        <td>MITRE Corporation</td>
+        <td>OWASP (Open Web Application Security Project).</td>
+        <td>NIST (Instituto Nacional de Estándares y Tecnología, EE. UU.).</td>
+        <td>ISECOM (The Institute for Security and Open Methodologies).</td>
+        <td>Comunidad de seguridad / Pentest Standard (grupo open).</td>
+        <td>InfoSec (historical / comunidad de evaluación).</td>
+      </tr>
+      <tr>
+        <td>URL del material oficial</td>
+        <td><a href="https://attack.mitre.org/" target="_blank">https://attack.mitre.org/</a></td>
+        <td><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">https://owasp.org/www-project-web-security-testing-guide/</a></td>
+        <td><a href="https://www.nist.gov/privacy-framework/nist-sp-800-115" target="_blank">https://www.nist.gov/privacy-framework/nist-sp-800-115</a></td>
+        <td><a href="https://www.isecom.org/OSSTMM.3.pdf" target="_blank">https://www.isecom.org/OSSTMM.3.pdf</a></td>
+        <td><a href="https://www.penteststandard.org/" target="_blank">https://www.penteststandard.org/</a></td>
+        <td>No hay URL oficial simple, suele referenciarse en documentos académicos.</td>
+      </tr>
+      <tr>
+        <td>Existencia de certificaciones asociadas</td>
+        <td>No hay, pero hay cursos y prácticas alineadas.</td>
+        <td>No tiene certificación propia, pero se usa en certificaciones de pentesting (OSCP, CEH).</td>
+        <td>No hay certificación oficial, pero se usa como modelo en auditorías y pruebas certificadas (ISO/IEC, auditorías GRC).</td>
+        <td>Existen certificaciones OSSTMM relacionadas con ISECOM (por ejemplo, certificados de auditoría).</td>
+        <td>No existe certificación oficial PTES, pero es base de muchas prácticas profesionales.</td>
+        <td>No hay certificaciones específicas asociadas, es un marco de referencia clásico.</td>
+      </tr>
+      <tr>
+        <td>Versiones o actualizaciones vigentes</td>
+        <td>Actualizado continuamente (Enterprise, Mobile, ICS)</td>
+        <td>WSTG v4.1 es la versión estable más reciente.</td>
+        <td>SP 800-115 (vigente como guía técnica)</td>
+        <td>OSSTMM v3 es la versión más usada (actualización menor con tiempo).</td>
+        <td>PTES ha evolucionado, pero mantiene 7 fases clave.</td>
+        <td>No hay actualizaciones frecuentes (histórico, usado como referencia).</td>
+      </tr>
+    </table>
   </div>
 
 
   <!-- MULTIMEDIA -->
   <div class="lab-card multimedia">
     <h2>Material multimedia</h2>
-    <img src="img/captura1.png" alt="Evidencia">
+    <img src="images/cp1.png" alt="Evidencia">
   </div>
 
 
