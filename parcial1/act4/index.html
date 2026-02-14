@@ -34,9 +34,11 @@
   <!-- INTRO -->
   <div class="lab-card intro">
     <h2>Introducción</h2>
-    <p>
-      Aquí explicas el contexto del tema, su importancia dentro de la
-      seguridad informática y el objetivo de la práctica.
+    <p style="text-align: justify;">
+      En esta práctica se implementan reglas de filtrado utilizando iptables con el
+      objetivo de fortalecer la seguridad perimetral de la red. Se aplican políticas
+      restrictivas y posteriormente se habilitan servicios necesarios como DNS,
+      correo electrónico y HTTP.
     </p>
   </div>
 
@@ -44,26 +46,48 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-    <p>
-      Procedimientos realizados, configuraciones, comandos,
-      herramientas utilizadas y explicación paso a paso.
-    </p>
+
+    <h3>1. Política restrictiva</h3>
+    <pre><code>iptables -P INPUT DROP</code></pre>
+    <pre><code>iptables -P OUTPUT DROP</code></pre>
+    <pre><code>iptables -P FORWARD DROP</code></pre>
+
+    <h3>2. Conexiones establecidas</h3>
+    <pre><code>iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code></pre>
+
+    <h3>3. DNS saliente</h3>
+    <pre><code>iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT</code></pre>
+
+    <h3>4. Correo entrante</h3>
+    <pre><code>iptables -A INPUT -p tcp -d 192.1.2.10 --dport 25 -j ACCEPT</code></pre>
+
+    <h3>5. Correo saliente</h3>
+    <pre><code>iptables -A OUTPUT -p tcp -s 192.1.2.10 --dport 25 -j ACCEPT</code></pre>
+
+    <h3>6. HTTP hacia servidor web</h3>
+    <pre><code>iptables -A INPUT -p tcp -d 192.1.2.11 --dport 80 -j ACCEPT</code></pre>
+
+    <h3>7. HTTP desde la red local</h3>
+    <pre><code>iptables -A INPUT -p tcp -s 192.1.2.0/24 --dport 80 -j ACCEPT</code></pre>
   </div>
 
 
   <!-- MULTIMEDIA -->
   <div class="lab-card multimedia">
     <h2>Material multimedia</h2>
-    <img src="img/captura1.png" alt="Evidencia">
+    <img src="images/cp1.png" alt="Evidencia">
   </div>
 
 
   <!-- REFLEXIÓN -->
   <div class="lab-card reflexion">
     <h2>Opinión / reflexión técnica</h2>
-    <p>
-      Relación del ejercicio con escenarios reales, riesgos y aplicaciones
-      prácticas en la ciberseguridad.
+    <p style="text-align: justify;">
+      La aplicación de listas de control de acceso demuestra la importancia de
+      trabajar bajo el principio de mínimo privilegio. Definir primero una política
+      de denegación total y después habilitar únicamente los servicios necesarios
+      reduce significativamente la superficie de ataque y permite un mejor control
+      del tráfico.
     </p>
   </div>
 
@@ -72,8 +96,8 @@
   <div class="lab-card referencias">
     <h2>Referencias</h2>
     <ul>
-      <li>Autor, título, año.</li>
-      <li>Documentación utilizada.</li>
+      <li>Documentación oficial de iptables.</li>
+      <li>Material de clase CNO V – Seguridad Informática.</li>
     </ul>
   </div>
 
