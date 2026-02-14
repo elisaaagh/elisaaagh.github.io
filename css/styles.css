@@ -797,22 +797,22 @@ footer {
   gap: 25px;
 
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto auto auto;
 
   grid-template-areas:
     "intro intro"
     "desarrollo desarrollo"
     "referencias reflexion"
     "referencias multimedia";
-
-  align-items: stretch;
 }
 
 /* posiciones */
 .intro { grid-area: intro; }
 .desarrollo { grid-area: desarrollo; }
 .referencias { grid-area: referencias; }
-.reflexion { grid-area: reflexion; }   
+.reflexion { grid-area: reflexion; }
 .multimedia { grid-area: multimedia; }
+
 .lab-export{ grid-area: export; text-align:center; }
 
 /* tarjetas */
