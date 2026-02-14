@@ -800,9 +800,8 @@ footer {
   grid-template-areas:
     "intro intro"
     "desarrollo desarrollo"
-    "multimedia reflexion"
-    "multimedia referencias"
-    "export export";
+    "referencias reflexion"
+    "multimedia multimedia";
 }
 
 /* posiciones */
