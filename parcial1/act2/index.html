@@ -27,26 +27,25 @@
 
   <div class="section-divider"></div>
   
-  <section class="actividad">
 <!-- ===== DASHBOARD ===== -->
 <div class="lab">
 
   <!-- INTRO -->
   <div class="lab-card intro">
     <h2>Introducción</h2>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       En la actualidad, la seguridad informática enfrenta escenarios de amenaza cada vez más complejos, donde los incidentes no solo afectan activos digitales, sino también servicios esenciales, procesos organizacionales y la confianza en los sistemas de información. Ante este panorama, el análisis de incidentes de seguridad requiere el uso de marcos conceptuales y terminológicos estandarizados que permitan describir, evaluar y comunicar las vulneraciones de manera clara, precisa y profesional.
     </p>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       El estándar ITU-T X.800 establece un modelo conceptual basado en seis servicios fundamentales de seguridad (autenticación, control de acceso, confidencialidad, integridad, no repudio y disponibilidad) cuyo propósito es identificar qué propiedades de seguridad deben protegerse dentro de un sistema de información. Este marco permite evaluar de forma estructurada qué servicios fueron comprometidos durante un incidente y comprender el impacto de dichas fallas sobre la operación del sistema.
     </p>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       Por su parte, el RFC 4949 proporciona un marco terminológico estandarizado para la seguridad de la información, definiendo con precisión conceptos como amenaza, vulnerabilidad, ataque, impacto y riesgo. Su propósito principal es unificar el lenguaje técnico, evitando ambigüedades y permitiendo una comunicación clara y consistente entre profesionales, analistas y responsables de la toma de decisiones en materia de ciberseguridad.
     </p>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       La relación entre ambos marcos es complementaria: mientras el ITU-T X.800 permite identificar qué servicios de seguridad han sido afectados, el RFC 4949 facilita describir cómo y por qué ocurrió la vulneración, utilizando un vocabulario técnico común. Esta combinación resulta especialmente relevante en la seguridad informática actual, donde la correcta documentación y análisis de incidentes es clave para la respuesta, la prevención y la mejora continua de los controles de seguridad.
     </p>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       En este sentido, la presente actividad tiene como objetivo analizar escenarios reales de incidentes de seguridad informática mediante la aplicación conjunta del ITU-T X.800 y el RFC 4949, fortaleciendo la capacidad del estudiante para identificar, explicar y documentar vulneraciones de seguridad de manera rigurosa, estandarizada y alineada con las prácticas profesionales vigentes.
     </p>
   </div>
@@ -55,7 +54,7 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 01.</strong> En múltiples incidentes atribuidos al grupo LockBit, organizaciones públicas y privadas han sufrido el cifrado masivo de servidores tras un acceso inicial no autorizado. Antes de ejecutar el ransomware, los atacantes exfiltraron información sensible y posteriormente amenazaron con su publicación, evidenciando un compromiso simultáneo de la confidencialidad, la integridad y la disponibilidad. Desde el enfoque del RFC 4949, el incidente se clasifica como un multi-stage attack con data breach y availability attack, donde la indisponibilidad del sistema es solo una fase final del daño. La ausencia de respaldos inmutables y de detección temprana permitió que el impacto fuera total.
     </p>
 <table>
@@ -105,7 +104,7 @@ Planes de respuesta a incidentes específicos para ransomware y doble extorsión
   </tr>
 </table>
     
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 02.</strong> En diversos casos documentados, bases de datos completas quedaron accesibles públicamente debido a errores de configuración en servicios de almacenamiento en la nube. No existió una explotación técnica sofisticada, sino una falla en el control de acceso, lo que derivó directamente en la pérdida de confidencialidad de los datos. El RFC 4949 describe este tipo de incidentes como misconfiguration y exposure, subrayando que la amenaza no siempre implica malware o intrusión activa. El impacto suele ser legal y reputacional, aun cuando no se pueda demostrar acceso malicioso.
     </p>
     <table>
@@ -151,7 +150,7 @@ Capacitación técnica del personal en buenas prácticas de configuración segur
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 03.</strong> Un proveedor legítimo de software fue comprometido y distribuyó una actualización que incluía código malicioso, afectando a cientos de organizaciones que confiaban en él Este escenario refleja una violación grave de la integridad de los sistemas y, en muchos casos, de la confidencialidad al permitir accesos no autorizados posteriores El RFC 4949 lo identifica como supply chain attack destacando el abuso de relaciones de confianza El daño es particularmente crítico porque rompe el supuesto de legitimidad del software firmado.
     </p>
     <table>
@@ -203,7 +202,7 @@ Planes de respuesta específicos para ataques a la cadena de suministro.</td>
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 04.</strong> Mediante campañas de phishing, atacantes obtuvieron credenciales válidas y accedieron a sistemas corporativos durante meses sin levantar alertas Aunque la autenticación funcionó técnicamente, el servicio de autenticación fue comprometido al basarse en credenciales robadas, afectando también el control de acceso Según el RFC 4949 se trata de un credential compromise con authentication failure conceptual, no técnica La falta de MFA y de monitoreo de comportamiento facilitó la persistencia del atacante.
     </p>
     <table>
@@ -254,7 +253,7 @@ Alertas por patrones atípicos (horarios, ubicaciones, volúmenes de acceso).</t
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 05.</strong> En ataques de ransomware avanzados, los atacantes eliminaron o cifraron los respaldos antes de afectar los sistemas productivos Este hecho compromete directamente la disponibilidad y la integridad de la información, al impedir la recuperación El RFC 4949 clasifica este comportamiento como data destruction y availability attack evidenciando intención deliberada de maximizar el daño La inexistencia de respaldos offline o inmutables convierte el incidente en catastrófico.
     </p>
     <table>
@@ -302,7 +301,7 @@ Principio de mínimo privilegio aplicado a la infraestructura de backup.</td>
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 06.</strong> Un empleado con acceso legítimo extrajo bases de datos completas y las vendió a terceros, sin explotar vulnerabilidades técnicas El servicio afectado fue principalmente la confidencialidad junto con fallas en el control de acceso por exceso de privilegios El RFC 4949 define este escenario como insider threat destacando que el riesgo interno puede ser tan grave como el externo La carencia de monitoreo y de políticas de mínimo privilegio fue determinante.
     </p>
     <table>
@@ -350,7 +349,7 @@ Políticas claras de manejo de información y concientización interna.</td>
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 07.</strong> Tras un ataque, los registros del sistema quedaron cifrados o alterados, impidiendo reconstruir la secuencia de eventos Esto compromete la integridad de los datos y el no repudio ya que no es posible demostrar qué ocurrió ni quién fue responsable Desde el RFC 4949 se trata de una violación de evidentiary integrity y del audit trail El impacto no solo es técnico, sino también probatorio y legal.
     </p>
     <table>
@@ -398,7 +397,7 @@ Planes de respuesta a incidentes con preservación de evidencia.</td>
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 08.</strong> Una actualización mal ejecutada provocó la caída simultánea de múltiples servicios críticos a nivel global, Aunque no existió un atacante, el servicio de disponibilidad fue gravemente afectado El RFC 4949 contempla estos eventos como operational failure recordando que la seguridad también se ve afectada por errores internos La falta de pruebas previas y planes de reversión amplificó el impacto.
     </p>
     <table>
@@ -446,7 +445,7 @@ Planes de continuidad del negocio (BCP) y recuperación ante desastres (DRP).</t
       </tr>
     </table>
 
-     <p style="text-align:center;">
+     <p style="text-align:justify;">
        <strong>Escenario 09.</strong> Atacantes replicaron sitios y correos oficiales para engañar a ciudadanos y obtener información sensible Este escenario afecta la autenticación al suplantar identidades legítimas, y la confidencialidad de los datos recolectados El RFC 4949 lo clasifica como masquerade y phishing subrayando el componente de ingeniería social La ausencia de mecanismos de autenticación del dominio y de concientización facilitó el éxito del ataque
      </p>
     <table>
@@ -494,7 +493,7 @@ Políticas claras de comunicación institucional.</td>
       </tr>
     </table>
 
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       <strong>Escenario 10.</strong> En algunos incidentes, tras exfiltrar información, los atacantes ejecutaron acciones destructivas para borrar sistemas completos y eliminar rastros Se produce un compromiso total de la confidencialidad la integridad y la disponibilidad configurando uno de los peores escenarios posibles El RFC 4949 describe este patrón como destructive attack donde el objetivo no es solo el lucro, sino el daño irreversible La detección tardía impidió cualquier contención efectiva.
     </p>
     <table>
@@ -559,13 +558,13 @@ Simulacros de ataque destructivo.</td>
   <!-- REFLEXIÓN -->
   <div class="lab-card reflexion">
     <h2>Opinión / reflexión técnica</h2>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       El análisis de los escenarios presentados revela que los problemas de seguridad informática no siguen un solo patrón técnico, sino que se deben a una compleja mezcla de fallos tecnológicos, errores humanos y debilidades organizacionales. La implementación del modelo de servicios de seguridad del ITU-T X. 800 facilitó la identificación estructurada de cómo los principios de autenticación, control de acceso, confidencialidad, integridad, no repudio y disponibilidad pueden estar en riesgo, tanto por ataques intencionados como por errores internos.
     </p>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       Desde un enfoque latinoamericano, estos escenarios son especialmente relevantes. Muchas organizaciones en la región enfrentan limitaciones en sus presupuestos, dependencia de proveedores externos, niveles de madurez en ciberseguridad desiguales y una cultura reactiva, lo que aumenta el riesgo ante amenazas internas, ataques de ingeniería social y fallos operativos. No obstante, el análisis también revela que muchas de las medidas de control sugeridas, como políticas de mínimos privilegios, capacitación, segmentación de redes, copias de seguridad offline y gestión formal de cambios, son factibles y aplicables incluso en entornos con recursos escasos.
     </p>
-    <p style="text-align:center;">
+    <p style="text-align:justify;">
       En resumen, mejorar la seguridad informática en situaciones reales requiere no solo tecnología, sino también procesos claros, formación continua y marcos conceptuales robustos. La combinación de ITU-T X. 800 y RFC 4949 permite realizar análisis técnicos rigurosos, optimizar la documentación de incidentes y respaldar decisiones estratégicas, contribuyendo a una postura de seguridad más robusta y acorde con las necesidades actuales de las organizaciones, particularmente en América Latina.
     </p>
     
@@ -588,7 +587,7 @@ Simulacros de ataque destructivo.</td>
       Exportar a PDF
     </a>
   </div>
-  </section>
+
 </div>
 <div class="section-divider"></div>
 <footer>
