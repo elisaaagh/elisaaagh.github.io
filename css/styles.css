@@ -910,3 +910,61 @@ footer {
   box-shadow: 0 0 10px rgba(140,0,255,0.5);
 }
 
+/* =========================
+   TABLAS HACKER
+========================= */
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  overflow: hidden;
+
+  background: rgba(20, 20, 40, 0.45);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+/* encabezados */
+table thead{
+  background: linear-gradient(90deg, #7b2ff7, #c77dff);
+}
+
+table th{
+  padding: 14px;
+  text-align: left;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* celdas */
+table td{
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  color: #dcdcff;
+  font-size: 0.9rem;
+}
+
+/* efecto hover */
+table tbody tr:hover{
+  background: rgba(167, 139, 250, 0.08);
+  transition: 0.2s;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a{
+  color: #c77dff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.25s;
+}
+
+a:hover{
+  color: white;
+  text-shadow: 0 0 8px #a855f7;
+}
