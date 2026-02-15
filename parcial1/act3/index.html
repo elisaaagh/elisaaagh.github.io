@@ -43,15 +43,15 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-    <ul>
-      <li>1. Completa los espacios conforme se explica el flujo del paquete.</li>
-    </ul>
+    <ol>
+      <li>Completa los espacios conforme se explica el flujo del paquete.</li>
+    </ol>
     <p style:text-align="justify";>
       Cuando un paquete llega al sistema, primero para por una <u> tabla </u>, después por una <u> cadena </u> y finalmente se ejecuta una <u> acción </u>.
     </p>
-    <ul>
-      <li>2. Relaciona cada tabla con su propósito principal. </li>
-    </ul>
+    <ol>
+      <li>Relaciona cada tabla con su propósito principal. </li>
+    </ol>
     <table>
       <tr>
         <th>Tabla</th>
@@ -84,20 +84,20 @@
         <td>Permite el servicio.</td>
       </tr>
     </table>
-    <ul>
-      <li>3. Anatomía de un comando iptables.</li>
-    </ul>
+    <ol>
+      <li>Anatomía de un comando iptables.</li>
+    </ol>
     <p style:text-align="justify";>
       iptables -A <u> cadena </u> -p tcp -m <u> multiport </u> --dports 80,443 -j <u> acción </u>
     </p>
-    <ul>
-      <li>4.	Este comando permite: </li>
-    </ul>
+    <ol>
+      <li>Este comando permite: </li>
+    </ol>
     <p style:text-align="justify";>
      Aplicar una acción a tráfico TCP dirigido a los puertos 80 y 443 en la cadena que se especifique.
     </p>
-    <ul>
-      <li>5. Variables y opciones comunes</li>
+    <ol>
+      <li>Variables y opciones comunes</li>
       <ul>
         <li><strong>Limitar intentos por minuto </strong></li>
       </ul>
@@ -122,10 +122,10 @@
       <p style:text-align="justify";>
         -L -v
       </p>
-    </ul>
-    <ul>
-      <li>6. ¿Qué hace esta regla?</li>
-    </ul>
+    </ol>
+    <ol>
+      <li>¿Qué hace esta regla?</li>
+    </ol>
     <p style:text-align="justify";>
       <strong>iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 \ -m state --state NEW,ESTABLISHED -j ACCEPT </strong>
     </p>
@@ -144,21 +144,21 @@
     <p style:text-align="justify";>
         iptables -A OUTPUT -j ACCEPT
     </p>
-    <ul>
-      <li>9.	Permitir SSH solo desde la IP 192.168.1.5,0 </li>
-    </ul>
+    <ol>
+      <li>Permitir SSH solo desde la IP 192.168.1.5,0 </li>
+    </ol>
     <p style:text-align="justify";>
         iptables -A INPUT -p tcp -s 192.168.1.50 –dport 22 -m conntrack –ctstate NEW,ESTABLISHED -j ACCEPT
     </p>
-    <ul>
-      <li>10.	Permitir tráfico TCP entrante a puertos 80 y 443 solo si es conexión establecida o relacionada </li>
-    </ul>
+    <ol>
+      <li>Permitir tráfico TCP entrante a puertos 80 y 443 solo si es conexión establecida o relacionada </li>
+    </ol>
     <p style:text-align="justify";>
         iptables -A INPUT -p tcp -m multiport –dports 80,443 -m conntrack –ctstate ESTABLISHED,RELATED -j ACCEPT
     </p>
-    <ul>
-      <li>11.	Permitir tráfico TCP entrante por eth0 a 22, 80 y 443, registrar intentos y permitir solo NEW y ESTABLISHED </li>
-    </ul>
+    <ol>
+      <li>Permitir tráfico TCP entrante por eth0 a 22, 80 y 443, registrar intentos y permitir solo NEW y ESTABLISHED </li>
+    </ol>
     <p style:text-align="justify";>
          iptables -A INPUT -i eth0 -p tcp -m multiport –dports 22,80,443 -m conntrack –ctstate NEW -j LOG –log-prefix “INTENTO ENTRANTE TCP: ”
     </p>
