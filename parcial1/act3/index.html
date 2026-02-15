@@ -45,123 +45,101 @@
     <h2>Desarrollo técnico</h2>
     <ol>
       <li>Completa los espacios conforme se explica el flujo del paquete.</li>
-    </ol>
-    <p style:text-align="justify";>
-      Cuando un paquete llega al sistema, primero pasa por una <u> tabla </u>, después por una <u> cadena </u> y finalmente se ejecuta una <u> acción </u>.
-    </p>
-    <ol>
+      <p style:text-align="justify";>
+        Cuando un paquete llega al sistema, primero pasa por una <u> tabla </u>, después por una <u> cadena </u> y finalmente se ejecuta una <u> acción </u>.
+      </p>
       <li>Relaciona cada tabla con su propósito principal. </li>
-    </ol>
-    <table>
+      <table>
       <tr>
         <th>Tabla</th>
-        <th>Propósito principal</th>
-        <th>Ejemplo de uso</th>
-      </tr>
-      <tr>
-        <td><strong>FILTER</strong></td>
-        <td>Firewall que filtra paquetes.</td>
-        <td>Bloquear tráfico.</td>
-      </tr>
-      <tr>
-        <td><strong>NAT</strong></td>
-        <td>Traducción de direcciones.</td>
-        <td>Conexión de diferentes dispositivos.</td>
-      </tr>
-      <tr>
-        <td><strong>MANGLE</strong></td>
-        <td>Marcar las cabeceras.</td>
-        <td>Cambiar las cabeceras.</td>
-      </tr>
-      <tr>
-        <td><strong>RAW</strong></td>
-        <td>Seguimiento a la conexión.</td>
-        <td>Realiza monitoreos.</td>
-      </tr>
-      <tr>
-        <td><strong>SECURITY</strong></td>
-        <td>Permitir el servicio de seguridad.</td>
-        <td>Permite el servicio.</td>
-      </tr>
-    </table>
-    <ol>
+          <th>Propósito principal</th>
+          <th>Ejemplo de uso</th>
+        </tr>
+        <tr>
+          <td><strong>FILTER</strong></td>
+          <td>Firewall que filtra paquetes.</td>
+          <td>Bloquear tráfico.</td>
+        </tr>
+        <tr>
+          <td><strong>NAT</strong></td>
+          <td>Traducción de direcciones.</td>
+          <td>Conexión de diferentes dispositivos.</td>
+        </tr>
+        <tr>
+          <td><strong>MANGLE</strong></td>
+          <td>Marcar las cabeceras.</td>
+          <td>Cambiar las cabeceras.</td>
+        </tr>
+        <tr>
+          <td><strong>RAW</strong></td>
+          <td>Seguimiento a la conexión.</td>
+          <td>Realiza monitoreos.</td>
+        </tr>
+        <tr>
+          <td><strong>SECURITY</strong></td>
+          <td>Permitir el servicio de seguridad.</td>
+          <td>Permite el servicio.</td>
+        </tr>
+      </table>
       <li>Anatomía de un comando iptables.</li>
-    </ol>
-    <p style:text-align="justify";>
-      iptables -A <u> cadena </u> -p tcp -m <u> multiport </u> --dports 80,443 -j <u> acción </u>
-    </p>
-    <ol>
+      <p style:text-align="justify";>
+        iptables -A <u> cadena </u> -p tcp -m <u> multiport </u> --dports 80,443 -j <u> acción </u>
+      </p>
       <li>Este comando permite: </li>
-    </ol>
-    <p style:text-align="justify";>
-     Aplicar una acción a tráfico TCP dirigido a los puertos 80 y 443 en la cadena que se especifique.
-    </p>
-    <ol>
+      <p style:text-align="justify";>
+         Aplicar una acción a tráfico TCP dirigido a los puertos 80 y 443 en la cadena que se especifique.
+        </p>
       <li>Variables y opciones comunes</li>
       <ol type="a">
         <li><strong>Limitar intentos por minuto </strong></li>
-      </ol>
-      <p style:text-align="justify";>
-        --limit 5/minute
-      </p>
-      <ol type="b">
+          <p style:text-align="justify";>
+            --limit 5/minute
+          </p>
         <li><strong>Filtrar por IP de origen </strong></li>
-      </ol>
-      <p style:text-align="justify";>
-        -s 192.168.1.1/24
-      </p>
-      <ol type="c">
+          <p style:text-align="justify";>
+            -s 192.168.1.1/24
+          </p>
         <li><strong>Ver solo números, sin DNS (ni resolución de puertos)</strong></li>
-      </ol>
-      <p style:text-align="justify";>
-        -L -n
-      </p>
-      <ol type="d">
+        <p style:text-align="justify";>
+          -L -n
+        </p>
         <li><strong>Ver reglas con contadores (paquetes y bytes</strong></li>
+        <p style:text-align="justify";>
+          -L -v
+        </p>
       </ol>
-      <p style:text-align="justify";>
-        -L -v
-      </p>
-    </ol>
-    <ol>
       <li>¿Qué hace esta regla?</li>
-    </ol>
-    <p style:text-align="justify";>
+      <p style:text-align="justify";>
       <strong>iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 \ -m state --state NEW,ESTABLISHED -j ACCEPT </strong>
     </p>
     <p style:text-align="justify";>
       Permite tráfico TCP entrante por la interfaz eth0 a los puertos 22, 80 y 443, siempre que sea parte de una conexión nueva o establecida.
     </p>
-    <ul>
-      <li>7. Permite tráfico HTTP entrante</li>
-    </ul>
-    <p style:text-align="justify";>
-       iptables -A INPUT -p tcp –dport 80 -j ACCEPT
-    </p>
-    <ul>
-      <li>8.	Permitir todo el tráfico saliente </li>
-    </ul>
-    <p style:text-align="justify";>
+      <li>Permite tráfico HTTP entrante</li>
+      <p style:text-align="justify";>
+         iptables -A INPUT -p tcp –dport 80 -j ACCEPT
+      </p>
+      <li>Permitir todo el tráfico saliente </li>
+      <p style:text-align="justify";>
         iptables -A OUTPUT -j ACCEPT
-    </p>
-    <ol>
+      </p>
+      <p style:text-align="justify";>
+        iptables -A OUTPUT -j ACCEPT
+      </p>
       <li>Permitir SSH solo desde la IP 192.168.1.5,0 </li>
-    </ol>
-    <p style:text-align="justify";>
+      <p style:text-align="justify";>
         iptables -A INPUT -p tcp -s 192.168.1.50 –dport 22 -m conntrack –ctstate NEW,ESTABLISHED -j ACCEPT
-    </p>
-    <ol>
+      </p>
       <li>Permitir tráfico TCP entrante a puertos 80 y 443 solo si es conexión establecida o relacionada </li>
-    </ol>
-    <p style:text-align="justify";>
+      <p style:text-align="justify";>
         iptables -A INPUT -p tcp -m multiport –dports 80,443 -m conntrack –ctstate ESTABLISHED,RELATED -j ACCEPT
-    </p>
-    <ol>
+      </p>
       <li>Permitir tráfico TCP entrante por eth0 a 22, 80 y 443, registrar intentos y permitir solo NEW y ESTABLISHED </li>
-    </ol>
-    <p style:text-align="justify";>
+      <p style:text-align="justify";>
          iptables -A INPUT -i eth0 -p tcp -m multiport –dports 22,80,443 -m conntrack –ctstate NEW -j LOG –log-prefix “INTENTO ENTRANTE TCP: ”
     </p>
+    </ol>
+    
   </div>
 
 
