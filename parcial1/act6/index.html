@@ -42,10 +42,70 @@
   <!-- DESARROLLO -->
   <div class="lab-card desarrollo">
     <h2>Desarrollo técnico</h2>
-    <p>
-      Procedimientos realizados, configuraciones, comandos,
-      herramientas utilizadas y explicación paso a paso.
-    </p>
+      <h3>Topología</h3>
+    <ul>
+      <li>Tres routers 1941 (ISP, R1, R2)</li>
+      <li>Dos switch 2960 (S1, S2)</li>
+      <li>Dos PC´s</li>
+    </ul>
+    <h3>Configuración inicial</h3>
+      <h4>Router ISP</h4>
+      <ul>
+        <li>enable</li>
+        <li>conf t</li>
+        <li>hostname ISP</li>
+        <li>interface G0/0</li>
+        <li>ip address 209.165.100.2 255.255.255.0</li>
+        <li>no shut</li>
+        <li>interface G0/0</li>
+        <li>ip address 209.165.200.2 255.255.255.0</li>
+        <li>no shut</li>
+        <li>ip route 0.0.0.0 0.0.0.0 209.165.100.2</li>
+        <li>license boot technology-package securityK9</li>
+        <li>exit</li>
+        <li>copy run start</li>
+        <li>reload</li>
+        <li>en</li>
+        <li>show version</li>
+      </ul>
+    <h4>Router 1</h4>
+      <ul>
+        <li>enable</li>
+        <li>conf t</li>
+        <li>hostname R1</li>
+        <li>interface G0/1</li>
+        <li>ip address 192.168.1.1 255.255.255.0</li>
+        <li>no shut</li>
+        <li>interface G0/0</li>
+        <li>ip address 209.165.100.1 255.255.255.0</li>
+        <li>no shut</li>
+        <li>ip route 0.0.0.0 0.0.0.0 209.165.100.2</li>
+        <li>license boot technology-package securityK9</li>
+        <li>exit</li>
+        <li>copy run start</li>
+        <li>reload</li>
+        <li>en</li>
+        <li>show version</li>
+      </ul>
+    <h4>Router 2</h4>
+      <ul>
+        <li>enable</li>
+        <li>conf t</li>
+        <li>hostname R2</li>
+        <li>interface G0/1</li>
+        <li>ip address 192.168.3.1 255.255.255.0</li>
+        <li>no shut</li>
+        <li>interface G0/0</li>
+        <li>ip address 209.165.200.1 255.255.255.0</li>
+        <li>no shut</li>
+        <li>ip route 0.0.0.0 0.0.0.0 209.165.100.2</li>
+        <li>license boot technology-package securityK9</li>
+        <li>exit</li>
+        <li>copy run start</li>
+        <li>reload</li>
+        <li>en</li>
+        <li>show version</li>
+      </ul>
   </div>
 
 
