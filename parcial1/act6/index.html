@@ -136,6 +136,88 @@
       R1(config)# crypto isakmp key secretkey address 209.165.200.1
     </p>
     <img src="images/ISAKMPR1.png" alt="Evidencia">
+    <p style="text-align:justify";>
+      R2(config)# crypto isakmp policy 10
+    </p>
+    <p style="text-align:justify";>
+      R2(config-isakmp)# encryption aes 256
+    </p>
+    <p style="text-align:justify";>
+      R2(config-isakmp)# authentication pre-share
+    </p>
+    <p style="text-align:justify";>
+      R2(config-isakmp)# group 5
+    </p>
+    <p style="text-align:justify";>
+      R2(config-isakmp)# exit
+    </p>
+    <p style="text-align:justify";>
+      R2(config)# crypto isakmp key secretkey address 209.165.100.1
+    </p>
+    <img src="images/ISAKMPR2.png" alt="Evidencia">
+    <h3>5. Phase 2: IPSec transform-set</h3>
+    <p style="text-align:justify";>
+      Cifra encabezado y cuerpo del contenido
+    </p>
+    <p style="text-align:justify";>
+      R1(config)#crypto ipsec transform-set R1->R2 esp-aes 256 esp-sha-hmac
+    </p>
+    <img src="images/IPSecR1.png" alt="Evidencia">
+    <p style="text-align:justify";>
+      R2(config)#crypto ipsec transform-set R2->R1 esp-aes 256 esp-sha-hmac
+    </p>
+    <img src="images/IPSecR2.png" alt="Evidencia">
+    <h3>6. Crear el mapa criptográfico</h3>
+    <p style="text-align:justify";>
+      R1(config)#crypto map IPSEC-MAP 10 ipsec-isakmp
+    </p>
+    <p style="text-align:justify";>
+      R1(config-crypto-map)#set peer 209.165.200.1
+    </p>
+    <p style="text-align:justify";>
+      R1(config-crypto-map)#set pfs group5
+    </p>
+    <img src="images/MAPAR1.png" alt="Evidencia">
+    <p style="text-align:justify";>
+      R2(config)# crypto map IPSEC-MAP 10 ipsec-isakmp
+    </p>
+    <p style="text-align:justify";>
+      R2(config-crypto-map)# set peer 209.165.100.1
+    </p>
+    <p style="text-align:justify";>
+      R2(config-crypto-map)#set pfs group5
+    </p>
+    <p style="text-align:justify";>
+      R2(config-crypto-map)#set security-association lifetime seconds 86400
+    </p>
+    <p style="text-align:justify";>
+      R2(config-crypto-map)#set transform-set R2->R1
+    </p>
+    <p style="text-align:justify";>
+      R2(config-crypto-map)#match address 100
+    </p>
+    <img src="images/MAPAR2.png" alt="Evidencia">
+    <h3>7. Aplicar el mapa</h3>
+    <p style="text-align:justify";>
+      R1(config-crypto-map)#exit
+    </p>
+    <p style="text-align:justify";>
+      R1(config)#int g0/0
+    </p>
+    <p style="text-align:justify";>
+      R1(config-if)#crypto map IPSEC-MAP
+    </p>
+    <img src="images/APLIR1.png" alt="Evidencia">
+    <p style="text-align:justify";>
+      R2(config-crypto-map)#exit
+    </p>
+    <p style="text-align:justify";>
+      R2(config)#int g0/0
+    </p>
+    <p style="text-align:justify";>
+      R2(config-if)#crypto map IPSEC-MAP
+    </p>
+    <img src="images/APLIR2.png" alt="Evidencia">
   </div>
 
 
