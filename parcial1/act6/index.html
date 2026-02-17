@@ -48,7 +48,7 @@
       <li>Dos switch 2960 (S1, S2)</li>
       <li>Dos PC´s</li>
     </ul>
-    <h3>Configuración inicial</h3>
+    <h3>1. Configuración inicial</h3>
       <h4>Router ISP</h4>
       <ul>
         <li>enable</li>
@@ -61,12 +61,6 @@
         <li>ip address 209.165.200.2 255.255.255.0</li>
         <li>no shut</li>
         <li>ip route 0.0.0.0 0.0.0.0 209.165.100.2</li>
-        <li>license boot technology-package securityK9</li>
-        <li>exit</li>
-        <li>copy run start</li>
-        <li>reload</li>
-        <li>en</li>
-        <li>show version</li>
       </ul>
     <h4>Router 1</h4>
       <ul>
@@ -80,12 +74,6 @@
         <li>ip address 209.165.100.1 255.255.255.0</li>
         <li>no shut</li>
         <li>ip route 0.0.0.0 0.0.0.0 209.165.100.2</li>
-        <li>license boot technology-package securityK9</li>
-        <li>exit</li>
-        <li>copy run start</li>
-        <li>reload</li>
-        <li>en</li>
-        <li>show version</li>
       </ul>
     <h4>Router 2</h4>
       <ul>
@@ -99,13 +87,55 @@
         <li>ip address 209.165.200.1 255.255.255.0</li>
         <li>no shut</li>
         <li>ip route 0.0.0.0 0.0.0.0 209.165.100.2</li>
-        <li>license boot technology-package securityK9</li>
-        <li>exit</li>
-        <li>copy run start</li>
-        <li>reload</li>
-        <li>en</li>
-        <li>show version</li>
       </ul>
+    <h3>2. Licencia de seguridad habilitada</h3>
+    <p style="text-align:justify";>
+      En cada Router:
+    </p>
+    <ul>
+      <li>license boot technology-package securityK9</li>
+      <li>exit</li>
+      <li>copy run start</li>
+      <li>reload</li>
+      <li>en</li>
+      <li>show version</li>
+    </ul>
+    <img src="images/licencia.png" alt="Evidencia">
+    <h3>3. Implementación de ACL´s</h3>
+    <p style="text-align:justify";>
+      Listas de Control de Acceso (ACL): son conjuntos de reglas de seguridad configuradas en routers, switches o firewalls que gestionan el tráfico de red permitiendo o denegando el paso de datos basándose en direcciones IP, protocolos y puertos.
+    </p>
+    <p style="text-align:justify";>
+      R1 (config): access-list 100 permit ip 192.168.1.0 0.0.0.255 192.168.3.0 0.0.0.255
+    </p>
+    <img src="images/ACLR1.png" alt="Evidencia">
+    <p style="text-align:justify";>
+      R2 (config): access-list 100 permit ip 192.168.3.0 0.0.0.255 192.168.1.0 0.0.0.255    
+    </p>
+    <img src="images/ACLR2.png" alt="Evidencia">
+    <h3>4. Phase 01: ISAKMP policy</h3>
+    <p style="text-align:justify";>
+      Cifra sólo encabezado.
+    </p>
+    <p style="text-align:justify";>
+      R1(config)# crypto isakmp policy 10
+    </p>
+    <p style="text-align:justify";>
+      R1(config-isakmp)# encryption aes 256
+    </p>
+    <p style="text-align:justify";>
+      R1(config-isakmp)# authentication pre-share
+    </p>
+    <p style="text-align:justify";>
+      R1(config-isakmp)# group 5
+    </p>
+    <p style="text-align:justify";>
+      R1(config-isakmp)# exit
+    </p>
+    <p style="text-align:justify";>
+      R1(config)# crypto isakmp key secretkey address 209.165.200.1
+    </p>
+    <img src="images/ISAKMPR1.png" alt="Evidencia">
   </div>
 
 
