@@ -1086,15 +1086,15 @@ a:hover{
       ROAD MAP
 */
 
-/* ROADMAP */
+/* ROADMAP COMPACTO */
 
 .roadmap {
   position: relative;
-  width: 80%;
-  margin: 100px auto;
+  width: 85%;
+  margin: 80px auto;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 50px; /* ↓ menos separación */
 }
 
 /* línea central */
@@ -1104,16 +1104,15 @@ a:hover{
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #7a5cff55;
+  background: linear-gradient(to bottom, #7a5cff44, #b388ff44);
   transform: translateX(-50%);
 }
 
-/* pasos */
+/* step */
 .roadmap-step {
   display: flex;
   width: 100%;
   position: relative;
-  text-decoration: none;
 }
 
 /* zig zag */
@@ -1130,35 +1129,50 @@ a:hover{
   content: "";
   position: absolute;
   top: 50%;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background: #7a5cff;
   border-radius: 50%;
   transform: translateY(-50%);
+  box-shadow: 0 0 8px #7a5cff66;
 }
 
 .left::before {
-  left: calc(50% - 7px);
+  left: calc(50% - 6px);
 }
 
 .right::before {
-  right: calc(50% - 7px);
+  right: calc(50% - 6px);
 }
 
 /* tarjeta */
 .step-card {
-  width: 360px;
-  padding: 20px 25px;
-  border-radius: 12px;
+  width: 280px; /* ↓ más compacta */
+  padding: 14px 18px;
+  border-radius: 10px;
   background: rgba(15,15,30,0.75);
   border: 1px solid #7a5cff33;
-  transition: 0.3s;
+  transition: 0.25s;
+  text-decoration: none;
 }
 
-/* hover sutil */
-.roadmap-step:hover .step-card {
+/* hover */
+.step-card:hover {
   border-color: #b388ff;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+}
+
+/* texto */
+.step-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #c4b5fd;
+}
+
+.step-card p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #9f9fbd;
 }
 
 /* estados */
@@ -1172,6 +1186,6 @@ a:hover{
 }
 
 .locked {
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
 }
