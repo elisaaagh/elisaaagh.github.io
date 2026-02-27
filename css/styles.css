@@ -1104,3 +1104,37 @@ a:hover{
   padding-left: 30px;
   border-left: 2px solid rgba(199,125,255,0.3);
 }
+
+.roadmap-step {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.step-node {
+  position: absolute;
+  left: -10px;
+  top: 5px;
+
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+
+  background: #c77dff;
+  box-shadow: 0 0 10px #c77dff;
+}
+
+.step-content {
+  background: rgba(20,20,40,0.6);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(199,125,255,0.2);
+}
+
+.locked .step-node {
+  background: #555;
+  box-shadow: none;
+}
+
+.locked .step-content {
+  opacity: 0.4;
+}
