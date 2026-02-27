@@ -286,35 +286,11 @@ MENU DESPLEGABLE
 }
 
 /* Dropdown */
+/* Hace que el dropdown se comporte como link */
 .dropdown {
+  display: inline-block;
   position: relative;
-}
-
-/* Submenu oculto */
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #000;
-  border: 1px solid #00ffcc;
-  min-width: 180px;
-  box-shadow: 0 0 10px #00ffcc;
-}
-
-.submenu a {
-  display: block;
-  padding: 10px;
-}
-
-/* Mostrar al pasar el mouse */
-.dropdown:hover .submenu {
-  display: block;
-}
-
-/* Hover cyber efecto */
-.menu a:hover {
-  text-shadow: 0 0 5px #00ffcc;
+  vertical-align: middle;
 }
 
 .active {
