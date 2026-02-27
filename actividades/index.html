@@ -139,5 +139,16 @@
     });
   </script>
     <script src="../js/particles.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const dropdownBtn = document.querySelector(".dropdown > a");
+
+  dropdownBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    const submenu = this.nextElementSibling;
+    submenu.classList.toggle("active");
+  });
+});
+</script>
 </body>
 </html>
