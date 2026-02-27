@@ -297,6 +297,26 @@ MENU DESPLEGABLE
   display: block;
 }
 
+.submenu {
+background: #000;
+  border: 1px solid #00ffcc;
+  min-width: 180px;
+  box-shadow: 0 0 10px #00ffcc;
+  
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: none;
+  z-index: 999;
+}
+
+.dropdown:hover .submenu {
+  display: block;
+}
+/************************************************/
+
 section {
   max-width: 900px;
   margin: 60px auto;
