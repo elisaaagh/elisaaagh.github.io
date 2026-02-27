@@ -317,6 +317,10 @@ MENU DESPLEGABLE
   text-shadow: 0 0 5px #00ffcc;
 }
 
+.active {
+  display: block;
+}
+
 section {
   max-width: 900px;
   margin: 60px auto;
