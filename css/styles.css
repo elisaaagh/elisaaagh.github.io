@@ -305,7 +305,7 @@ background: #000;
   
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: 0;
   transform: translateX(-50%);
 
   display: none;
