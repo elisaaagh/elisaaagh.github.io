@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio – SQL Injection</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
 
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="topbar">
+        <div class="matrix-bg"></div>
+        <a href="https://www.upslp.edu.mx/upslp/">
+          <img src="../images/upslp.jpg" alt="Logo universidad" class="logo-uni">
+      </a>
+        <a href="../index.html" class="btn-volver-top">← Volver</a>
+        <img src="../images/capi.png" alt="Foto estudiante" class="foto-alumna">
+    </div>
+
+    <header class="hero" id="hero">
+  <div class="hero-content">
+    <h1>SQL Injection</h1>
+    <p>CNO V - Seguridad Informática</p>
+  </div>
+</header>
+
+
+    <!-- NAV -->
+    <nav>
+      <a href="https://elisaaagh.github.io/">Inicio</a>
+      <a href="https://elisaaagh.github.io/actividades/index.html">Actividades</a>
+      <a href="">Proyectos</a>
+      <div class="dropdown">
+    <a href="#">Road to hall of fame</a>
+    <div class="submenu">
+      <a href="https://elisaaagh.github.io/SQL_Injection/index.html">SQL Injection</a>
+    </div>
+  </div>
+      <a href="https://elisaaagh.github.io/#contacto">Contacto</a>
+    </nav>
+
+<div class="section-divider"></div>
+
+<section class="lab-container">
+
+  <h2>Lab 1 - SQL Injection Reconocimiento</h2>
+
+  <div class="lab-content">
+
+    <h3>Objetivo</h3>
+    <p>
+      Identificar vulnerabilidad en campo login.
+    </p>
+
+    <h3>Procedimiento</h3>
+    <pre>
+' OR '1'='1
+    </pre>
+
+    <h3>Resultado</h3>
+    <p>Se logró bypass de autenticación.</p>
+
+    <h3>Evidencia</h3>
+    <img src="img/lab1.png" alt="evidencia">
+
+  </div>
+
+  <div class="lab-actions">
+    <a href="pdf/lab1.pdf" download class="pdf-btn">
+      Exportar PDF
+    </a>
+  </div>
+
+</section>
+
+  <div class="section-divider"></div>
+  
+<footer>
+  <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 450,
+      delay: 0,
+      offset: 10,      
+      once: true,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+    <script src="../js/particles.js"></script>
+</body>
+</html>
