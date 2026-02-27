@@ -1086,17 +1086,15 @@ a:hover{
       ROAD MAP
 */
 
-/* ROADMAP REAL */
-
-/* ROADMAP DARK LOTUS */
+/* ROADMAP */
 
 .roadmap {
   position: relative;
-  width: 90%;
+  width: 80%;
   margin: 100px auto;
   display: flex;
   flex-direction: column;
-  gap: 90px;
+  gap: 80px;
 }
 
 /* línea central */
@@ -1106,67 +1104,61 @@ a:hover{
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #7a5cff, #b388ff);
+  background: #7a5cff55;
   transform: translateX(-50%);
-  opacity: 0.4;
 }
 
 /* pasos */
 .roadmap-step {
-  width: 100%;
   display: flex;
+  width: 100%;
   position: relative;
   text-decoration: none;
 }
 
-/* lados */
-.roadmap-step.left {
+/* zig zag */
+.left {
   justify-content: flex-start;
 }
 
-.roadmap-step.right {
+.right {
   justify-content: flex-end;
 }
 
-/* punto */
+/* nodo */
 .roadmap-step::before {
   content: "";
   position: absolute;
   top: 50%;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   background: #7a5cff;
   border-radius: 50%;
-  box-shadow: 0 0 15px #7a5cff;
   transform: translateY(-50%);
-  z-index: 2;
 }
 
-.roadmap-step.left::before {
-  left: calc(50% - 9px);
+.left::before {
+  left: calc(50% - 7px);
 }
 
-.roadmap-step.right::before {
-  right: calc(50% - 9px);
+.right::before {
+  right: calc(50% - 7px);
 }
 
 /* tarjeta */
 .step-card {
-  width: 420px;
-  padding: 25px;
-  border-radius: 14px;
-  background: rgba(15,15,30,0.7);
-  border: 1px solid #7a5cff55;
-  backdrop-filter: blur(8px);
+  width: 360px;
+  padding: 20px 25px;
+  border-radius: 12px;
+  background: rgba(15,15,30,0.75);
+  border: 1px solid #7a5cff33;
   transition: 0.3s;
-  position: relative;
 }
 
-/* hover */
+/* hover sutil */
 .roadmap-step:hover .step-card {
-  transform: scale(1.03);
-  border: 1px solid #b388ff;
-  box-shadow: 0 0 25px #7a5cff33;
+  border-color: #b388ff;
+  transform: translateY(-3px);
 }
 
 /* estados */
@@ -1177,10 +1169,9 @@ a:hover{
 
 .active .step-card {
   border: 1px solid #b388ff;
-  box-shadow: 0 0 20px #7a5cff55;
 }
 
 .locked {
-  opacity: 0.3;
+  opacity: 0.4;
   pointer-events: none;
 }
