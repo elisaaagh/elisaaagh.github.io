@@ -1088,78 +1088,96 @@ a:hover{
 
 /* ROADMAP REAL */
 
+/* ROADMAP DARK LOTUS */
+
 .roadmap {
   position: relative;
-  width: 80%;
-  margin: 80px auto;
+  width: 90%;
+  margin: 100px auto;
   display: flex;
   flex-direction: column;
-  gap: 70px;
+  gap: 90px;
 }
 
 /* línea central */
 .roadmap-line {
   position: absolute;
-  left: 9px;
+  left: 50%;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, #7a5cff, #00cfff);
-  opacity: 0.3;
+  width: 2px;
+  background: linear-gradient(to bottom, #7a5cff, #b388ff);
+  transform: translateX(-50%);
+  opacity: 0.4;
 }
 
-/* nodo */
-.roadmap-node {
+/* pasos */
+.roadmap-step {
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 25px;
-  text-decoration: none;
-  color: inherit;
   position: relative;
-  transition: 0.3s;
+  text-decoration: none;
+}
+
+/* lados */
+.roadmap-step.left {
+  justify-content: flex-start;
+}
+
+.roadmap-step.right {
+  justify-content: flex-end;
 }
 
 /* punto */
-.dot {
+.roadmap-step::before {
+  content: "";
+  position: absolute;
+  top: 50%;
   width: 18px;
   height: 18px;
   background: #7a5cff;
   border-radius: 50%;
-  box-shadow: 0 0 12px #7a5cff;
+  box-shadow: 0 0 15px #7a5cff;
+  transform: translateY(-50%);
   z-index: 2;
-  transition: 0.3s;
+}
+
+.roadmap-step.left::before {
+  left: calc(50% - 9px);
+}
+
+.roadmap-step.right::before {
+  right: calc(50% - 9px);
 }
 
 /* tarjeta */
-.node-content {
-  padding: 18px 30px;
-  border-radius: 12px;
-  background: rgba(15,15,30,0.6);
+.step-card {
+  width: 420px;
+  padding: 25px;
+  border-radius: 14px;
+  background: rgba(15,15,30,0.7);
   border: 1px solid #7a5cff55;
   backdrop-filter: blur(8px);
   transition: 0.3s;
+  position: relative;
 }
 
-/* hover cyber */
-.roadmap-node:hover .dot {
-  background: #00cfff;
-  box-shadow: 0 0 20px #00cfff;
-}
-
-.roadmap-node:hover .node-content {
-  border-color: #00cfff;
-  transform: translateX(8px);
+/* hover */
+.roadmap-step:hover .step-card {
+  transform: scale(1.03);
+  border: 1px solid #b388ff;
+  box-shadow: 0 0 25px #7a5cff33;
 }
 
 /* estados */
 
-.completed .dot {
-  background: #00cfff;
+.completed::before {
+  background: #b388ff;
 }
 
-.active .node-content {
+.active .step-card {
   border: 1px solid #b388ff;
-  box-shadow: 0 0 15px #7a5cff44;
+  box-shadow: 0 0 20px #7a5cff55;
 }
 
 .locked {
