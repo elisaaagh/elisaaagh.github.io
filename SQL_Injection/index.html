@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio – SQL Injection</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
 
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="topbar">
+        <div class="matrix-bg"></div>
+        <a href="https://www.upslp.edu.mx/upslp/">
+          <img src="../images/upslp.jpg" alt="Logo universidad" class="logo-uni">
+      </a>
+        <a href="../index.html" class="btn-volver-top">← Volver</a>
+        <img src="../images/capi.png" alt="Foto estudiante" class="foto-alumna">
+    </div>
+
+    <header class="hero" id="hero">
+  <div class="hero-content">
+    <h1>SQL Injection</h1>
+    <p>CNO V - Seguridad Informática</p>
+  </div>
+</header>
+
+
+    <!-- NAV -->
+    <nav>
+      <a href="https://elisaaagh.github.io/">Inicio</a>
+      <a href="https://elisaaagh.github.io/parcial1/index.html">Parcial 1</a>
+      <a href="https://elisaaagh.github.io/parcial2/index.html">Parcial 2</a>
+      <a href="https://elisaaagh.github.io/parcial3/index.html">Parcial 3</a>
+      <a href="https://elisaaagh.github.io/#contacto">Contacto</a>
+    </nav>
+
+<div class="section-divider"></div>
+
+<section class="roadmap">
+
+  <h1>SQL Injection</h1>
+  <p class="roadmap-desc">
+    Ruta de aprendizaje enfocada en la identificación y explotación
+    de vulnerabilidades SQL Injection desde un enfoque ético.
+  </p>
+
+  <!-- BOTÓN PDF -->
+  <a href="docs/sql_injection.pdf" download class="btn-pdf">
+    Descargar actividad completa
+  </a>
+
+  <!-- TIMELINE -->
+  <div class="roadmap-timeline">
+
+    <div class="roadmap-step">
+      <div class="step-node"></div>
+      <div class="step-content">
+        <h3>Laboratorio 1</h3>
+        <p>Identificación de vulnerabilidad</p>
+      </div>
+    </div>
+
+    <div class="roadmap-step">
+      <div class="step-node"></div>
+      <div class="step-content">
+        <h3>Laboratorio 2</h3>
+        <p>Bypass de autenticación</p>
+      </div>
+    </div>
+
+    <div class="roadmap-step locked">
+      <div class="step-node"></div>
+      <div class="step-content">
+        <h3>Laboratorio 3</h3>
+        <p>Exfiltración de datos</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <div class="section-divider"></div>
+  
+<footer>
+  <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 450,
+      delay: 0,
+      offset: 10,      
+      once: true,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+    <script src="../js/particles.js"></script>
+</body>
+</html>
