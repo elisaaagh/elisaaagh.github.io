@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio – Proyectos</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
 
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="topbar">
+        <div class="matrix-bg"></div>
+    <a href="https://www.upslp.edu.mx/upslp/">
+          <img src="../images/upslp.jpg" alt="Logo universidad" class="logo-uni">
+      </a>
+        <a href="../index.html" class="btn-volver-top">← Volver</a>
+        <img src="../images/capi.png" alt="Foto estudiante" class="foto-alumna">
+    </div>
+
+    <!-- HERO -->
+    <!--<header class="parcial-hero">
+        <h1>Parcial 1</h1>
+        <p>Actividades y evidencias de Seguridad Informática</p>
+    </header>-->
+
+    <header class="hero" id="hero">
+  <div class="hero-content">
+    <h1>Proyectos</h1>
+  </div>
+</header>
+
+
+    <!-- NAV -->
+    <nav>
+      <a href="https://elisaaagh.github.io/">Inicio</a>
+      <a href="https://elisaaagh.github.io/actividades/index.html">Actividades</a>
+      <a href="">Proyectos</a>
+      <div class="dropdown">
+    <a href="#">Road to hall of fame</a>
+    <div class="submenu">
+      <a href="https://elisaaagh.github.io/SQL_Injection/index.html">SQL Injection</a>
+    </div>
+  </div>
+      <a href="https://elisaaagh.github.io/#contacto">Contacto</a>
+    </nav>
+
+<div class="section-divider"></div>
+
+    <!-- PARCIAL 1 -->
+    <div class="hero-content">
+        <h1>Proyectos</h1>
+    </div>
+    <section class="cards-container"  data-aos="fade-up">
+        
+        <a href="/PR01/index.html" class="card">
+            <h3 text-align="center">De la teoría a la práctica</h3>
+            <p>Walkthrough en acción (guía y video).</p>
+        </a>
+      
+    </section>
+  <div class="section-divider"></div>
+  
+<footer>
+  <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 450,
+      delay: 0,
+      offset: 10,      
+      once: true,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+    <script src="../js/particles.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const dropdownBtn = document.querySelector(".dropdown > a");
+
+  dropdownBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    const submenu = this.nextElementSibling;
+    submenu.classList.toggle("active");
+  });
+});
+</script>
+</body>
+</html>
