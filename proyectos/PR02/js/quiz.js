@@ -7,7 +7,7 @@ scenario: `
       ⚠ Suspensión inmediata de cuenta institucional
     </div>
     <div class="gmail-meta">
-      <strong>soporte-tecnico@upslp-security.com</strong><br>
+      <strong>Soporte Técnico</strong> &lt;soporte-tecnico@upslp-security.com&gt;<br>
       para usuario@upslp.edu.mx
     </div>
   </div>
@@ -21,11 +21,17 @@ scenario: `
     Si no verifica su identidad en las próximas <strong>2 horas</strong>,
     su acceso será suspendido permanentemente.<br><br>
 
-    Para evitar la desactivación, haga clic en el siguiente enlace:<br><br>
+    Puede validar su cuenta aquí:<br><br>
 
-    <span class="gmail-link">https://upslp-security.com/verificar</span><br><br>
+    <span class="gmail-link"
+      data-url="https://upslp-security.com/verificar">
+      https://upslp-security.com/verificar
+    </span><br><br>
 
-    <a class="gmail-button">Verificar cuenta</a><br><br>
+    <a class="gmail-button"
+      data-url="https://upslp-security.com/verificar">
+      Verificar cuenta
+    </a><br><br>
 
     Atentamente,<br>
     Departamento de Soporte Técnico
@@ -307,4 +313,19 @@ score = 0;
 resultScreen.style.display = "none";
 quizContainer.style.display = "block";
 loadQuestion();
+});
+
+const urlPreview = document.getElementById("urlPreview");
+
+document.addEventListener("mouseover", function(e) {
+  if (e.target.dataset.url) {
+    urlPreview.textContent = e.target.dataset.url;
+    urlPreview.style.opacity = "1";
+  }
+});
+
+document.addEventListener("mouseout", function(e) {
+  if (e.target.dataset.url) {
+    urlPreview.style.opacity = "0";
+  }
 });
