@@ -1,19 +1,34 @@
 const questions = [
 {
 scenario: `
-<div class="email-box">
-  <div class="email-header">
-    <strong>Asunto:</strong> Suspensión inmediata de cuenta institucional<br>
-    <strong>De:</strong> soporte-tecnico@upslp-security.com<br>
-    <strong>Para:</strong> usuario@upslp.edu.mx
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      ⚠ Suspensión inmediata de cuenta institucional
+    </div>
+    <div class="gmail-meta">
+      <strong>soporte-tecnico@upslp-security.com</strong><br>
+      para usuario@upslp.edu.mx
+    </div>
   </div>
 
-  <div class="email-body">
+  <div class="gmail-body">
     Estimado estudiante,<br><br>
-    Detectamos actividad sospechosa en su cuenta institucional.
+
+    Hemos detectado <span class="gmail-warning">actividad sospechosa</span>
+    en su cuenta institucional.<br><br>
+
     Si no verifica su identidad en las próximas <strong>2 horas</strong>,
     su acceso será suspendido permanentemente.<br><br>
-    Haga clic aquí para validar su cuenta.
+
+    Para evitar la desactivación, haga clic en el siguiente enlace:<br><br>
+
+    <span class="gmail-link">https://upslp-security.com/verificar</span><br><br>
+
+    <a class="gmail-button">Verificar cuenta</a><br><br>
+
+    Atentamente,<br>
+    Departamento de Soporte Técnico
   </div>
 </div>
 `,
