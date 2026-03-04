@@ -206,16 +206,40 @@ optionsBox.appendChild(btn);
 }
 
 function checkAnswer(index) {
-const q = questions[current];
+  const q = questions[current];
+  const buttons = optionsBox.querySelectorAll("button");
 
-if (index === q.correct) {
-score++;
-feedbackBox.innerHTML = `<p style="color:#4cc9f0;">Correcto.</p><p>${q.explanation}</p>`;
-} else {
-feedbackBox.innerHTML = `<p style="color:#ff4d6d;">Incorrecto.</p><p>${q.explanation}</p>`;
-}
+  // Desactivar todos los botones
+  buttons.forEach(btn => {
+    btn.disabled = true;
+    btn.classList.add("disabled");
+  });
 
-nextBtn.style.display = "block";
+  if (index === q.correct) {
+    score++;
+    buttons[index].classList.add("correct");
+    feedbackBox.innerHTML = `
+      <strong>Respuesta correcta.</strong><br><br>
+      ${q.explanation}<br><br>
+      <strong>Análisis técnico:</strong>
+      Este mensaje utiliza técnicas de urgencia y suplantación de identidad.
+      El dominio no pertenece a la universidad oficial (upslp.edu.mx),
+      lo que indica posible phishing.
+    `;
+  } else {
+    buttons[index].classList.add("incorrect");
+    buttons[q.correct].classList.add("correct");
+
+    feedbackBox.innerHTML = `
+      <strong>Respuesta incorrecta.</strong><br><br>
+      ${q.explanation}<br><br>
+      <strong>Análisis técnico:</strong>
+      El dominio del remitente es diferente al institucional legítimo.
+      Los atacantes usan variaciones similares para engañar visualmente.
+    `;
+  }
+
+  nextBtn.style.display = "block";
 }
 
 nextBtn.addEventListener("click", () => {
