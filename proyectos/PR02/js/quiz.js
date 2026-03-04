@@ -188,21 +188,27 @@ loadQuestion();
 });
 
 function loadQuestion() {
-const q = questions[current];
-scenarioBox.innerHTML = q.scenario;
-optionsBox.innerHTML = "";
-feedbackBox.innerHTML = "";
-nextBtn.style.display = "none";
+  const q = questions[current];
+  scenarioBox.innerHTML = q.scenario;
+  optionsBox.innerHTML = "";
+  feedbackBox.innerHTML = "";
+  nextBtn.style.display = "none";
 
-document.getElementById("progress").innerHTML =
-`Pregunta ${current + 1} de ${questions.length}`;
+  const progressPercent = ((current) / questions.length) * 100;
 
-q.options.forEach((opt, index) => {
-const btn = document.createElement("button");
-btn.innerText = opt;
-btn.onclick = () => checkAnswer(index);
-optionsBox.appendChild(btn);
-});
+  document.getElementById("progress").innerHTML = `
+    Pregunta ${current + 1} de ${questions.length}
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:${progressPercent}%"></div>
+    </div>
+  `;
+
+  q.options.forEach((opt, index) => {
+    const btn = document.createElement("button");
+    btn.innerText = opt;
+    btn.onclick = () => checkAnswer(index);
+    optionsBox.appendChild(btn);
+  });
 }
 
 function checkAnswer(index) {
