@@ -393,10 +393,14 @@ const feedbackBox = document.getElementById("feedback");
 const nextBtn = document.getElementById("next-btn");
 const resultScreen = document.getElementById("result-screen");
 const resultsContent = document.getElementById("results-content");
+const playerInput = document.getElementById("playerName");
 
-consentCheckbox.addEventListener("change", () => {
-startBtn.disabled = !consentCheckbox.checked;
-});
+consentCheckbox.addEventListener("change", validateStart);
+playerInput.addEventListener("input", validateStart);
+
+function validateStart() {
+  startBtn.disabled = !(consentCheckbox.checked && playerInput.value.trim() !== "");
+}
 
 startBtn.addEventListener("click", () => {
 consentScreen.style.display = "none";
