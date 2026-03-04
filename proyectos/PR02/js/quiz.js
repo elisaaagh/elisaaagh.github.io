@@ -48,9 +48,36 @@ explanation: "Este caso usa autoridad y urgencia. El dominio no es oficial de la
 },
 {
 scenario: `
-<div class="sms-box">
-Movimiento no reconocido por $4,850 MXN.  
-Verifica aquí: bit.ly/seguridad-banco
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      ⚠ Movimiento no reconocido detectado
+    </div>
+    <div class="gmail-meta">
+      <strong>Banco Nacional</strong> &lt;alertas@banco-seguridad.com&gt;<br>
+      para usuario@gmail.com
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Estimado cliente,<br><br>
+
+    Detectamos un cargo por <strong>$4,850 MXN</strong> en su cuenta.<br><br>
+
+    Si usted no reconoce esta operación, debe verificarla inmediatamente:<br><br>
+
+    <span class="gmail-link"
+      data-url="https://banco-seguridad.com/verificar-transaccion">
+      https://banco-nacional.com/verificar
+    </span><br><br>
+
+    <a class="gmail-button"
+      data-url="https://banco-seguridad.com/verificar-transaccion">
+      Verificar transacción
+    </a><br><br>
+
+    Departamento de Prevención de Fraudes
+  </div>
 </div>
 `,
 options: [
@@ -63,9 +90,32 @@ explanation: "Smishing clásico. Los enlaces acortados ocultan dominios malicios
 },
 {
 scenario: `
-<div class="social-box">
-Reclutador ofrece trabajo remoto.  
-Solicita INE, comprobante y foto sosteniendo identificación.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      Oferta laboral remota – Respuesta inmediata
+    </div>
+    <div class="gmail-meta">
+      <strong>Global Tech Recruiting</strong> &lt;hr@globaltech-careers.net&gt;<br>
+      para usuario@gmail.com
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Buen día,<br><br>
+
+    Su perfil fue seleccionado para una vacante remota con salario competitivo.<br><br>
+
+    Para continuar el proceso necesitamos:<br>
+    • Identificación oficial<br>
+    • Comprobante de domicilio<br>
+    • Foto sosteniendo su identificación<br><br>
+
+    Envíe la documentación respondiendo este correo.<br><br>
+
+    Saludos,<br>
+    Departamento de Recursos Humanos
+  </div>
 </div>
 `,
 options: [
@@ -78,9 +128,34 @@ explanation: "Ingeniería social por recompensa. Solicitan datos sensibles prema
 },
 {
 scenario: `
-<div class="qr-box">
-QR en cafetería: “50% descuento si te registras”  
-Solicita correo institucional y contraseña.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      🎉 50% de descuento exclusivo para estudiantes
+    </div>
+    <div class="gmail-meta">
+      <strong>Café Campus Promo</strong> &lt;promo@cafecampus-deals.com&gt;<br>
+      para usuario@upslp.edu.mx
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Estudiante seleccionado,<br><br>
+
+    Obtén <strong>50% de descuento</strong> registrando tu correo institucional.<br><br>
+
+    Escanea el código QR o accede aquí:<br><br>
+
+    <span class="gmail-link"
+      data-url="https://cafecampus-deals.com/registro">
+      https://cafecampus.com/registro
+    </span><br><br>
+
+    <a class="gmail-button"
+      data-url="https://cafecampus-deals.com/registro">
+      Registrarme ahora
+    </a>
+  </div>
 </div>
 `,
 options: [
@@ -93,9 +168,29 @@ explanation: "Ataque por QR malicioso. Nunca ingresar contraseñas en enlaces de
 },
 {
 scenario: `
-<div class="call-box">
-Llamada de “Soporte TI”.  
-Piden instalar AnyDesk para solucionar virus.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      Soporte urgente – Equipo comprometido
+    </div>
+    <div class="gmail-meta">
+      <strong>IT Helpdesk</strong> &lt;support@it-securitydesk.com&gt;<br>
+      para usuario@empresa.com
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Detectamos malware activo en su equipo.<br><br>
+
+    Para evitar pérdida de información, instale la herramienta segura desde el siguiente enlace:<br><br>
+
+    <span class="gmail-link"
+      data-url="https://it-securitydesk.com/anydesk-install">
+      Descargar herramienta de soporte
+    </span><br><br>
+
+    Soporte Técnico
+  </div>
 </div>
 `,
 options: [
@@ -108,8 +203,28 @@ explanation: "Vishing + acceso remoto. Soporte legítimo no solicita acceso sin 
 },
 {
 scenario: `
-<div class="email-box">
-Profesor solicita usuario y contraseña por falla del sistema.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      Entrega urgente de credenciales
+    </div>
+    <div class="gmail-meta">
+      <strong>Dr. Martínez</strong> &lt>dr.martinez@upslp-edu.com&gt;<br>
+      para estudiante@upslp.edu.mx
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Estimado alumno,<br><br>
+
+    El sistema de calificaciones presenta fallas.<br>
+    Necesito que me envíes tu usuario y contraseña para validar tu acceso.<br><br>
+
+    Es urgente antes de las 6 PM.<br><br>
+
+    Saludos,<br>
+    Dr. Martínez
+  </div>
 </div>
 `,
 options: [
@@ -122,8 +237,27 @@ explanation: "Suplantación. Ninguna institución solicita contraseñas."
 },
 {
 scenario: `
-<div class="social-box">
-“Eres tú en este video?” + enlace extraño.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      ¿Eres tú en este video?
+    </div>
+    <div class="gmail-meta">
+      <strong>Contacto conocido</strong> &lt;amigo@gmail-security.co&gt;<br>
+      para usuario@gmail.com
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Oye,<br><br>
+
+    Mira este video, creo que eres tú 😳<br><br>
+
+    <span class="gmail-link"
+      data-url="https://video-viral-security.co/play">
+      Ver video ahora
+    </span>
+  </div>
 </div>
 `,
 options: [
@@ -136,8 +270,22 @@ explanation: "Ataque por curiosidad. Confirmar siempre por canal alternativo."
 },
 {
 scenario: `
-<div class="usb-box">
-Encuentras USB etiquetado “Examen Final Seguridad”.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      Material de examen final disponible
+    </div>
+    <div class="gmail-meta">
+      <strong>Coordinación Académica</strong> &lt;coord.academica@upslp-material.com&gt;<br>
+      para estudiante@upslp.edu.mx
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    El examen final ya está disponible en el dispositivo USB entregado hoy en campus.<br><br>
+
+    Inserta el dispositivo en tu equipo para acceder al contenido.
+  </div>
 </div>
 `,
 options: [
@@ -150,9 +298,34 @@ explanation: "Baiting físico. Dispositivos desconocidos pueden contener malware
 },
 {
 scenario: `
-<div class="email-box">
-Ganaste 1 año gratis de Netflix.  
-Solicitan tarjeta para validar identidad.
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      🎁 Ganaste 1 año gratis de Netflix
+    </div>
+    <div class="gmail-meta">
+      <strong>Netflix Rewards</strong> &lt;promo@netflix-student.net&gt;<br>
+      para usuario@gmail.com
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    Felicidades,<br><br>
+
+    Has sido seleccionado para recibir 1 año gratuito.<br><br>
+
+    Para validar tu identidad, ingresa los datos de tu tarjeta aquí:<br><br>
+
+    <span class="gmail-link"
+      data-url="https://netflix-student.net/validar">
+      https://netflix.com/validar-promocion
+    </span><br><br>
+
+    <a class="gmail-button"
+      data-url="https://netflix-student.net/validar">
+      Reclamar premio
+    </a>
+  </div>
 </div>
 `,
 options: [
@@ -165,9 +338,32 @@ explanation: "Premio falso. Servicios legítimos no piden tarjeta para premios."
 },
 {
 scenario: `
-<div class="email-box">
-Security Alert: Unauthorized login  
-Enlace: github-security-check.io
+<div class="gmail-wrapper">
+  <div class="gmail-header">
+    <div class="gmail-subject">
+      Security Alert: Unauthorized login attempt
+    </div>
+    <div class="gmail-meta">
+      <strong>GitHub Security</strong> &lt;security@github-alerts.io&gt;<br>
+      para usuario@gmail.com
+    </div>
+  </div>
+
+  <div class="gmail-body">
+    We detected a login attempt from an unknown device.<br><br>
+
+    If this was not you, secure your account immediately:<br><br>
+
+    <span class="gmail-link"
+      data-url="https://github-alerts.io/security-check">
+      https://github.com/security-check
+    </span><br><br>
+
+    <a class="gmail-button"
+      data-url="https://github-alerts.io/security-check">
+      Secure account
+    </a>
+  </div>
 </div>
 `,
 options: [
