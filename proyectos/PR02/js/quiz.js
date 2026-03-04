@@ -2,9 +2,19 @@ const questions = [
 {
 scenario: `
 <div class="email-box">
-<strong>Asunto:</strong> ⚠️ Suspensión inmediata de cuenta institucional<br>
-<strong>Remitente:</strong> soporte-tecnico@upslp-security.com<br><br>
-Detectamos actividad sospechosa. Verifica tu cuenta en las próximas 2 horas o será suspendida.
+  <div class="email-header">
+    <strong>Asunto:</strong> Suspensión inmediata de cuenta institucional<br>
+    <strong>De:</strong> soporte-tecnico@upslp-security.com<br>
+    <strong>Para:</strong> usuario@upslp.edu.mx
+  </div>
+
+  <div class="email-body">
+    Estimado estudiante,<br><br>
+    Detectamos actividad sospechosa en su cuenta institucional.
+    Si no verifica su identidad en las próximas <strong>2 horas</strong>,
+    su acceso será suspendido permanentemente.<br><br>
+    Haga clic aquí para validar su cuenta.
+  </div>
 </div>
 `,
 options: [
