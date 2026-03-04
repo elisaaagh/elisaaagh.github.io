@@ -1416,3 +1416,20 @@ a:hover{
   text-decoration: underline;
   cursor: pointer;
 }
+/* -------- Vista previa URL tipo navegador -------- */
+
+.url-preview {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  background: #202124;
+  color: #e8eaed;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  font-family: monospace;
+  z-index: 9999;
+}
