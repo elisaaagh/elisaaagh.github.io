@@ -1355,3 +1355,64 @@ a:hover{
   line-height: 1.6;
   font-size: 0.95rem;
 }
+
+/* -------- SIMULACIÓN CORREO REAL -------- */
+
+.gmail-wrapper {
+  background: white;
+  color: #202124;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gmail-header {
+  background: #f1f3f4;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.gmail-subject {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.gmail-meta {
+  font-size: 0.85rem;
+  color: #5f6368;
+}
+
+.gmail-meta strong {
+  color: #202124;
+}
+
+.gmail-body {
+  padding: 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.gmail-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #1a73e8;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.gmail-warning {
+  color: #d93025;
+  font-weight: 600;
+}
+
+.gmail-link {
+  color: #1a73e8;
+  text-decoration: underline;
+  cursor: pointer;
+}
