@@ -1433,3 +1433,7 @@ a:hover{
   font-family: monospace;
   z-index: 9999;
 }
+#start-btn:disabled{
+opacity:0.5;
+cursor:not-allowed;
+}
