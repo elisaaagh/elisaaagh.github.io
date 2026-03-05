@@ -514,7 +514,7 @@ date: new Date().toLocaleString()
 
 localStorage.setItem("phishingData", JSON.stringify(attemptsData));
 
-const scores = attemptsData.results.map(r => r.score);
+const scores = (attemptsData.results || []).map(r => r.score);
 
 const best = Math.max(...scores);
 
