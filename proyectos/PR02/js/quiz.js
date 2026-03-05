@@ -380,7 +380,7 @@ let current = 0;
 let score = 0;
 let attemptsData = JSON.parse(localStorage.getItem("phishingData")) || {
 attempts: 0,
-scores: []
+results: []
 };
 
 const consentCheckbox = document.getElementById("consent-checkbox");
