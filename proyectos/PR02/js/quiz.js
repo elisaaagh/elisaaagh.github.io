@@ -399,11 +399,12 @@ const playerInput = document.getElementById("playerName");
 const warningText = document.getElementById("start-warning");
 
 consentCheckbox.addEventListener("change", validateStart);
-if (playerInput) {
-  playerInput.addEventListener("input", validateStart);
-}
+playerInput.addEventListener("input", validateStart);
 
-const warningText = document.getElementById("start-warning");
+function validateStart(){
+
+const nameFilled = playerInput.value.trim() !== "";
+const consentChecked = consentCheckbox.checked;
 
 function validateStart(){
 
@@ -413,26 +414,18 @@ const consentChecked = consentCheckbox.checked;
 if(nameFilled && consentChecked){
 startBtn.disabled = false;
 warningText.textContent = "";
-}
+}else{
 
-else{
-
-startBtn.disabled = true;
-
-if(!nameFilled && !consentChecked){
-warningText.textContent = "Ingresa un nombre y acepta el consentimiento.";
-}
-
-else if(!nameFilled){
-warningText.textContent = "Debes ingresar un nombre o alias.";
-}
-
-else{
-warningText.textContent = "Debes aceptar el consentimiento informado.";
-}
-
-}
-
+  startBtn.disabled = true;
+  
+  if(!nameFilled && !consentChecked){
+  warningText.textContent = "Ingresa un nombre y acepta el consentimiento.";
+  }else if(!nameFilled){
+      warningText.textContent = "Debes ingresar un nombre o alias.";
+    }else{
+      warningText.textContent = "Debes aceptar el consentimiento informado.";
+    }
+  }
 }
 
 startBtn.addEventListener("click", () => {
