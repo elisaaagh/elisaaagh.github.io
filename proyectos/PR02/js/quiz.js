@@ -402,11 +402,6 @@ function validateStart(){
 const nameFilled = playerInput.value.trim() !== "";
 const consentChecked = consentCheckbox.checked;
 
-function validateStart(){
-
-const nameFilled = playerInput.value.trim() !== "";
-const consentChecked = consentCheckbox.checked;
-
 if(nameFilled && consentChecked){
   startBtn.disabled = false;
   warningText.textContent = "";
@@ -426,9 +421,9 @@ consentCheckbox.addEventListener("change", validateStart);
 playerInput.addEventListener("input", validateStart);
 
 startBtn.addEventListener("click", () => {
-consentScreen.style.display = "none";
-quizContainer.style.display = "block";
-loadQuestion();
+  consentScreen.style.display = "none";
+  quizContainer.style.display = "block";
+  loadQuestion();
 });
 
 function loadQuestion() {
@@ -508,7 +503,7 @@ resultScreen.style.display = "block";
 attemptsData.attempts++;
 
 attemptsData.results.push({
-name: playerInput.value,
+name: playerInput.value.trim(),
 score: score,
 date: new Date().toLocaleString()
 });
