@@ -571,4 +571,4 @@ document.addEventListener("mouseout", function(e) {
     urlPreview.style.opacity = "0";
   }
 });
-
+}
