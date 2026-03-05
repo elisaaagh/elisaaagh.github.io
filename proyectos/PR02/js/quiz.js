@@ -209,7 +209,7 @@ scenario: `
       Entrega urgente de credenciales
     </div>
     <div class="gmail-meta">
-      <strong>Dr. Martínez</strong> &lt>dr.martinez@upslp-edu.com&gt;<br>
+      <strong>Dr. Martínez</strong> &lt;dr.martinez@upslp-edu.com&gt;<br>
       para estudiante@upslp.edu.mx
     </div>
   </div>
