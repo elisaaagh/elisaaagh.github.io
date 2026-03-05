@@ -398,28 +398,19 @@ const playerInput = document.getElementById("playerName");
 const warningText = document.getElementById("start-warning");
 
 consentCheckbox.addEventListener("change", validateStart);
-playerInput.addEventListener("input", validateStart);
+if (playerInput) {
+  playerInput.addEventListener("input", validateStart);
+}
 
 function validateStart() {
 
-  const nameFilled = playerInput.value.trim() !== "";
+  const nameFilled = playerInput && playerInput.value.trim() !== "";
   const consentChecked = consentCheckbox.checked;
 
   if(nameFilled && consentChecked){
     startBtn.disabled = false;
-    warningText.textContent = "";
   } else {
     startBtn.disabled = true;
-
-    if(!nameFilled && !consentChecked){
-      warningText.textContent = "Debes ingresar un nombre y aceptar el consentimiento.";
-    }
-    else if(!nameFilled){
-      warningText.textContent = "Ingresa un nombre o alias para continuar.";
-    }
-    else if(!consentChecked){
-      warningText.textContent = "Debes aceptar el consentimiento informado.";
-    }
   }
 
 }
