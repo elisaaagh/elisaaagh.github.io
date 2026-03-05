@@ -547,17 +547,30 @@ resultsContent.innerHTML = `
 ${rankingHTML}
 `;
 
-
-
 document.getElementById("retry-btn").addEventListener("click", () => {
-current = 0;
-score = 0;
-resultScreen.style.display = "none";
-quizContainer.style.display = "block";
-loadQuestion();
+  current = 0;
+  score = 0;
+  resultScreen.style.display = "none";
+  quizContainer.style.display = "block";
+  loadQuestion();
 });
 
+} // ← AQUÍ se cierra showResults()
+
 const urlPreview = document.getElementById("urlPreview");
+
+document.addEventListener("mouseover", function(e) {
+  if (e.target.dataset.url) {
+    urlPreview.textContent = e.target.dataset.url;
+    urlPreview.style.opacity = "1";
+  }
+});
+
+document.addEventListener("mouseout", function(e) {
+  if (e.target.dataset.url) {
+    urlPreview.style.opacity = "0";
+  }
+});
 
 document.addEventListener("mouseover", function(e) {
   if (e.target.dataset.url) {
