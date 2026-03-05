@@ -1,1 +1,57 @@
+body{
+font-family: Arial;
+background:#0b0f17;
+color:white;
+display:flex;
+justify-content:center;
+padding:40px;
+}
 
+.container{
+width:800px;
+}
+
+#emailBox{
+background:white;
+color:black;
+padding:20px;
+border-radius:8px;
+margin-bottom:20px;
+}
+
+.email-header{
+border-bottom:1px solid #ddd;
+margin-bottom:10px;
+}
+
+.email-link{
+color:#1a73e8;
+cursor:pointer;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.option{
+display:block;
+margin:10px 0;
+padding:10px;
+background:#1e2636;
+border-radius:6px;
+cursor:pointer;
+}
+
+.option:hover{
+background:#2c3a55;
+}
+
+.correct{
+background:#1f7a4c;
+}
+
+.wrong{
+background:#8c2f39;
+}
