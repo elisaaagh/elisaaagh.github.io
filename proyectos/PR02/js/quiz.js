@@ -384,6 +384,10 @@ attempts: 0,
 results: []
 };
 
+if(!attemptsData.results){
+  attemptsData.results = [];
+}
+
 const consentCheckbox = document.getElementById("consent-checkbox");
 const startBtn = document.getElementById("start-btn");
 const quizContainer = document.getElementById("quiz-container");
