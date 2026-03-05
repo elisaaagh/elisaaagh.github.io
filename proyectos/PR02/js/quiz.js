@@ -483,29 +483,53 @@ quizContainer.style.display = "none";
 resultScreen.style.display = "block";
 
 attemptsData.attempts++;
-attemptsData.scores.push(score);
+
+attemptsData.results.push({
+name: playerInput.value,
+score: score,
+date: new Date().toLocaleString()
+});
 
 localStorage.setItem("phishingData", JSON.stringify(attemptsData));
 
-const best = Math.max(...attemptsData.scores);
+const scores = attemptsData.results.map(r => r.score);
+
+const best = Math.max(...scores);
+
 const avg = (
-attemptsData.scores.reduce((a,b)=>a+b,0) /
-attemptsData.scores.length
+scores.reduce((a,b)=>a+b,0) /
+scores.length
 ).toFixed(2);
+
+const ranking = [...attemptsData.results]
+.sort((a,b)=>b.score-a.score)
+.slice(0,5);
 
 let level = "";
 if(score <=4) level="Alto riesgo";
 else if(score<=7) level="Riesgo medio";
 else level="Buen nivel de detección";
 
+let rankingHTML = "<h4>Ranking global</h4><ol>";
+
+ranking.forEach(r => {
+rankingHTML += `<li>${r.name} — ${r.score}/10</li>`;
+});
+
+rankingHTML += "</ol>";
+
 resultsContent.innerHTML = `
+<p><strong>Jugador:</strong> ${playerInput.value}</p>
 <p>Puntaje actual: ${score}/10</p>
 <p>Nivel: ${level}</p>
 <p>Intentos realizados: ${attemptsData.attempts}</p>
-<p>Mejor puntaje: ${best}</p>
-<p>Promedio histórico: ${avg}</p>
+<p>Mejor puntaje histórico: ${best}</p>
+<p>Promedio global: ${avg}</p>
+
+${rankingHTML}
 `;
-}
+
+
 
 document.getElementById("retry-btn").addEventListener("click", () => {
 current = 0;
