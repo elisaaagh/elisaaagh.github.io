@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 8 - SQL injection attack, listing the database contents on non-Oracle databases</h2>
+      <h2>Lab 9 - Blind SQL injection with conditional responsess</h2>
 
     <h3>Nivel</h3>
     <p>
@@ -59,51 +59,58 @@
       
       <h3>Tipo de SQLi</h3>
     <p>
-      In-Band – UNION Based
+      Inyección ciega booleana
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        El objetivo es identificar el tipo y la versión del motor de base de datos (MySQL o Microsoft SQL Server) para obtener información del entorno que permita adaptar ataques posteriores.   
+        Explotar una inyección SQL ciega para deducir la contraseña del usuario administrator.    
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        La vulnerabilidad existe porque la aplicación concatena directamente la entrada del usuario dentro de una consulta SQL sin utilizar consultas parametrizadas. Esto permite la inyección de una cláusula UNION SELECT que consulta las vistas del sistema (information_schema). Al coincidir el número y tipo de columnas con la consulta original, la base de datos ejecuta la instrucción alterada y expone metadatos internos, lo que facilita la enumeración y posterior extracción de información sensible.    
+        La aplicación utiliza el valor de la cookie de rastreo (TrackingId) dentro de una consulta SQL sin la debida sanitización. Aunque los resultados de la consulta no se muestran en pantalla, la aplicación exhibe un comportamiento condicional: si la consulta inyectada evalúa como verdadera, el servidor incluye el mensaje "Welcome back" en la respuesta HTTP, si evalúa como falsa, el mensaje se omite. Esta diferencia booleana permite inferir datos de la base de datos haciendo preguntas de si o no.    
     </p>
 
     <h3>Procedimiento paso a paso</h3>
     <ul>
-      <li>Identificar el parámetro vulnerable (por ejemplo, filtro de categoría).</li>
-      <li>Determinar el número de columnas.</li>
-      <li>Confirmar columnas visibles.</li>
-        <li>Numerar tablas del sistema.</li>
-        <li>Identificar tabla relevante.</li>
-        <li>Enumerar columnas de esa tabla.</li>
-        <li>Extraer datos sensibles.</li>
+      <li>Interceptar la petición que contiene la cookie <code>TrackingId</code> y enviarla a <code>Repeater</code> en Burp Suite.</li>
+      <li>Probar una condición verdadera y una falsa para confirmar la vulnerabilidad de SQL Injection observando el mensaje <code>"Welcome back"</code>.</li>
+      <li>Verificar la existencia de la tabla <code>users</code> y del usuario <code>administrator</code> mediante consultas SQL inyectadas.</li>
+      <li>Determinar la longitud de la contraseña usando consultas con <code>LENGTH(password)</code>.</li>
+      <li>Enviar la petición a <code>Intruder</code> para descubrir la contraseña carácter por carácter usando <code>SUBSTRING()</code>.</li>
+      <li>Configurar los payloads con caracteres alfanuméricos y detectar la respuesta correcta mediante el texto <code>"Welcome back"</code>.</li>
+      <li>Repetir el proceso para cada posición hasta obtener toda la contraseña.</li>
+      <li>Iniciar sesión en <code>My account</code> con el usuario <code>administrator</code> y la contraseña obtenida.</li>
     </ul>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab8_1.png" alt="evidencia">
+    <img src="img/lab9_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab8_2.png" alt="evidencia">
-          <img src="img/lab8_3.png" alt="evidencia">
+    <img src="img/lab9_2.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab8_4.png" alt="evidencia">
+          <img src="img/lab9_3.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab8_5.png" alt="evidencia">
+    <img src="img/lab9_4.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            El payload explota una vulnerabilidad de inyección SQL basada en Union que permite acceder a las vistas de metadatos del sistema (information_schema) disponibles en bases de datos no Oracle como MySQL y SQL Server. Al no utilizar consultas parametrizadas, la aplicación permite que la entrada del usuario modifique la estructura lógica de la consulta original, posibilitando la enumeración del esquema interno (tablas y columnas) y posteriormente la extracción directa de datos sensibles desde la tabla que almacena credenciales. Este proceso constituye una fase de reconocimiento y explotación, donde primero se identifica la estructura de almacenamiento y luego se accede a la información crítica aprovechando la ejecución no restringida de consultas adicionales dentro del mismo contexto de la aplicación.    
+            TrackingId=TuCookie' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a.    
         </p>
+      <ul>
+          <li>La comilla simple (<code>'</code>) cierra la cadena original del <code>TrackingId</code>.</li>
+          <li>El operador <code>AND</code> permite agregar una condición lógica a la consulta SQL.</li>
+          <li>La subconsulta <code>SELECT SUBSTRING(password,1,1)</code> extrae el primer carácter de la contraseña del usuario <code>administrator</code>.</li>
+          <li>La comparación <code>='a'</code> verifica si ese carácter coincide con el valor probado.</li>
+          <li>Si la condición es verdadera, la aplicación responde normalmente y aparece el mensaje <code>"Welcome back"</code>, confirmando el carácter correcto.</li>
+        </ul>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          Se recomienda restringir el acceso al esquema del sistema y utilizar consultas parametrizadas. Además, aplicar el principio de privilegios mínimos evita que la aplicación pueda consultar metadatos internos.    
+          La solución definitiva es implementar Consultas Parametrizadas (Prepared Statements) en el código del servidor. Esto garantiza que la entrada proporcionada por el usuario (en este caso, la cookie TrackingId) se trate estrictamente como un valor de tipo cadena (string) y nunca como código SQL ejecutable, previniendo así cualquier alteración de la lógica de la base de datos.    
       </p>
 
   </div>
