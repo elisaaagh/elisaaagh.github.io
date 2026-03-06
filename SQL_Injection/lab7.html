@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio – SQL Injection</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="topbar">
+        <div class="matrix-bg"></div>
+        <a href="https://www.upslp.edu.mx/upslp/">
+          <img src="../images/upslp.jpg" alt="Logo universidad" class="logo-uni">
+      </a>
+        <a href="https://elisaaagh.github.io/SQL_Injection/index.html" class="btn-volver-top">← Volver</a>
+       <a href="https://elisaaagh.github.io/">
+        <img src="../images/capi.png" alt="Foto estudiante" class="foto-alumna">
+    </a>
+    </div>
+
+    <header class="hero" id="hero">
+  <div class="hero-content">
+    <h1>SQL Injection</h1>
+    <p>CNO V - Seguridad Informática</p>
+  </div>
+</header>
+
+
+    <!-- NAV -->
+    <nav>
+      <a href="https://elisaaagh.github.io/">Inicio</a>
+      <a href="https://elisaaagh.github.io/actividades/index.html">Actividades</a>
+      <a href="https://elisaaagh.github.io/proyectos/index.html">Proyectos</a>
+      <div class="dropdown">
+    <a href="#">Road to hall of fame</a>
+    <div class="submenu">
+      <a href="https://elisaaagh.github.io/SQL_Injection/index.html">SQL Injection</a>
+    </div>
+  </div>
+      <a href="https://elisaaagh.github.io/#contacto">Contacto</a>
+    </nav>
+
+<div class="section-divider"></div>
+
+<div class="lab">  
+
+  <div class="lab-card desarrollo">
+
+      <h2>Lab 6 - SQL injection UNION attack, retrieving multiple values in a single column </h2>
+
+    <h3>Nivel</h3>
+    <p>
+      Practitioner
+    </p>
+      
+      <h3>Tipo de SQLi</h3>
+    <p>
+      In-Band – UNION Based
+    </p>
+
+      <h3>Objetivo</h3>
+    <p style="text-align:justify";>
+        El objetivo es extraer múltiples valores dentro de una sola columna visible de la aplicación.  
+    </p>
+
+      <h3>Explicación técnica de la vulnerabilidad</h3>
+    <p style="text-align:justify";>
+        La vulnerabilidad ocurre porque la aplicación incorpora directamente la entrada del usuario dentro de la consulta SQL sin utilizar consultas parametrizadas ni validación adecuada. Esto permite la inyección de una cláusula UNION SELECT, siempre que se respete la misma estructura (número y tipo de columnas) de la consulta original. Como resultado, la base de datos ejecuta la consulta alterada y expone información sensible de otras tablas.   
+    </p>
+
+    <h3>Procedimiento paso a paso</h3>
+    <ul>
+      <li>Identificar el número de columnas.</li>
+      <li>Detectar la columna visible.</li>
+      <li>Usar concatenación para mostrar múltiples datos.</li>
+    </ul>
+    
+      <div class="lab-card multimedia">
+          <h3>Evidencia</h3>
+    <p>Request interceptado</p>
+    <img src="img/lab6_1.png" alt="evidencia">
+      <p>Payload utilizado</p>
+    <img src="img/lab6_2.png" alt="evidencia">
+          <img src="img/lab6_3.png" alt="evidencia">
+          <p>Respuesta vulnerable</p>
+          <img src="img/lab6_4.png" alt="evidencia">
+      <p>Confirmación</p>
+    <img src="img/lab6_5.png" alt="evidencia">
+      </div>
+
+      <h3>Explicación de payload</h3>
+        <p style="text-align:justify";>
+            El payload combina múltiples valores dentro de una sola columna mediante funciones de concatenación. Esto permite mostrar información como usuario y contraseña en un único campo visible cuando la aplicación solo presenta una columna.   
+        </p>
+
+      <h3>Mitigación recomendada</h3>
+      <p style="text-align:justify";>
+          El uso de consultas preparadas evita que funciones como concatenación sean utilizadas con fines maliciosos. Además, se debe limitar la exposición de datos y evitar mostrar información directamente desde consultas dinámicas.    
+      </p>
+
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a href="act08-equipo3.pdf" class="btn-ver" download="act08.pdf">
+      Exportar a PDF
+    </a>
+  </div>
+</div>
+
+  <div class="section-divider"></div>
+  
+<footer>
+  <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 450,
+      delay: 0,
+      offset: 10,      
+      once: true,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+    <script src="../js/particles.js"></script>
+</body>
+</html>
