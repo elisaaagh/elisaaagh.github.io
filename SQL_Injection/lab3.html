@@ -50,61 +50,58 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 3 - SQL injection vulnerability allowing login bypass </h2>
+      <h2>Lab 3 - SQL injection UNION attack, determining the number of columns returned by the query </h2>
 
     <h3>Nivel</h3>
     <p>
-      Apprentice
+      Practitioner
     </p>
       
       <h3>Tipo de SQLi</h3>
     <p>
-      SQL Injection clásica (Bypass de autenticación)
+      In-Band – UNION Based
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-      Evitar el mecanismo de autenticación e iniciar sesión como usuario administrador sin conocer la contraseña.
+        Determinar el número de columnas que devuelve la consulta original para poder construir un ataque UNION válido  
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-       La vulnerabilidad se produce porque la consulta de autenticación es construida concatenando directamente los valores introducidos en los campos de usuario y contraseña dentro de la cláusula WHERE. Esta práctica permite que la entrada del usuario modifique la evaluación lógica de la expresión booleana utilizada para validar credenciales. Al no emplearse consultas preparadas ni validación adecuada, la aplicación queda expuesta a manipulaciones que pueden alterar completamente el flujo de autenticación.
+        La vulnerabilidad radica en la posibilidad de inyectar fragmentos de código SQL dentro del parámetro vulnerable sin que exista validación o parametrización adecuada. Esto permite utilizar cláusulas como ORDER BY para inferir información estructural sobre la consulta original. Aunque esta fase no extrae datos directamente, revela el número de columnas devueltas por la consulta, lo cual constituye información crítica para construir ataques UNION compatibles. La falla subyacente es nuevamente la concatenación insegura de entradas externas dentro de la instrucción SQL.
     </p>
 
     <h3>Procedimiento paso a paso</h3>
     <ul>
-      <li>Acceder al formulario de login.</li>
-      <li>Interceptar la petición POST.</li>
-      <li>Identificar los parámetros <code>username</code> y <code>password</code>.</li>
-      <li>En el campo user insertar: administrator' - -</li>
-      <li>Enviar la petición.</li>
-      <li>Acceso concedido sin credenciales válidas</li>
+      <li>Interceptar petición del filtro de categoría.</li>
+      <li>Probar con:' UNION SELECT NULL --</li>
+      <li>Incrementar hasta que aparezca error.</li>
+      <li>Determinar el número máximo válido de columnas.</li>
     </ul>
-
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Acceso al laboratorio:</p>
-    <img src="img/lab2_1.png" alt="evidencia">
-      <p>Acceso al apartado Gifts</p>
-    <img src="img/lab2_2.png" alt="evidencia">
+    <img src="img/lab3_1.png" alt="evidencia">
       <p>Request interceptado</p>
-    <img src="img/lab2_3.png" alt="evidencia">
+    <img src="img/lab3_2.png" alt="evidencia">
+      <p>Vulnerabilidad</p>
+    <img src="img/lab3_3.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab2_4.png" alt="evidencia">
+    <img src="img/lab3_4.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab2_5.png" alt="evidencia">
+    <img src="img/lab3_5.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-          administrator' - - El payload empleado introduce una condición lógica que siempre se evalúa como verdadera dentro de la cláusula WHERE, anulando la validación real de la contraseña almacenada en la base de datos. Al cerrar la cadena original y comentar el resto de la instrucción SQL, se evita cualquier error sintáctico y se logra que la consulta resultante sea procesada correctamente por el motor de base de datos. Esta técnica explota directamente la lógica booleana de la autenticación para obtener acceso no autorizado.
+              ’+UNION+SELECT+NULL-- El payload basado en la cláusula ORDER BY permite enumerar progresivamente los índices de columnas hasta provocar un error cuando el número especificado supera el total real existente. Este comportamiento del motor de base de datos es aprovechado para deducir la estructura interna de la consulta. Conocer el número exacto de columnas es un requisito indispensable para ejecutar con éxito un ataque UNION-based.
         </p>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          La prevención exige el uso de consultas preparadas que impidan que los datos del usuario sean interpretados como código SQL ejecutable. Además, las contraseñas deben almacenarse utilizando algoritmos de hash seguros y nunca en texto plano. Es recomendable implementar controles adicionales como limitación de intentos de acceso, monitoreo de actividad sospechosa y validación estricta de entradas para reforzar la seguridad del proceso de autenticación.
+           La mitigación requiere eliminar la posibilidad de inyección mediante consultas parametrizadas y asegurar que los mensajes de error no revelen detalles internos de la base de datos. Asimismo, se deben implementar mecanismos de monitoreo que detecten patrones asociados a intentos de enumeración estructural.  
       </p>
 
   </div>
