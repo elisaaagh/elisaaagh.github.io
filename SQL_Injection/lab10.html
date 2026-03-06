@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 8 - SQL injection attack, listing the database contents on non-Oracle databases</h2>
+      <h2>Lab 10 - Blind SQL injection with conditional errors </h2>
 
     <h3>Nivel</h3>
     <p>
@@ -59,51 +59,57 @@
       
       <h3>Tipo de SQLi</h3>
     <p>
-      In-Band – UNION Based
+      Inyección SQL Ciega Basada en Errores
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        El objetivo es identificar el tipo y la versión del motor de base de datos (MySQL o Microsoft SQL Server) para obtener información del entorno que permita adaptar ataques posteriores.   
+        Explotar una inyección SQL ciega induciendo errores condicionales para extraer la contraseña del usuario administrator y acceder a su cuenta.   
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        La vulnerabilidad existe porque la aplicación concatena directamente la entrada del usuario dentro de una consulta SQL sin utilizar consultas parametrizadas. Esto permite la inyección de una cláusula UNION SELECT que consulta las vistas del sistema (information_schema). Al coincidir el número y tipo de columnas con la consulta original, la base de datos ejecuta la instrucción alterada y expone metadatos internos, lo que facilita la enumeración y posterior extracción de información sensible.    
+        maneja de forma insegura los errores de la base de datos. Si se inyecta una consulta que provoque un error lógico o matemático durante su ejecución (por ejemplo, intentar dividir entre cero), la aplicación no sabe cómo manejarlo y el servidor devuelve un código de estado HTTP 500 (Internal Server Error). Si la consulta se ejecuta sin problemas lógicos, devuelve un estado HTTP 200 (OK). Esta diferencia en el código de respuesta HTTP actúa como una señal booleana que permite inferir datos al condicionar el error a la veracidad de nuestra predicción.   
     </p>
 
     <h3>Procedimiento paso a paso</h3>
     <ul>
-      <li>Identificar el parámetro vulnerable (por ejemplo, filtro de categoría).</li>
-      <li>Determinar el número de columnas.</li>
-      <li>Confirmar columnas visibles.</li>
-        <li>Numerar tablas del sistema.</li>
-        <li>Identificar tabla relevante.</li>
-        <li>Enumerar columnas de esa tabla.</li>
-        <li>Extraer datos sensibles.</li>
+      <li>Interceptar la petición que contiene la cookie <code>TrackingId</code> y enviarla a <code>Repeater</code> en Burp Suite.</li>
+      <li>Confirmar la vulnerabilidad probando una comilla simple (<code>'</code>) para provocar un error SQL y luego <code>''</code> para cerrar la sintaxis.</li>
+      <li>Identificar el motor de base de datos probando una subconsulta con <code>SELECT ... FROM dual</code>, lo que confirma que el sistema utiliza Oracle.</li>
+      <li>Verificar la inyección lógica usando una condición que provoque un error intencional (<code>1/0</code>) y observar la diferencia entre respuestas HTTP 500 y 200.</li>
+      <li>Confirmar la existencia del usuario <code>administrator</code> y determinar la longitud de su contraseña mediante consultas con <code>LENGTH(password)</code>.</li>
+      <li>Enviar la petición a <code>Intruder</code> para automatizar la extracción de la contraseña.</li>
+      <li>Usar <code>SUBSTR(password,posición,1)</code> y una lista alfanumérica de payloads para descubrir cada carácter observando cuándo se genera el error 500.</li>
+      <li>Repetir el proceso hasta obtener toda la contraseña e iniciar sesión en <code>My account</code> con el usuario <code>administrator</code>.</li>
     </ul>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab8_1.png" alt="evidencia">
+    <img src="img/lab10_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab8_2.png" alt="evidencia">
-          <img src="img/lab8_3.png" alt="evidencia">
+    <img src="img/lab10_2.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab8_4.png" alt="evidencia">
+          <img src="img/lab10_3.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab8_5.png" alt="evidencia">
+    <img src="img/lab10_4.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            El payload explota una vulnerabilidad de inyección SQL basada en Union que permite acceder a las vistas de metadatos del sistema (information_schema) disponibles en bases de datos no Oracle como MySQL y SQL Server. Al no utilizar consultas parametrizadas, la aplicación permite que la entrada del usuario modifique la estructura lógica de la consulta original, posibilitando la enumeración del esquema interno (tablas y columnas) y posteriormente la extracción directa de datos sensibles desde la tabla que almacena credenciales. Este proceso constituye una fase de reconocimiento y explotación, donde primero se identifica la estructura de almacenamiento y luego se accede a la información crítica aprovechando la ejecución no restringida de consultas adicionales dentro del mismo contexto de la aplicación.    
+            TrackingId=tuCookie'||(SELECT CASE WHEN SUBSTR(password,1,1)='a' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'.   
         </p>
+      <ul>
+          <li><code>||</code>: Operador de concatenación de cadenas en Oracle, permite unir nuestra inyección con la consulta original.</li>
+          <li><code>CASE WHEN ... THEN ... ELSE ... END</code>: Estructura condicional que ejecuta una acción distinta dependiendo de si la condición es verdadera o falsa.</li>
+          <li><code>SUBSTR(password,1,1)='a'</code>: Extrae un carácter específico de la contraseña y comprueba si coincide con la letra probada.</li>
+          <li><code>TO_CHAR(1/0)</code>: Si la condición es verdadera, provoca una división entre cero que genera un error en Oracle y produce una respuesta HTTP 500.</li>
+        </ul>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          Se recomienda restringir el acceso al esquema del sistema y utilizar consultas parametrizadas. Además, aplicar el principio de privilegios mínimos evita que la aplicación pueda consultar metadatos internos.    
+          Utilizar Consultas Parametrizadas. Al implementar esto en el código fuente, la entrada proporcionada en la cookie TrackingId se encapsulará estrictamente como un tipo de dato string, impidiendo que los caracteres especiales (', ||) alteren la estructura sintáctica de la consulta SQL subyacente. Adicionalmente, es vital implementar un manejo de excepciones global robusto en el backend para que errores internos de la base de datos jamás se filtren o afecten el estado HTTP devuelto al cliente.    
       </p>
 
   </div>
