@@ -48,30 +48,72 @@
 
 <section class="lab-container">
 
-  <h2>Lab 1 - SQL Injection Reconocimiento</h2>
+  <h2>Lab 1 - SQL injection vulnerability in WHERE clause allowing retrieval of hidden data</h2>
 
   <div class="lab-content">
 
-    <h3>Objetivo</h3>
+    <h3>Nivel</h3>
     <p>
-      Identificar vulnerabilidad en campo login.
+      Apprentice
+    </p>
+      
+      <h3>Tipo de SQLi</h3>
+    <p>
+      SQL Injection Clásica en cláusula WHERE
     </p>
 
-    <h3>Procedimiento</h3>
-    <pre>
-' OR '1'='1
-    </pre>
+      <h3>Objetivo</h3>
+    <p style="text-align:justify";>
+      Explotar la vulnerabilidad en el filtro de categorías de productos para recuperar datos ocultos
+    </p>
 
-    <h3>Resultado</h3>
-    <p>Se logró bypass de autenticación.</p>
+      <h3>Explicación técnica de la vulnerabilidad</h3>
+    <p style="text-align:justify";>
+      La vulnerabilidad consiste en la concatenación insegura de parámetros dentro de la cláusula <pre>WHERE</pre> de una consulta SQL, lo que permite a un atacante manipular la lógica de filtrado y acceder a información oculta. En este laboratorio, la aplicación construye dinámicamente la consulta utilizando directamente la entrada del usuario sin validación ni uso de parámetros preparados.La vulnerabilidad se debe a la falta de parametrización y validación de entradas, lo que convierte la consulta en un vector de ataque de inyección SQL. El impacto directo es la exposición de datos restringidos y la posibilidad de escalar el ataque hacia escenarios más graves, como la extracción de credenciales o la manipulación de la base de datos.
+    </p>
+
+    <h3>Procedimiento paso a paso</h3>
+    <ul>
+      <li>Ingresar al laboratorio.</li>
+      <li>Seleccionar una categoría de productos.</li>
+      <li>Interceptar la petición con Burp Suite.</li>
+      <li>Identificar el parámetro vulnerable: <code>category</code>.</li>
+      <li>
+        Modificar el valor por el siguiente payload:
+        <code>Gifts' OR 1=1--</code>
+      </li>
+      <li>Enviar la petición modificada.</li>
+      <li>
+        Observar que se muestran todos los productos, incluidos los ocultos.
+      </li>
+    </ul>
 
     <h3>Evidencia</h3>
-    <img src="img/lab1.png" alt="evidencia">
+    <p>Acceso al laboratorio:</p>
+    <img src="img/lab1_1.png" alt="evidencia">
+      <p>Acceso al apartado Gifts</p>
+    <img src="img/lab1_2.png" alt="evidencia">
+      <p>Request interceptado</p>
+    <img src="img/lab1_3.png" alt="evidencia">
+      <p>Payload utilizado</p>
+    <img src="img/lab1_4.png" alt="evidencia">
+      <p>Confirmación</p>
+    <img src="img/lab1_5.png" alt="evidencia">
+
+      <h3>Explicación de payload</h3>
+        <p style="text-align:justify";>
+            ' OR 1=1– El payload utilizado funciona cerrando la cadena original dentro de la consulta SQL mediante una comilla simple, lo que permite salir del contexto previsto por el desarrollador. Posteriormente, se introduce una condición lógica siempre verdadera utilizando el operador OR junto con una expresión booleana que se evalúa como verdadera en cualquier circunstancia. Finalmente, el uso del comentario SQL impide que el resto de la instrucción original sea procesado por el motor de base de datos. Esta combinación altera completamente la lógica de la cláusula WHERE, forzando al sistema a devolver todos los registros sin respetar las restricciones definidas originalmente en la aplicación.
+        </p>
+
+      <h3>Mitigación recomendada</h3>
+      <p style="text-align:justify";>
+          La prevención efectiva requiere la implementación de consultas parametrizadas que separen estrictamente el código SQL de los datos proporcionados por el usuario. Asimismo, es fundamental aplicar validación de entradas del lado servidor, evitar la exposición de errores detallados y configurar la base de datos bajo el principio de mínimo privilegio. Estas medidas reducen significativamente la posibilidad de manipulación lógica de las consultas y limitan el impacto en caso de explotación.
+      </p>
 
   </div>
 
   <div class="lab-actions">
-    <a href="pdf/lab1.pdf" download class="pdf-btn">
+    <a href="equipo3-act08.pdf" download class="pdf-btn">
       Exportar PDF
     </a>
   </div>
