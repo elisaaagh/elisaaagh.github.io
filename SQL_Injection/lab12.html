@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 11 - Visible error-based SQL injection </h2>
+      <h2>Lab 12 - Blind SQL injection with time delays and information retrieval </h2>
 
     <h3>Nivel</h3>
     <p>
@@ -59,56 +59,78 @@
       
       <h3>Tipo de SQLi</h3>
     <p>
-      Inyección SQL Basada en Errores Visibles
+      Inyección SQL Ciega Basada en Tiempos
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        Explotar una vulnerabilidad de inyección SQL para extraer la contraseña del usuario administrator, forzando a la base de datos a revelar esta información dentro de un mensaje de error detallado    
+        Explotar una vulnerabilidad de inyección SQL basada en tiempos para extraer la contraseña del usuario administrator induciendo retrasos condicionales en el tiempo de respuesta del servidor.   
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        La aplicación es vulnerable porque no sanitiza la entrada del usuario en la cookie TrackingId y, además, está configurada de manera insegura para mostrar los mensajes de error detallados (verbose errors) de la base de datos directamente en la respuesta HTTP al cliente.   
+        En este caso, la aplicación es completamente ciega: no refleja datos de la base de datos en pantalla, no cambia su contenido HTML , ni arroja errores HTTP cuando algo falla. La vulnerabilidad existe porque el backend ejecuta de forma síncrona las consultas inyectadas.   
     </p>
 
     <h3>Procedimiento paso a paso</h3>
-    <ul>
-      <li>Interceptar una petición que contenga la cookie <code>TrackingId</code> usando Burp Suite.</li>
-      <li>Agregar una comilla simple (<code>'</code>) para provocar un error SQL y confirmar la vulnerabilidad.</li>
-      <li>Usar <code>--</code> para comentar el resto de la consulta y restaurar la sintaxis.</li>
-      <li>Construir una consulta con <code>CAST()</code> para forzar un error de conversión y extraer datos de la base de datos.</li>
-      <li>Modificar la subconsulta para obtener primero el <code>username</code> y después el <code>password</code> de la tabla <code>users</code>, usando <code>LIMIT 1</code>.</li>
-      <li>Leer la contraseña revelada en el mensaje de error e iniciar sesión como <code>administrator</code> en <code>My account</code>.</li>
-    </ul>
+    <ol>
+      <li>Interceptar una petición a la página principal que contenga la cookie <code>TrackingId</code> y enviarla a <b>Repeater</b> en Burp Suite.</li>
+      <li>Inyectar un payload para comprobar control del tiempo de respuesta:
+        <code>TrackingId=x'%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END--</code>.
+        Si la respuesta tarda ~10 segundos, la inyección funciona.
+      </li>
+      <li>Probar una condición falsa cambiando <code>(1=1)</code> por <code>(1=2)</code>. 
+      La aplicación debe responder inmediatamente, confirmando que se pueden evaluar condiciones booleanas.</li>
+      <li>Verificar la existencia del usuario administrador:
+        <code>TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--</code>.
+        Si hay retraso, el usuario existe.
+      </li>
+      <li>Determinar la longitud de la contraseña usando:
+        <code>LENGTH(password)&gt;X</code>. 
+        Incrementar el valor (1,2,3...) hasta encontrar la longitud exacta cuando la respuesta deja de tardar 10 segundos.
+      </li>
+      <li>Enviar la petición a <b>Intruder</b> para automatizar la extracción de la contraseña.</li>
+      <li>En <b>Positions</b>, añadir marcadores de payload:
+        <code>SUBSTRING(password,1,1)='§a§'</code>.
+      </li>
+      <li>En <b>Payloads</b>, configurar una lista simple con caracteres <code>a-z</code> y <code>0-9</code>.</li>
+      <li>En <b>Resource pool</b>, establecer <code>Maximum concurrent requests = 1</code> para enviar las peticiones en un solo hilo.</li>
+      <li>Iniciar el ataque y revisar la columna de tiempo de respuesta. 
+      El carácter correcto será el que genere un retraso cercano a 10 segundos.</li>
+      <li>Repetir el proceso cambiando la posición del carácter:
+        <code>SUBSTRING(password,2,1)</code>, <code>3,1</code>, etc., hasta obtener todos los caracteres.
+      </li>
+      <li>Ir a <b>My account</b> e iniciar sesión con la contraseña obtenida.</li>
+    </ol>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab11_1.png" alt="evidencia">
+    <img src="img/lab12_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab11_2.png" alt="evidencia">
+    <img src="img/lab12_2.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab11_3.png" alt="evidencia">
+          <img src="img/lab12_3.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab11_4.png" alt="evidencia">
+    <img src="img/lab12_4.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--   
+            TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users–   
         </p>
       <ul>
-          <li><code>' AND</code>: Cierra la cadena original de la consulta e introduce una nueva condición lógica.</li>
-          <li><code>(SELECT password FROM users LIMIT 1)</code>: Subconsulta que obtiene la contraseña de la primera fila de la tabla <code>users</code> (correspondiente al administrador).</li>
-          <li><code>CAST(... AS int)</code>: Fuerza a la base de datos (PostgreSQL) a convertir la contraseña de texto a un número entero, generando un error.</li>
-          <li><code>1 = ...</code>: Mantiene la condición lógica válida dentro del operador <code>AND</code>.</li>
-          <li><code>--</code>: Comenta el resto de la consulta SQL original.</li>
+          <li><code>x'</code>: Cierra la cadena original de la consulta SQL vulnerable.</li>
+          <li><code>%3B</code>: Codificación URL de <code>;</code>. Permite terminar la consulta original y ejecutar otra (stacked queries).</li>
+          <li><code>SELECT CASE WHEN (...) THEN pg_sleep(10) ELSE pg_sleep(0) END</code>: 
+          Estructura condicional. Si la condición es verdadera, la base de datos se pausa 10 segundos; si es falsa, responde inmediatamente.</li>
+          <li><code>SUBSTRING(password,1,1)='a'</code>: Extrae un carácter específico de la contraseña y lo compara con el intento actual.</li>
+          <li><code>--</code>: Comenta el resto de la consulta original para evitar errores de sintaxis.</li>
         </ul>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          Parametrización de Consultas para evitar que la entrada del usuario altere la estructura de la consulta SQL. Y también, para este tipo específico de ataque, es la Supresión de Errores Detallados en entornos de producción.    
+          La solución principal consiste en aplicar Consultas Parametrizadas en todo el código fuente que interactúe con la base de datos, forzando a que la entrada del usuario se evalúe estrictamente como un dato y no como un comando. Adicionalmente, como medida de defensa en profundidad, se debe deshabilitar la ejecución de consultas apiladas en los controladores de conexión de la base de datos a nivel de aplicación; esto evitaría que un atacante inyecta un comando secundario separado.   
       </p>
 
   </div>
