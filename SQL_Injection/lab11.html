@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 10 - Blind SQL injection with conditional errors </h2>
+      <h2>Lab 11 - Visible error-based SQL injection </h2>
 
     <h3>Nivel</h3>
     <p>
@@ -59,57 +59,56 @@
       
       <h3>Tipo de SQLi</h3>
     <p>
-      Inyección SQL Ciega Basada en Errores
+      Inyección SQL Basada en Errores Visibles
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        Explotar una inyección SQL ciega induciendo errores condicionales para extraer la contraseña del usuario administrator y acceder a su cuenta.   
+        Explotar una vulnerabilidad de inyección SQL para extraer la contraseña del usuario administrator, forzando a la base de datos a revelar esta información dentro de un mensaje de error detallado    
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        maneja de forma insegura los errores de la base de datos. Si se inyecta una consulta que provoque un error lógico o matemático durante su ejecución (por ejemplo, intentar dividir entre cero), la aplicación no sabe cómo manejarlo y el servidor devuelve un código de estado HTTP 500 (Internal Server Error). Si la consulta se ejecuta sin problemas lógicos, devuelve un estado HTTP 200 (OK). Esta diferencia en el código de respuesta HTTP actúa como una señal booleana que permite inferir datos al condicionar el error a la veracidad de nuestra predicción.   
+        La aplicación es vulnerable porque no sanitiza la entrada del usuario en la cookie TrackingId y, además, está configurada de manera insegura para mostrar los mensajes de error detallados (verbose errors) de la base de datos directamente en la respuesta HTTP al cliente.   
     </p>
 
     <h3>Procedimiento paso a paso</h3>
     <ul>
-      <li>Interceptar la petición que contiene la cookie <code>TrackingId</code> y enviarla a <code>Repeater</code> en Burp Suite.</li>
-      <li>Confirmar la vulnerabilidad probando una comilla simple (<code>'</code>) para provocar un error SQL y luego <code>''</code> para cerrar la sintaxis.</li>
-      <li>Identificar el motor de base de datos probando una subconsulta con <code>SELECT ... FROM dual</code>, lo que confirma que el sistema utiliza Oracle.</li>
-      <li>Verificar la inyección lógica usando una condición que provoque un error intencional (<code>1/0</code>) y observar la diferencia entre respuestas HTTP 500 y 200.</li>
-      <li>Confirmar la existencia del usuario <code>administrator</code> y determinar la longitud de su contraseña mediante consultas con <code>LENGTH(password)</code>.</li>
-      <li>Enviar la petición a <code>Intruder</code> para automatizar la extracción de la contraseña.</li>
-      <li>Usar <code>SUBSTR(password,posición,1)</code> y una lista alfanumérica de payloads para descubrir cada carácter observando cuándo se genera el error 500.</li>
-      <li>Repetir el proceso hasta obtener toda la contraseña e iniciar sesión en <code>My account</code> con el usuario <code>administrator</code>.</li>
+      <li>Interceptar una petición que contenga la cookie <code>TrackingId</code> usando Burp Suite.</li>
+      <li>Agregar una comilla simple (<code>'</code>) para provocar un error SQL y confirmar la vulnerabilidad.</li>
+      <li>Usar <code>--</code> para comentar el resto de la consulta y restaurar la sintaxis.</li>
+      <li>Construir una consulta con <code>CAST()</code> para forzar un error de conversión y extraer datos de la base de datos.</li>
+      <li>Modificar la subconsulta para obtener primero el <code>username</code> y después el <code>password</code> de la tabla <code>users</code>, usando <code>LIMIT 1</code>.</li>
+      <li>Leer la contraseña revelada en el mensaje de error e iniciar sesión como <code>administrator</code> en <code>My account</code>.</li>
     </ul>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab10_1.png" alt="evidencia">
+    <img src="img/lab11_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab10_2.png" alt="evidencia">
+    <img src="img/lab11_2.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab10_3.png" alt="evidencia">
+          <img src="img/lab11_3.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab10_4.png" alt="evidencia">
+    <img src="img/lab11_4.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            TrackingId=tuCookie'||(SELECT CASE WHEN SUBSTR(password,1,1)='a' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'.   
+            TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--   
         </p>
       <ul>
-          <li><code>||</code>: Operador de concatenación de cadenas en Oracle, permite unir nuestra inyección con la consulta original.</li>
-          <li><code>CASE WHEN ... THEN ... ELSE ... END</code>: Estructura condicional que ejecuta una acción distinta dependiendo de si la condición es verdadera o falsa.</li>
-          <li><code>SUBSTR(password,1,1)='a'</code>: Extrae un carácter específico de la contraseña y comprueba si coincide con la letra probada.</li>
-          <li><code>TO_CHAR(1/0)</code>: Si la condición es verdadera, provoca una división entre cero que genera un error en Oracle y produce una respuesta HTTP 500.</li>
+          <li><code>' AND</code>: Cierra la cadena original de la consulta e introduce una nueva condición lógica.</li>
+          <li><code>(SELECT password FROM users LIMIT 1)</code>: Subconsulta que obtiene la contraseña de la primera fila de la tabla <code>users</code> (correspondiente al administrador).</li>
+          <li><code>CAST(... AS int)</code>: Fuerza a la base de datos (PostgreSQL) a convertir la contraseña de texto a un número entero, generando un error.</li>
+          <li><code>1 = ...</code>: Mantiene la condición lógica válida dentro del operador <code>AND</code>.</li>
+          <li><code>--</code>: Comenta el resto de la consulta SQL original.</li>
         </ul>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          Utilizar Consultas Parametrizadas. Al implementar esto en el código fuente, la entrada proporcionada en la cookie TrackingId se encapsulará estrictamente como un tipo de dato string, impidiendo que los caracteres especiales (', ||) alteren la estructura sintáctica de la consulta SQL subyacente. Adicionalmente, es vital implementar un manejo de excepciones global robusto en el backend para que errores internos de la base de datos jamás se filtren o afecten el estado HTTP devuelto al cliente.    
+          Parametrización de Consultas para evitar que la entrada del usuario altere la estructura de la consulta SQL. Y también, para este tipo específico de ataque, es la Supresión de Errores Detallados en entornos de producción.    
       </p>
 
   </div>
