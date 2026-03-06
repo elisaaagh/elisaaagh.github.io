@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 5 - SQL injection UNION attack, retrieving data from other tables</h2>
+      <h2>Lab 6 - SQL injection UNION attack, retrieving multiple values in a single column </h2>
 
     <h3>Nivel</h3>
     <p>
@@ -64,43 +64,42 @@
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        Extraer datos desde otras tablas.   
+        El objetivo es extraer múltiples valores dentro de una sola columna visible de la aplicación.  
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        La vulnerabilidad se origina porque la aplicación construye dinámicamente la consulta SQL incorporando directamente la entrada del usuario en la cláusula WHERE, sin emplear consultas parametrizadas ni validación adecuada. Esto permite que un atacante inyecte una cláusula UNION SELECT adicional compatible en número y tipo de columnas con la consulta original. Como resultado, la base de datos ejecuta ambas consultas dentro de una sola instrucción y devuelve datos provenientes de otras tablas no destinadas a ser accesibles desde la interfaz. Esta falta de separación entre datos y código posibilita la exposición directa de información sensible almacenada en la base de datos.    
+        La vulnerabilidad ocurre porque la aplicación incorpora directamente la entrada del usuario dentro de la consulta SQL sin utilizar consultas parametrizadas ni validación adecuada. Esto permite la inyección de una cláusula UNION SELECT, siempre que se respete la misma estructura (número y tipo de columnas) de la consulta original. Como resultado, la base de datos ejecuta la consulta alterada y expone información sensible de otras tablas.   
     </p>
 
     <h3>Procedimiento paso a paso</h3>
     <ul>
-      <li>Identificar el punto vulnerable (filtro de categoría).</li>
-      <li>Determinar el número de columnas usando ' ORDER BY 1–</li>
-      <li>Identificar qué columnas muestran datos.</li>
-      <li>Extraer datos de la tabla ‘users’.</li>
+      <li>Identificar el número de columnas.</li>
+      <li>Detectar la columna visible.</li>
+      <li>Usar concatenación para mostrar múltiples datos.</li>
     </ul>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab5_1.png" alt="evidencia">
+    <img src="img/lab6_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab5_2.png" alt="evidencia">
+    <img src="img/lab6_2.png" alt="evidencia">
+          <img src="img/lab6_3.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab5_3.png" alt="evidencia">
-          <img src="img/lab5_4.png" alt="evidencia">
+          <img src="img/lab6_4.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab5_5.png" alt="evidencia">
+    <img src="img/lab6_5.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            El payload utiliza la cláusula UNION SELECT para combinar los resultados legítimos de la consulta con datos provenientes de otra tabla, en este caso la tabla de usuarios. Al igualar el número de columnas, la base de datos acepta la consulta y devuelve nombres de usuario y contraseñas dentro de la respuesta de la aplicación.    
+            El payload combina múltiples valores dentro de una sola columna mediante funciones de concatenación. Esto permite mostrar información como usuario y contraseña en un único campo visible cuando la aplicación solo presenta una columna.   
         </p>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          Se recomienda el uso de consultas parametrizadas para evitar que la entrada del usuario sea interpretada como código SQL. También es importante validar entradas y restringir los permisos de la base de datos para evitar accesos innecesarios a tablas sensibles.    
+          El uso de consultas preparadas evita que funciones como concatenación sean utilizadas con fines maliciosos. Además, se debe limitar la exposición de datos y evitar mostrar información directamente desde consultas dinámicas.    
       </p>
 
   </div>
