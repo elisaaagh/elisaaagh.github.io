@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio – SQL Injection</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="topbar">
+        <div class="matrix-bg"></div>
+        <a href="https://www.upslp.edu.mx/upslp/">
+          <img src="../images/upslp.jpg" alt="Logo universidad" class="logo-uni">
+      </a>
+        <a href="https://elisaaagh.github.io/SQL_Injection/index.html" class="btn-volver-top">← Volver</a>
+       <a href="https://elisaaagh.github.io/">
+        <img src="../images/capi.png" alt="Foto estudiante" class="foto-alumna">
+    </a>
+    </div>
+
+    <header class="hero" id="hero">
+  <div class="hero-content">
+    <h1>SQL Injection</h1>
+    <p>CNO V - Seguridad Informática</p>
+  </div>
+</header>
+
+
+    <!-- NAV -->
+    <nav>
+      <a href="https://elisaaagh.github.io/">Inicio</a>
+      <a href="https://elisaaagh.github.io/actividades/index.html">Actividades</a>
+      <a href="https://elisaaagh.github.io/proyectos/index.html">Proyectos</a>
+      <div class="dropdown">
+    <a href="#">Road to hall of fame</a>
+    <div class="submenu">
+      <a href="https://elisaaagh.github.io/SQL_Injection/index.html">SQL Injection</a>
+    </div>
+  </div>
+      <a href="https://elisaaagh.github.io/#contacto">Contacto</a>
+    </nav>
+
+<div class="section-divider"></div>
+
+<div class="lab">  
+
+  <div class="lab-card desarrollo">
+
+      <h2>Lab 3 - SQL injection UNION attack, determining the number of columns returned by the query </h2>
+
+    <h3>Nivel</h3>
+    <p>
+      Practitioner
+    </p>
+      
+      <h3>Tipo de SQLi</h3>
+    <p>
+      In-Band – UNION Based
+    </p>
+
+      <h3>Objetivo</h3>
+    <p style="text-align:justify";>
+        Determinar el número de columnas que devuelve la consulta original para poder construir un ataque UNION válido  
+    </p>
+
+      <h3>Explicación técnica de la vulnerabilidad</h3>
+    <p style="text-align:justify";>
+        La vulnerabilidad radica en la posibilidad de inyectar fragmentos de código SQL dentro del parámetro vulnerable sin que exista validación o parametrización adecuada. Esto permite utilizar cláusulas como ORDER BY para inferir información estructural sobre la consulta original. Aunque esta fase no extrae datos directamente, revela el número de columnas devueltas por la consulta, lo cual constituye información crítica para construir ataques UNION compatibles. La falla subyacente es nuevamente la concatenación insegura de entradas externas dentro de la instrucción SQL.
+    </p>
+
+    <h3>Procedimiento paso a paso</h3>
+    <ul>
+      <li>Interceptar petición del filtro de categoría.</li>
+      <li>Probar con:' UNION SELECT NULL --</li>
+      <li>Incrementar hasta que aparezca error.</li>
+      <li>Determinar el número máximo válido de columnas.</li>
+    </ul>
+    
+      <div class="lab-card multimedia">
+          <h3>Evidencia</h3>
+    <p>Acceso al laboratorio:</p>
+    <img src="img/lab3_1.png" alt="evidencia">
+      <p>Request interceptado</p>
+    <img src="img/lab3_2.png" alt="evidencia">
+      <p>Vulnerabilidad</p>
+    <img src="img/lab3_3.png" alt="evidencia">
+      <p>Payload utilizado</p>
+    <img src="img/lab3_4.png" alt="evidencia">
+      <p>Confirmación</p>
+    <img src="img/lab3_5.png" alt="evidencia">
+      </div>
+
+      <h3>Explicación de payload</h3>
+        <p style="text-align:justify";>
+              ’+UNION+SELECT+NULL-- El payload basado en la cláusula ORDER BY permite enumerar progresivamente los índices de columnas hasta provocar un error cuando el número especificado supera el total real existente. Este comportamiento del motor de base de datos es aprovechado para deducir la estructura interna de la consulta. Conocer el número exacto de columnas es un requisito indispensable para ejecutar con éxito un ataque UNION-based.
+        </p>
+
+      <h3>Mitigación recomendada</h3>
+      <p style="text-align:justify";>
+           La mitigación requiere eliminar la posibilidad de inyección mediante consultas parametrizadas y asegurar que los mensajes de error no revelen detalles internos de la base de datos. Asimismo, se deben implementar mecanismos de monitoreo que detecten patrones asociados a intentos de enumeración estructural.  
+      </p>
+
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a href="act08-equipo3.pdf" class="btn-ver" download="act08.pdf">
+      Exportar a PDF
+    </a>
+  </div>
+</div>
+
+  <div class="section-divider"></div>
+  
+<footer>
+  <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 450,
+      delay: 0,
+      offset: 10,      
+      once: true,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+    <script src="../js/particles.js"></script>
+</body>
+</html>
