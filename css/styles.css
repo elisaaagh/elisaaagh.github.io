@@ -1190,7 +1190,7 @@ a:hover{
   pointer-events: none;
 }
 */
-.roadmap {
+/*.roadmap {
   width: 90%;
   margin: 80px auto;
   display: flex;
@@ -1208,8 +1208,8 @@ a:hover{
 .reverse {
   flex-direction: row-reverse;
 }
-
-/* conexión */
+*//**/
+/* conexión *//*
 .roadmap-row::before {
   content: "";
   position: absolute;
@@ -1219,9 +1219,9 @@ a:hover{
   height: 2px;
   background: linear-gradient(to right, #7a5cff33, #b388ff33);
   z-index: 0;
-}
+}*/
 
-/* tarjeta */
+/* tarjeta *//*
 .lab-node {
   width: 170px;
   height: 100px;
@@ -1252,10 +1252,10 @@ a:hover{
   margin: 4px 0 0;
   font-size: 0.85rem;
   color: #9f9fbd;
-}
+}/*
 
 /* estados */
-
+/*
 .completed {
   border: 1px solid #b388ff;
 }
@@ -1269,7 +1269,77 @@ a:hover{
   opacity: 0.3;
   pointer-events: none;
 }
+*/
 
+.roadmap{
+position: relative;
+width: 85%;
+margin: auto;
+padding: 80px 0;
+}
+
+.timeline-line{
+position: absolute;
+left: 50%;
+top: 0;
+width: 4px;
+height: 100%;
+background: #00f7ff;
+transform: translateX(-50%);
+}
+
+.timeline-item{
+width: 50%;
+position: relative;
+margin-bottom: 80px;
+}
+
+.timeline-item.left{
+left: 0;
+padding-right: 40px;
+}
+
+.timeline-item.right{
+left: 50%;
+padding-left: 40px;
+}
+
+.timeline-card{
+background: #08131f;
+border-radius: 14px;
+padding: 25px;
+box-shadow: 0 0 20px rgba(0,255,255,0.15);
+transition: 0.3s;
+}
+
+.timeline-card:hover{
+transform: translateY(-5px);
+box-shadow: 0 0 25px rgba(0,255,255,0.3);
+}
+
+.timeline-card h3{
+color: white;
+margin-top: 10px;
+}
+
+.timeline-card p{
+color: #a9c3d9;
+font-size: 14px;
+}
+
+.timeline-card img{
+width: 100%;
+border-radius: 10px;
+margin-top: 15px;
+}
+
+.lab-tag{
+background: #0a2c33;
+padding: 6px 12px;
+border-radius: 8px;
+font-size: 13px;
+color: #00f7ff;
+}
 /* ---------- QUIZ MEJORADO ---------- */
 
 #progress {
