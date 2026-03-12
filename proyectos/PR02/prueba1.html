@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phishing Defense Quiz | Academia de Seguridad</title>
+    <title>Phishing Defense Quiz | CNO V Seguridad Informática</title>
     <link rel="icon" href="../../images/favicon.ico">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Ajustes para que el quiz no rompa tu estilo oscuro */
         #quiz-container {
             width: 100%;
             margin: 0 auto;
-            color: #eaeaea; /* Texto claro para tu fondo oscuro */
+            color: #eaeaea; 
         }
 
         .screen { display: none; }
         .active { display: block; animation: fadeUp 0.5s ease; }
 
-        /* Estilo del "Correo" (Mantenemos blanco para realismo, pero dentro de tu tarjeta) */
         .email-viewer {
             background: #ffffff;
             color: #202124;
@@ -57,7 +55,6 @@
         .btn-phishing { background: #d93025 !important; color: white; flex: 1; }
         .btn-legit { background: #1a73e8 !important; color: white; flex: 1; }
         
-        /* Feedback estilo "Hacker" */
         #feedback {
             margin: 20px 0;
             padding: 15px;
@@ -154,23 +151,77 @@
     </footer>
 
     <script>
-        // Los escenarios se quedan igual, solo nos aseguramos de que el JS funcione
         const scenarios = [
             {
-                subject: "⚠️ Actividad sospechosa en su cuenta de Google",
-                sender: "Google Security <no-reply@accounts-google-security.com>",
-                content: `Hola usuario,<br><br>Alguien intentó acceder a tu cuenta. <br><br><center><a href="#" class="gmail-button" onmouseover="showUrl('http://accounts-google-security.com/login')" onmouseout="hideUrl()">Actualizar Contraseña</a></center>`,
-                isPhishing: true,
-                feedback: "El dominio <b>accounts-google-security.com</b> es falso. Google usa @google.com."
-            },
-            {
-                subject: "Factura pendiente - Servicios Cloud @Apollo",
-                sender: "Facturación Apollo <billing@apollo-corp.com>",
-                content: `Estimado colega, adjunto factura. <br><br>📎 <b>Factura_Marzo.pdf</b>`,
-                isPhishing: false,
-                feedback: "Dominio oficial y archivo esperado."
-            },
-            // ... Agrega el resto de tus escenarios aquí
+            subject: "⚠️ Actividad sospechosa en su cuenta de Google",
+            sender: "Google Security <no-reply@accounts-google-security.com>",
+            content: `Hola usuario,<br><br>Alguien acaba de intentar iniciar sesión en tu cuenta desde Moscú, Rusia. Si no fuiste tú, por favor cambia tu contraseña inmediatamente haciendo clic aquí: <br><br><center><a href="#" class="tooltip-link">Actualizar Contraseña Ahora</a></center>`,
+            isPhishing: true,
+            feedback: "¡Correcto! El dominio del remitente <b>accounts-google-security.com</b> es falso. Los correos oficiales de Google vienen de @google.com o @accounts.google.com. Además, usa un saludo genérico."
+        },
+        {
+            subject: "Factura pendiente - Servicios Cloud @Apollo",
+            sender: "Facturación Apollo <billing@apollo-corp.com>",
+            content: `Estimado colega,<br><br>Adjuntamos la factura mensual de los servicios de infraestructura de este mes. Por favor, revísela para evitar cortes en el servicio.<br><br>📎 <b>Factura_Marzo.pdf</b>`,
+            isPhishing: false,
+            feedback: "Este es un correo legítimo. El dominio coincide con la organización y el archivo adjunto es un PDF esperado en el flujo de trabajo administrativo."
+        },
+        {
+            subject: "URGENTE: Actualización de nómina requerida",
+            sender: "RRHH Apollo <rrhh.apollo@gmail.com>",
+            content: `Debido a un error en el sistema de pagos, necesitamos que validez tus datos bancarios en el siguiente formulario para recibir tu sueldo mañana: <br><br><a href="#" class="tooltip-link">Formulario de Nómina</a>`,
+            isPhishing: true,
+            feedback: "¡Phishing detectado! Una empresa seria nunca usaría una cuenta gratuita de <b>@gmail.com</b> para asuntos oficiales de Recursos Humanos."
+        },
+        {
+            subject: "🚨 Alerta de Seguridad: Acceso Root detectado",
+            sender: "Apollo IT Alerts <security-admin@apollo-infrastructure.net>",
+            content: `Se ha detectado un inicio de sesión exitoso como <b>root</b> desde una IP no reconocida (192.168.45.2).<br><br>Si no reconoce esta actividad, bloquee el acceso inmediatamente desde nuestro portal de emergencia:<br><br><center><a href="#" class="tooltip-link">https://portal-apollo.net/auth/emergency-lock</a></center>`,
+            isPhishing: true,
+            feedback: "¡Cuidado! Aunque parece legítimo, el dominio <b>apollo-infrastructure.net</b> no es el oficial de la empresa (apollo-corp.com). Los atacantes registran dominios similares para asustar a los administradores y robar sus credenciales de acceso total."
+        },
+        {
+            subject: "Actualización de seguridad crítica para el Kernel de Linux",
+            sender: "Soporte Técnico @Apollo <soporte@apollo-corp.com>",
+            content: `Hola Equipo,<br><br>Se ha publicado un parche para una vulnerabilidad de día cero que afecta a nuestras estaciones de trabajo. Por favor, descarguen el script de actualización y ejecútenlo con privilegios sudo:<br><br>📎 <b>patch_v2.1.sh</b>`,
+            isPhishing: true,
+            feedback: "¡Peligro! Nunca ejecutes scripts (.sh) enviados por correo electrónico con <b>sudo</b>, incluso si el remitente parece real. Un script malicioso puede dar control total (UID 0) a un atacante en segundos."
+        },
+        {
+            subject: "Invitación: Reunión trimestral de planificación @Apollo",
+            sender: "Calendario de Google <apps-notif@google.com>",
+            content: `Se te ha invitado al evento: <b>Planificación Q2 @Apollo</b><br>Organizador: gerencia@apollo-corp.com<br><br>¿Asistirás? <a href="#">Sí</a> - <a href="#">Quizás</a> - <a href="#">No</a>`,
+            isPhishing: false,
+            feedback: "Este es un correo legítimo. El remitente es el servicio oficial de notificaciones de Google y el organizador pertenece al dominio oficial de la empresa."
+        },
+        {
+            subject: "Capacidad de almacenamiento excedida en su cuenta",
+            sender: "Cloud Admin <admin@storage-apollo.com>",
+            content: `Tu cuota de disco en el servidor ha llegado al 98%. Para evitar la pérdida de datos, solicita una ampliación gratuita validando tu cuenta aquí:<br><br><center><a href="#" style="background:#1a73e8; color:white; padding:10px; text-decoration:none; border-radius:5px;">Aumentar Espacio</a></center>`,
+            isPhishing: true,
+            feedback: "¡Phishing! El dominio <b>storage-apollo.com</b> es sospechoso. Además, los administradores de sistemas suelen gestionar cuotas mediante comandos internos y no piden 'validar cuenta' mediante botones en correos externos."
+        },
+        {
+            subject: "Documento compartido: 'Presupuesto_Sistemas_2026.docx'",
+            sender: "Javier Manager (vía OneDrive) <no-reply@sharepoint-online.com>",
+            content: `Javier ha compartido un archivo contigo. Haz clic abajo para abrirlo y revisarlo para la reunión de mañana:<br><br><center><a href="#" class="tooltip-link">Ver Documento en la Nube</a></center>`,
+            isPhishing: true,
+            feedback: "¡Sospechoso! El dominio <b>sharepoint-online.com</b> parece real, pero Microsoft utiliza <i>sharepoint.com</i>. Es un ejemplo de 'Typosquatting' diseñado para engañar incluso a ojos expertos."
+        },
+        {
+            subject: "Confirmación de cambio de contraseña exitoso",
+            sender: "Apollo IT <systems@apollo-corp.com>",
+            content: `Este es un aviso automático para informarle que la contraseña de su cuenta @Apollo ha sido cambiada con éxito.<br><br>Si usted no realizó este cambio, <b>haga clic aquí para revertirlo inmediatamente</b>.`,
+            isPhishing: false,
+            feedback: "Este correo es legítimo y es una práctica de seguridad estándar. Si recibes uno sin haber hecho el cambio, debes reportarlo a TI, pero el correo en sí es un aviso de seguridad real del dominio oficial."
+        },
+        {
+            subject: "Encuesta de satisfacción de empleados (Anónima)",
+            sender: "RRHH Apollo <encuestas-apollo@surveymonkey.com>",
+            content: `Queremos saber tu opinión sobre el ambiente laboral. Tu respuesta es totalmente anónima. Accede aquí:<br><br><a href="#">https://es.surveymonkey.com/r/Apollo2026</a>`,
+            isPhishing: false,
+            feedback: "Es legítimo. Muchas empresas utilizan plataformas externas como SurveyMonkey para encuestas anónimas. La URL apunta al dominio real de la plataforma y el remitente es consistente."
+        }            
         ];
 
         let currentIdx = 0;
