@@ -157,6 +157,32 @@
             color: #856404;
             font-size: 0.9rem;
         }
+        .scanner-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(255,255,255,0.9); display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10; display: none;
+        }
+        .loader {
+            border: 4px solid #f3f3f3; border-top: 4px solid #1a73e8;
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .url-preview {
+    position: fixed;
+    bottom: -50px;
+    left: 20px;
+    background: #eeeeee;
+    color: #444;
+    padding: 4px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+    font-family: sans-serif;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    z-index: 10001;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
     </style>
 </head>
 <body>
@@ -240,7 +266,7 @@
             {
             subject: "⚠️ Actividad sospechosa en su cuenta de Google",
             sender: "Google Security <no-reply@accounts-google-security.com>",
-            content: `Hola usuario,<br><br>Alguien acaba de intentar iniciar sesión en tu cuenta desde Moscú, Rusia. Si no fuiste tú, por favor cambia tu contraseña inmediatamente haciendo clic aquí: <br><br><center><a href="#" class="tooltip-link">Actualizar Contraseña Ahora</a></center>`,
+            content: `Hola usuario,<br><br>Alguien intentó entrar a tu cuenta. <br><br><center><a href="#" data-url="http://accounts-google-security.support-login.com/reset-pass" class="quiz-link" style="color: #1a73e8;">Actualizar Contraseña Ahora</a></center>`,
             isPhishing: true,
             feedback: "¡Correcto! El dominio del remitente <b>accounts-google-security.com</b> es falso. Los correos oficiales de Google vienen de @google.com o @accounts.google.com. Además, usa un saludo genérico."
         },
@@ -344,6 +370,27 @@ function startQuiz() {
 // --- 2. MOSTRAR PREGUNTA ---
 function showQuestion() {
     const q = scenarios[currentIdx];
+
+    document.getElementById('mail-subject').innerText = q.subject;
+    document.getElementById('mail-sender').innerHTML = `De: <b>${q.sender}</b>`;
+    document.getElementById('mail-content').innerHTML = q.content;
+
+    // --- NUEVA LÓGICA DE INSPECCIÓN DE LINKS ---
+    const links = document.querySelectorAll('#mail-content a');
+    links.forEach(link => {
+        link.addEventListener('mouseover', function() {
+            // Leemos la URL "oculta" del atributo data-url
+            const realDestination = this.getAttribute('data-url') || "https://url-interna-segura.com";
+            showUrl(realDestination);
+        });
+        
+        link.addEventListener('mouseout', function() {
+            hideUrl();
+        });
+
+        // Evitar que el link refresque la página al hacer clic
+        link.addEventListener('click', (e) => e.preventDefault());
+    });
     
     // Reset de la interfaz
     document.getElementById('feedback').style.display = 'none';
@@ -358,6 +405,19 @@ function showQuestion() {
     
     // Iniciar cronómetro justo cuando se muestra la pregunta
     startTime = Date.now(); 
+}
+
+        function showUrl(url) {
+    const preview = document.getElementById('browser-url-preview');
+    preview.innerText = "Ir a: " + url;
+    preview.style.opacity = '1';
+    preview.style.bottom = '20px'; // Se levanta un poco para que se vea
+}
+
+function hideUrl() {
+    const preview = document.getElementById('browser-url-preview');
+    preview.style.opacity = '0';
+    preview.style.bottom = '-50px'; // Se esconde
 }
 
 // --- 3. VALIDAR RESPUESTA ---
