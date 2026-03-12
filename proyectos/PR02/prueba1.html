@@ -329,7 +329,7 @@
         {
             subject: "Encuesta de satisfacción de empleados (Anónima)",
             sender: "RRHH Apollo <encuestas-apollo@surveymonkey.com>",
-            content: `Queremos saber tu opinión sobre el ambiente laboral. Tu respuesta es totalmente anónima. Accede aquí:<br><br><a href="#">https://es.surveymonkey.com/r/Apollo2026</a>`,
+            content: `Queremos saber tu opinión sobre el ambiente laboral. Tu respuesta es totalmente anónima. Accede aquí:<br><br><a href="#" data-url="https://es.surveymonkey.com/r/Apollo2026">https://es.surveymonkey.com/r/Apollo2026</a>`,
             isPhishing: false,
             feedback: "Es legítimo. Muchas empresas utilizan plataformas externas como SurveyMonkey para encuestas anónimas. La URL apunta al dominio real de la plataforma y el remitente es consistente."
         }
@@ -370,40 +370,39 @@ function startQuiz() {
 // --- 2. MOSTRAR PREGUNTA ---
 function showQuestion() {
     const q = scenarios[currentIdx];
-
-    document.getElementById('mail-subject').innerText = q.subject;
-    document.getElementById('mail-sender').innerHTML = `De: <b>${q.sender}</b>`;
-    document.getElementById('mail-content').innerHTML = q.content;
-
-    // --- NUEVA LÓGICA DE INSPECCIÓN DE LINKS ---
-    const links = document.querySelectorAll('#mail-content a');
-    links.forEach(link => {
-        link.addEventListener('mouseover', function() {
-            // Leemos la URL "oculta" del atributo data-url
-            const realDestination = this.getAttribute('data-url') || "https://url-interna-segura.com";
-            showUrl(realDestination);
-        });
-        
-        link.addEventListener('mouseout', function() {
-            hideUrl();
-        });
-
-        // Evitar que el link refresque la página al hacer clic
-        link.addEventListener('click', (e) => e.preventDefault());
-    });
     
-    // Reset de la interfaz
+    // 1. Reset e Inyección de contenido
     document.getElementById('feedback').style.display = 'none';
     document.getElementById('action-buttons').style.display = 'flex';
     document.getElementById('next-btn').style.display = 'none';
-
-    // Cargar contenido
+    
     document.getElementById('mail-subject').innerText = q.subject;
     document.getElementById('mail-sender').innerHTML = `De: <b>${q.sender}</b>`;
     document.getElementById('mail-content').innerHTML = q.content;
     document.getElementById('progress').innerText = `Caso ${currentIdx + 1} de ${scenarios.length}`;
+
+    // 2. LÓGICA DE INSPECCIÓN DE LINKS (Mejorada)
+    // Buscamos cualquier enlace que esté dentro del cuerpo del correo
+    const links = document.querySelectorAll('#mail-content a');
     
-    // Iniciar cronómetro justo cuando se muestra la pregunta
+    links.forEach(link => {
+        link.addEventListener('mouseover', function() {
+            // Si el link tiene data-url lo muestra, si no, muestra el href
+            const urlToShow = this.getAttribute('data-url') || this.getAttribute('href');
+            if(urlToShow && urlToShow !== "#") {
+                showUrl(urlToShow);
+            }
+        });
+        
+        link.addEventListener('mouseout', hideUrl);
+
+        // Importante: evitar que el usuario se salga del quiz si hace clic
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("¡Buen intento! En este simulador no debes hacer clic, solo analizar. Usa los botones de abajo.");
+        });
+    });
+    
     startTime = Date.now(); 
 }
 
@@ -528,5 +527,6 @@ function showResults() {
         });
     }
 </script>
+    <div id="browser-url-preview" class="url-preview" style="opacity: 0; position: fixed; bottom: -50px; transition: all 0.3s;"></div>
 </body>
 </html>
