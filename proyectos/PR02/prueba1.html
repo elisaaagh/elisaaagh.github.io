@@ -10,70 +10,65 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* FIX DE VISIBILIDAD: Aseguramos que la sección sea visible sobre el fondo oscuro */
-        #quiz-section {
-            position: relative;
-            z-index: 10; /* Por encima de la matrix-bg */
-            margin-top: 40px;
-            min-height: 600px;
-        }
+    /* FUERZA BRUTA: Asegurar que el quiz se vea */
+    #quiz-section {
+        position: relative;
+        display: block !important; /* Forzamos visualización */
+        z-index: 9999 !important;   /* Por encima de matrix y topbar */
+        margin: 100px auto !important;
+        padding: 20px !important;
+        min-height: 500px !important;
+    }
 
-        #quiz-container {
-            background: rgba(15, 15, 30, 0.85); /* Fondo semitransparente estilo tu página */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(199, 125, 255, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 850px;
-            margin: 0 auto;
-            color: #fff;
-        }
+    #quiz-container {
+        background: #10101a !important; /* Fondo sólido oscuro para que no se pierda */
+        border: 2px solid #c77dff !important;
+        box-shadow: 0 0 30px rgba(199, 125, 255, 0.4) !important;
+        border-radius: 15px;
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: white !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
 
-        /* Pantallas */
-        .screen { display: none; }
-        .screen.active { display: block; animation: fadeUp 0.6s ease forwards; }
+    /* Pantallas */
+    .screen { display: none; }
+    .screen.active { display: block !important; }
 
-        /* Gmail Simulation (Contraste para ver el phishing) */
-        .gmail-wrapper {
-            background: #fff;
-            color: #202124;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            text-align: left;
-        }
+    /* Gmail Simulation - Blanco para que resalte y se pueda leer */
+    .gmail-wrapper {
+        background: #ffffff !important;
+        color: #202124 !important;
+        border-radius: 8px;
+        margin: 25px 0;
+        text-align: left;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
 
-        .gmail-header { padding: 15px; background: #f1f3f4; border-bottom: 1px solid #ddd; }
-        .gmail-subject { font-size: 1.1rem; font-weight: 700; color: #202124; }
-        .gmail-meta { font-size: 0.85rem; color: #5f6368; }
-        .gmail-body { padding: 20px; color: #3c4043; min-height: 150px; }
+    .gmail-header { padding: 15px; background: #f8f9fa; border-bottom: 1px solid #ddd; }
+    .gmail-subject { font-weight: bold; font-size: 1.1rem; color: #202124; }
+    .gmail-body { padding: 20px; color: #333; min-height: 120px; }
 
-        /* Botones del Quiz */
-        .quiz-actions { display: flex; gap: 15px; margin-top: 25px; }
-        .btn-phish { background: #d93025; color: white; border: none; padding: 12px; border-radius: 6px; flex: 1; cursor: pointer; font-weight: bold; }
-        .btn-safe { background: #1a73e8; color: white; border: none; padding: 12px; border-radius: 6px; flex: 1; cursor: pointer; font-weight: bold; }
-        
-        /* Feedback */
-        #feedback-box {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-            line-height: 1.5;
-        }
-        .correct { background: rgba(0, 255, 200, 0.15); border: 1px solid #00ffcc; color: #00ffcc; }
-        .incorrect { background: rgba(217, 48, 37, 0.15); border: 1px solid #ff4d4d; color: #ff4d4d; }
+    /* Botones */
+    .btn-phish { background: #ff4d4d; color: white; border: none; padding: 15px; border-radius: 8px; flex: 1; cursor: pointer; font-weight: bold; }
+    .btn-safe { background: #4d94ff; color: white; border: none; padding: 15px; border-radius: 8px; flex: 1; cursor: pointer; font-weight: bold; }
+    
+    .quiz-actions { display: flex; gap: 15px; margin-top: 20px; }
+    
+    #feedback-box {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        display: none;
+    }
+    .correct { background: rgba(0, 255, 150, 0.2); border-color: #00ff96; color: #00ff96; }
+    .incorrect { background: rgba(255, 80, 80, 0.2); border-color: #ff5050; color: #ff5050; }
 
-        /* Barra de Progreso */
-        .pg-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 15px 0; overflow: hidden; }
-        .pg-bar { height: 100%; background: #c77dff; width: 0%; transition: 0.4s; }
-
-        .url-preview {
-            position: fixed; bottom: 15px; left: 15px; background: #000; color: #00ffd5;
-            padding: 5px 10px; font-size: 12px; border-radius: 4px; opacity: 0; pointer-events: none; z-index: 9999;
-        }
-    </style>
+    .lab-tag { background: #7b2cbf; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
+</style>
 </head>
 <body>
 
@@ -279,7 +274,13 @@
         }
         function hideUrl() {
             document.getElementById('browser-url-preview').style.opacity = '0';
+        
         }
+        // Forzar que el quiz inicie en la pantalla correcta al cargar
+window.onload = function() {
+    document.getElementById('start-screen').classList.add('active');
+    console.log("Quiz cargado correctamente");
+};
     </script>
 </body>
 </html>
