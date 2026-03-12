@@ -120,7 +120,8 @@
     </a>
     </div>
 
-<div class="actividad" id="quiz-container">
+<section class="actividad" id="quiz-section">
+  <div id="quiz-container">
     <div id="start-screen" class="screen active">
         <h2>Simulador de Defensa contra Phishing</h2>
         <p>Bienvenido al entrenamiento de @Apollo. Este ejercicio tiene fines estrictamente educativos.</p>
@@ -161,6 +162,7 @@
         <button class="btn-legit" onclick="location.reload()">Reiniciar</button>
     </div>
 </div>
+</section>
 
 <footer>
   <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
@@ -188,7 +190,7 @@
             content: `Debido a un error en el sistema de pagos, necesitamos que validez tus datos bancarios en el siguiente formulario para recibir tu sueldo mañana: <br><br><a href="#" class="tooltip-link">Formulario de Nómina</a>`,
             isPhishing: true,
             feedback: "¡Phishing detectado! Una empresa seria nunca usaría una cuenta gratuita de <b>@gmail.com</b> para asuntos oficiales de Recursos Humanos."
-        }
+        },
         {
             subject: "🚨 Alerta de Seguridad: Acceso Root detectado",
             sender: "Apollo IT Alerts <security-admin@apollo-infrastructure.net>",
@@ -294,6 +296,24 @@
         document.getElementById('result-screen').classList.add('active');
         document.getElementById('final-stats').innerText = `Has obtenido ${score} puntos de defensor. ¡Sigue practicando para proteger a la organización!`;
     }
+
+function updateUrlPreview() {
+    const links = document.querySelectorAll('.gmail-link, .gmail-button');
+    const preview = document.getElementById('browser-url-preview');
+
+    links.forEach(link => {
+        link.addEventListener('mouseenter', (e) => {
+            preview.innerText = e.target.getAttribute('data-url');
+            preview.style.opacity = '1';
+        });
+        link.addEventListener('mouseleave', () => {
+            preview.style.opacity = '0';
+        });
+    });
+}
+
+// En tus escenarios, usa data-url para la trampa
+// Ejemplo: <a href="#" class="gmail-button" data-url="http://bit.ly/3XyZ7q">Click aquí</a>
 </script>
 
 </body>
