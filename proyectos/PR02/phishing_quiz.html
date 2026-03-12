@@ -518,42 +518,62 @@ function showResults() {
 
     // --- MAGIA DE FIREBASE ---
 
-    function saveToCloud(name, points, toughest) {
-        const newScoreRef = database.ref('ranking').push();
-        newScoreRef.set({
-            name: name,
-            points: points,
-            toughestScenario: toughest,
-            timestamp: Date.now()
-        });
-    }
+   function saveToCloud(name, points, toughest) {
+    // Limpiamos el nombre de caracteres que Firebase no permite como llaves (., $, #, [, ], /)
+    const cleanName = name.replace(/[.#$[\]/]/g, "_");
+    
+    // Referencia directa al nodo con el nombre del usuario
+    const userRef = database.ref('ranking/' + cleanName);
+
+    // Consultamos si ya existe para no bajarle el score si juega otra vez y saca menos
+    userRef.once('value').then((snapshot) => {
+        const existingData = snapshot.val();
+        
+        if (!existingData || points > existingData.points) {
+            // Solo guardamos si es la primera vez o si superó su récord anterior
+            userRef.set({
+                name: name, // Guardamos el nombre original con espacios/puntos
+                points: points,
+                toughestScenario: toughest,
+                timestamp: Date.now()
+            });
+            console.log("Récord actualizado para: " + name);
+        } else {
+            console.log("Puntaje actual menor al récord. No se sobrescribe.");
+        }
+    });
+}
 
     function listenToRanking() {
-        const rankingRef = database.ref('ranking').orderByChild('points').limitToLast(10);
+    const rankingRef = database.ref('ranking').orderByChild('points').limitToLast(10);
+    
+    rankingRef.on('value', (snapshot) => {
+        const data = snapshot.val();
+        const rankingBody = document.getElementById('ranking-body');
+        if (!rankingBody) return; // Seguridad por si la tabla no existe en pantalla
         
-        rankingRef.on('value', (snapshot) => {
-            const data = snapshot.val();
-            const rankingBody = document.getElementById('ranking-body');
-            rankingBody.innerHTML = "";
-            
-            // Convertir objeto a array y ordenar (Firebase ordena ascendente por default)
-            let sortedList = [];
-            for (let id in data) {
-                sortedList.push(data[id]);
-            }
-            sortedList.sort((a, b) => b.points - a.points);
-
-            sortedList.forEach((user, index) => {
-                rankingBody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${user.name}</td>
-                        <td>${user.points}</td>
-                    </tr>
-                `;
-            });
+        rankingBody.innerHTML = "";
+        
+        let sortedList = [];
+        // Extraemos los datos del objeto
+        snapshot.forEach((childSnapshot) => {
+            sortedList.push(childSnapshot.val());
         });
-    }
+        
+        // Firebase ordena de menor a mayor, así que invertimos el array
+        sortedList.reverse();
+
+        sortedList.forEach((user, index) => {
+            rankingBody.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${user.name}</td>
+                    <td>${user.points}</td>
+                </tr>
+            `;
+        });
+    });
+}
 </script>
     <div id="browser-url-preview" class="url-preview" style="opacity: 0; position: fixed; bottom: -50px; transition: all 0.3s;"></div>
 </body>
