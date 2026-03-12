@@ -214,11 +214,16 @@
                         <li>Haz clic en los botones rojos o azules para clasificar.</li>
                     </ul>
                 </div>
-                <button class="btn-legit" onclick="startQuiz()" style="width: auto; padding: 15px 40px;">Comenzar Misión</button>
+                <div style="display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 25px;">
+                    <button class="btn-legit" onclick="startQuiz()" style="margin: 0; flex: 1; max-width: 200px;">
+                        Comenzar Misión
+                    </button>
+                    <button class="btn-ranking-outline" onclick="viewRankingOnly()" style="flex: 1; max-width: 200px;">
+                        🏆 Ver Ranking
+                    </button>
+                </div>
             </div>
-            <button onclick="viewRankingOnly()" style="background: transparent; color: #a855f7; border: 2px solid #a855f7; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">
-            🏆 Ver Ranking
-        </button>
+            
 
             <div id="game-screen" class="screen">
                 <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
