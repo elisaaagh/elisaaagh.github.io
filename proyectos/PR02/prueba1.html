@@ -10,65 +10,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-    /* FUERZA BRUTA: Asegurar que el quiz se vea */
-    #quiz-section {
-        position: relative;
-        display: block !important; /* Forzamos visualización */
-        z-index: 9999 !important;   /* Por encima de matrix y topbar */
-        margin: 100px auto !important;
-        padding: 20px !important;
-        min-height: 500px !important;
-    }
+        /* AJUSTES DE CAPAS Y VISIBILIDAD */
+        #quiz-section {
+            position: relative;
+            z-index: 9999 !important;
+            margin: 120px auto 50px !important;
+            padding: 20px;
+            display: block !important;
+        }
 
-    #quiz-container {
-        background: #10101a !important; /* Fondo sólido oscuro para que no se pierda */
-        border: 2px solid #c77dff !important;
-        box-shadow: 0 0 30px rgba(199, 125, 255, 0.4) !important;
-        border-radius: 15px;
-        padding: 40px;
-        max-width: 800px;
-        margin: 0 auto;
-        color: white !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
+        #quiz-container {
+            background: #10101a !important; /* Fondo sólido para evitar transparencias raras */
+            border: 2px solid #c77dff !important;
+            box-shadow: 0 0 30px rgba(199, 125, 255, 0.4) !important;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: white !important;
+            min-height: 400px;
+        }
 
-    /* Pantallas */
-    .screen { display: none; }
-    .screen.active { display: block !important; }
+        /* Pantallas */
+        .screen { display: none; }
+        .screen.active { display: block !important; }
 
-    /* Gmail Simulation - Blanco para que resalte y se pueda leer */
-    .gmail-wrapper {
-        background: #ffffff !important;
-        color: #202124 !important;
-        border-radius: 8px;
-        margin: 25px 0;
-        text-align: left;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
+        /* Gmail Simulation (Visor de Correo) */
+        .email-viewer {
+            background: #ffffff !important;
+            color: #202124 !important;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: left;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
 
-    .gmail-header { padding: 15px; background: #f8f9fa; border-bottom: 1px solid #ddd; }
-    .gmail-subject { font-weight: bold; font-size: 1.1rem; color: #202124; }
-    .gmail-body { padding: 20px; color: #333; min-height: 120px; }
+        .email-header { padding: 15px; background: #f8f9fa; border-bottom: 1px solid #ddd; }
+        .subject { font-weight: bold; font-size: 1.1rem; color: #202124; margin-bottom: 4px; }
+        .sender { font-size: 0.85rem; color: #5f6368; }
+        .email-body { padding: 20px; color: #333; min-height: 120px; line-height: 1.5; }
 
-    /* Botones */
-    .btn-phish { background: #ff4d4d; color: white; border: none; padding: 15px; border-radius: 8px; flex: 1; cursor: pointer; font-weight: bold; }
-    .btn-safe { background: #4d94ff; color: white; border: none; padding: 15px; border-radius: 8px; flex: 1; cursor: pointer; font-weight: bold; }
-    
-    .quiz-actions { display: flex; gap: 15px; margin-top: 20px; }
-    
-    #feedback-box {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid transparent;
-        display: none;
-    }
-    .correct { background: rgba(0, 255, 150, 0.2); border-color: #00ff96; color: #00ff96; }
-    .incorrect { background: rgba(255, 80, 80, 0.2); border-color: #ff5050; color: #ff5050; }
+        /* Botones y Acciones */
+        .actions { display: flex; gap: 15px; margin-top: 20px; }
+        .btn-phishing { background: #ff4d4d !important; color: white !important; border: none; padding: 15px; border-radius: 8px; flex: 1; cursor: pointer; font-weight: bold; }
+        .btn-legit { background: #4d94ff !important; color: white !important; border: none; padding: 15px; border-radius: 8px; flex: 1; cursor: pointer; font-weight: bold; }
+        
+        /* Feedback estilo consola */
+        #feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+        }
+        .success-bg { background: rgba(0, 255, 150, 0.2); border: 1px solid #00ff96; color: #00ff96; }
+        .error-bg { background: rgba(255, 80, 80, 0.2); border: 1px solid #ff5050; color: #ff5050; }
 
-    .lab-tag { background: #7b2cbf; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
-</style>
+        .lab-tag { background: #7b2cbf; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color: white; }
+        
+        .url-preview {
+            position: fixed; bottom: 10px; left: 10px; background: black; color: #00ffd5;
+            padding: 4px 10px; font-size: 12px; border-radius: 4px; opacity: 0; z-index: 10000;
+        }
+    </style>
 </head>
 <body>
 
@@ -85,22 +90,22 @@
         </a>
     </div>
 
-    <section class="actividad" id="quiz-section" data-aos="fade-up">
+    <section class="actividad" id="quiz-section">
         <div id="quiz-container">
             
             <div id="start-screen" class="screen active">
-                <h2>Phishing Quiz: Entrenamiento @Apollo</h2>
-                <p>Analiza los escenarios y decide si son ataques de ingeniería social o correos legítimos.</p>
-                <ul style="margin: 20px 0; color: #c7c7ff;">
-                    <li>Analiza dominios y remitentes cuidadosamente.</li>
-                    <li>Busca errores gramaticales o urgencia artificial.</li>
-                    <li>Aprende de la retroalimentación técnica.</li>
+                <h2 style="color: #c77dff;">Phishing Quiz: Entrenamiento @Apollo</h2>
+                <p>Analiza los 10 correos y decide si son ataques o legítimos.</p>
+                <ul style="margin: 20px 0; color: #c7c7ff; text-align: left;">
+                    <li>Verifica el dominio del remitente.</li>
+                    <li>Busca enlaces o archivos sospechosos.</li>
+                    <li>Aprende de cada error para mejorar tu defensa.</li>
                 </ul>
                 <button class="btn-ver" onclick="startQuiz()" style="width: auto;">Iniciar Entrenamiento</button>
             </div>
 
             <div id="game-screen" class="screen">
-                <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
+                <div style="display:flex; justify-content: space-between; align-items: center;">
                     <span id="progress" class="lab-tag">Cargando...</span>
                     <span id="score" style="color: #00ffd5; font-weight: bold;">Puntos: 0</span>
                 </div>
@@ -126,7 +131,7 @@
             </div>
 
             <div id="result-screen" class="screen">
-                <h2>Análisis Finalizado</h2>
+                <h2 style="color: #c77dff;">Entrenamiento Completado</h2>
                 <p id="final-stats" style="font-size: 1.2rem; margin: 20px 0;"></p>
                 <button class="btn-ver" onclick="location.reload()" style="width: auto;">Reiniciar Misión</button>
             </div>
@@ -135,152 +140,21 @@
 
     <div id="browser-url-preview" class="url-preview"></div>
 
-    <footer>
-        <p>Elisa Alejandra Arellano Wratny © Portafolio Seguridad Informática | UPSLP</p>
-    </footer>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init();
+
         const scenarios = [
             {
-            subject: "⚠️ Actividad sospechosa en su cuenta de Google",
-            sender: "Google Security <no-reply@accounts-google-security.com>",
-            content: `Hola usuario,<br><br>Alguien acaba de intentar iniciar sesión en tu cuenta desde Moscú, Rusia. Si no fuiste tú, por favor cambia tu contraseña inmediatamente haciendo clic aquí: <br><br><center><a href="#" class="tooltip-link">Actualizar Contraseña Ahora</a></center>`,
-            isPhishing: true,
-            feedback: "¡Correcto! El dominio del remitente <b>accounts-google-security.com</b> es falso. Los correos oficiales de Google vienen de @google.com o @accounts.google.com. Además, usa un saludo genérico."
-        },
-        {
-            subject: "Factura pendiente - Servicios Cloud @Apollo",
-            sender: "Facturación Apollo <billing@apollo-corp.com>",
-            content: `Estimado colega,<br><br>Adjuntamos la factura mensual de los servicios de infraestructura de este mes. Por favor, revísela para evitar cortes en el servicio.<br><br>📎 <b>Factura_Marzo.pdf</b>`,
-            isPhishing: false,
-            feedback: "Este es un correo legítimo. El dominio coincide con la organización y el archivo adjunto es un PDF esperado en el flujo de trabajo administrativo."
-        },
-        {
-            subject: "URGENTE: Actualización de nómina requerida",
-            sender: "RRHH Apollo <rrhh.apollo@gmail.com>",
-            content: `Debido a un error en el sistema de pagos, necesitamos que validez tus datos bancarios en el siguiente formulario para recibir tu sueldo mañana: <br><br><a href="#" class="tooltip-link">Formulario de Nómina</a>`,
-            isPhishing: true,
-            feedback: "¡Phishing detectado! Una empresa seria nunca usaría una cuenta gratuita de <b>@gmail.com</b> para asuntos oficiales de Recursos Humanos."
-        },
-        {
-            subject: "🚨 Alerta de Seguridad: Acceso Root detectado",
-            sender: "Apollo IT Alerts <security-admin@apollo-infrastructure.net>",
-            content: `Se ha detectado un inicio de sesión exitoso como <b>root</b> desde una IP no reconocida (192.168.45.2).<br><br>Si no reconoce esta actividad, bloquee el acceso inmediatamente desde nuestro portal de emergencia:<br><br><center><a href="#" class="tooltip-link">https://portal-apollo.net/auth/emergency-lock</a></center>`,
-            isPhishing: true,
-            feedback: "¡Cuidado! Aunque parece legítimo, el dominio <b>apollo-infrastructure.net</b> no es el oficial de la empresa (apollo-corp.com). Los atacantes registran dominios similares para asustar a los administradores y robar sus credenciales de acceso total."
-        },
-        {
-            subject: "Actualización de seguridad crítica para el Kernel de Linux",
-            sender: "Soporte Técnico @Apollo <soporte@apollo-corp.com>",
-            content: `Hola Equipo,<br><br>Se ha publicado un parche para una vulnerabilidad de día cero que afecta a nuestras estaciones de trabajo. Por favor, descarguen el script de actualización y ejecútenlo con privilegios sudo:<br><br>📎 <b>patch_v2.1.sh</b>`,
-            isPhishing: true,
-            feedback: "¡Peligro! Nunca ejecutes scripts (.sh) enviados por correo electrónico con <b>sudo</b>, incluso si el remitente parece real. Un script malicioso puede dar control total (UID 0) a un atacante en segundos."
-        },
-        {
-            subject: "Invitación: Reunión trimestral de planificación @Apollo",
-            sender: "Calendario de Google <apps-notif@google.com>",
-            content: `Se te ha invitado al evento: <b>Planificación Q2 @Apollo</b><br>Organizador: gerencia@apollo-corp.com<br><br>¿Asistirás? <a href="#">Sí</a> - <a href="#">Quizás</a> - <a href="#">No</a>`,
-            isPhishing: false,
-            feedback: "Este es un correo legítimo. El remitente es el servicio oficial de notificaciones de Google y el organizador pertenece al dominio oficial de la empresa."
-        },
-        {
-            subject: "Capacidad de almacenamiento excedida en su cuenta",
-            sender: "Cloud Admin <admin@storage-apollo.com>",
-            content: `Tu cuota de disco en el servidor ha llegado al 98%. Para evitar la pérdida de datos, solicita una ampliación gratuita validando tu cuenta aquí:<br><br><center><a href="#" style="background:#1a73e8; color:white; padding:10px; text-decoration:none; border-radius:5px;">Aumentar Espacio</a></center>`,
-            isPhishing: true,
-            feedback: "¡Phishing! El dominio <b>storage-apollo.com</b> es sospechoso. Además, los administradores de sistemas suelen gestionar cuotas mediante comandos internos y no piden 'validar cuenta' mediante botones en correos externos."
-        },
-        {
-            subject: "Documento compartido: 'Presupuesto_Sistemas_2026.docx'",
-            sender: "Javier Manager (vía OneDrive) <no-reply@sharepoint-online.com>",
-            content: `Javier ha compartido un archivo contigo. Haz clic abajo para abrirlo y revisarlo para la reunión de mañana:<br><br><center><a href="#" class="tooltip-link">Ver Documento en la Nube</a></center>`,
-            isPhishing: true,
-            feedback: "¡Sospechoso! El dominio <b>sharepoint-online.com</b> parece real, pero Microsoft utiliza <i>sharepoint.com</i>. Es un ejemplo de 'Typosquatting' diseñado para engañar incluso a ojos expertos."
-        },
-        {
-            subject: "Confirmación de cambio de contraseña exitoso",
-            sender: "Apollo IT <systems@apollo-corp.com>",
-            content: `Este es un aviso automático para informarle que la contraseña de su cuenta @Apollo ha sido cambiada con éxito.<br><br>Si usted no realizó este cambio, <b>haga clic aquí para revertirlo inmediatamente</b>.`,
-            isPhishing: false,
-            feedback: "Este correo es legítimo y es una práctica de seguridad estándar. Si recibes uno sin haber hecho el cambio, debes reportarlo a TI, pero el correo en sí es un aviso de seguridad real del dominio oficial."
-        },
-        {
-            subject: "Encuesta de satisfacción de empleados (Anónima)",
-            sender: "RRHH Apollo <encuestas-apollo@surveymonkey.com>",
-            content: `Queremos saber tu opinión sobre el ambiente laboral. Tu respuesta es totalmente anónima. Accede aquí:<br><br><a href="#">https://es.surveymonkey.com/r/Apollo2026</a>`,
-            isPhishing: false,
-            feedback: "Es legítimo. Muchas empresas utilizan plataformas externas como SurveyMonkey para encuestas anónimas. La URL apunta al dominio real de la plataforma y el remitente es consistente."
-        }            
-        ];
-
-        let currentIdx = 0;
-        let score = 0;
-
-        function startQuiz() {
-            document.getElementById('start-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.add('active');
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const q = scenarios[currentIdx];
-            document.getElementById('mail-subject').innerText = q.subject;
-            document.getElementById('mail-sender').innerHTML = `De: <b>${q.sender}</b>`;
-            document.getElementById('mail-content').innerHTML = q.content;
-            document.getElementById('progress').innerText = `Escenario ${currentIdx + 1} de ${scenarios.length}`;
-            document.getElementById('feedback').style.display = 'none';
-            document.getElementById('action-buttons').style.display = 'flex';
-            document.getElementById('next-btn').style.display = 'none';
-        }
-
-        function checkAnswer(userSaysPhishing) {
-            const q = scenarios[currentIdx];
-            const fb = document.getElementById('feedback');
-            fb.style.display = 'block';
-            document.getElementById('action-buttons').style.display = 'none';
-            document.getElementById('next-btn').style.display = 'block';
-
-            if (userSaysPhishing === q.isPhishing) {
-                score += 100;
-                fb.className = 'success-bg';
-                fb.innerHTML = "<b>✅ CORRECTO:</b> " + q.feedback;
-            } else {
-                fb.className = 'error-bg';
-                fb.innerHTML = "<b>❌ ERROR:</b> " + q.feedback;
-            }
-            document.getElementById('score').innerText = `Puntos: ${score}`;
-        }
-
-        function nextQuestion() {
-            currentIdx++;
-            if (currentIdx < scenarios.length) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            document.getElementById('game-screen').classList.remove('active');
-            document.getElementById('result-screen').classList.add('active');
-            document.getElementById('final-stats').innerText = `Puntaje final: ${score} puntos.`;
-        }
-
-        // Funciones para el "Browser Preview"
-        function showUrl(url) {
-            const p = document.getElementById('browser-url-preview');
-            p.innerText = url;
-            p.style.opacity = '1';
-        }
-        function hideUrl() {
-            document.getElementById('browser-url-preview').style.opacity = '0';
-        
-        }
-        // Forzar que el quiz inicie en la pantalla correcta al cargar
-window.onload = function() {
-    document.getElementById('start-screen').classList.add('active');
-    console.log("Quiz cargado correctamente");
-};
-    </script>
-</body>
-</html>
+                subject: "⚠️ Actividad sospechosa en su cuenta",
+                sender: "Google Security <no-reply@accounts-google-security.com>",
+                content: `Alguien intentó entrar a tu cuenta. <br><br><center><a href="#" class="tooltip-link">Actualizar Contraseña</a></center>`,
+                isPhishing: true,
+                feedback: "El dominio <b>accounts-google-security.com</b> es falso. Google usa @google.com."
+            },
+            {
+                subject: "Factura pendiente - Servicios Cloud",
+                sender: "Facturación Apollo <billing@apollo-corp.com>",
+                content: `Adjuntamos la factura mensual. <br><br>📎 <b>Factura_Marzo.pdf</b>`,
+                isPhishing: false,
+                feedback: "
