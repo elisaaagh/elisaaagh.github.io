@@ -131,6 +131,32 @@
             cursor: pointer;
             margin-top: 15px;
         }
+
+        /* Estilos para el Ranking */
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #f8f9fa;
+            color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .ranking-table th, .ranking-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .ranking-table th { background: #1a73e8; color: white; }
+        .analysis-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -283,65 +309,118 @@
         ];
 
         let currentIdx = 0;
-        let score = 0;
+let score = 0;
+let startTime; // Para medir tiempo por escenario
+let performanceLog = []; // Guardará {escenario: id, tiempo: segs, acierto: bool}
 
-        // Función para iniciar el Quiz
-        function startQuiz() {
-            console.log("Iniciando Quiz..."); // Para debug
-            document.getElementById('start-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.add('active');
-            showQuestion();
-        }
+function startQuiz() {
+    // Pedir nombre para el ranking
+    const userName = prompt("Introduce tu nombre para el registro:") || "Anonimo";
+    localStorage.setItem("currentUser", userName);
+    
+    document.getElementById('start-screen').classList.remove('active');
+    document.getElementById('game-screen').classList.add('active');
+    showQuestion();
+}
 
-        // Mostrar la pregunta actual
-        function showQuestion() {
-            const q = scenarios[currentIdx];
-            document.getElementById('mail-subject').innerText = q.subject;
-            document.getElementById('mail-sender').innerHTML = `De: <b>${q.sender}</b>`;
-            document.getElementById('mail-content').innerHTML = q.content;
-            document.getElementById('progress').innerText = `Caso ${currentIdx + 1} de ${scenarios.length}`;
-            
-            document.getElementById('feedback').style.display = 'none';
-            document.getElementById('action-buttons').style.display = 'flex';
-            document.getElementById('next-btn').style.display = 'none';
-        }
+function showQuestion() {
+    const q = scenarios[currentIdx];
+    // Iniciar cronómetro para este escenario
+    startTime = Date.now(); 
 
-        // Evaluar respuesta
-        function checkAnswer(userSaysPhishing) {
-            const q = scenarios[currentIdx];
-            const fb = document.getElementById('feedback');
-            
-            fb.style.display = 'block';
-            document.getElementById('action-buttons').style.display = 'none';
-            document.getElementById('next-btn').style.display = 'block';
+    document.getElementById('mail-subject').innerText = q.subject;
+    document.getElementById('mail-sender').innerHTML = `De: <b>${q.sender}</b>`;
+    document.getElementById('mail-content').innerHTML = q.content;
+    document.getElementById('progress').innerText = `Caso ${currentIdx + 1} de ${scenarios.length}`;
+    
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('action-buttons').style.display = 'flex';
+    document.getElementById('next-btn').style.display = 'none';
+}
 
-            if (userSaysPhishing === q.isPhishing) {
-                score += 100;
-                fb.className = 'success-bg';
-                fb.innerHTML = "<b>✅ ¡Correcto!</b> " + q.feedback;
-            } else {
-                fb.className = 'error-bg';
-                fb.innerHTML = "<b>❌ Fallaste.</b> " + q.feedback;
-            }
-            document.getElementById('score').innerText = `Puntos: ${score}`;
-        }
+function checkAnswer(userSaysPhishing) {
+    const q = scenarios[currentIdx];
+    const endTime = Date.now();
+    const timeSpent = (endTime - startTime) / 1000; // Segundos
 
-        // Pasar al siguiente
-        function nextQuestion() {
-            currentIdx++;
-            if (currentIdx < scenarios.length) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        }
+    const fb = document.getElementById('feedback');
+    fb.style.display = 'block';
+    document.getElementById('action-buttons').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'block';
 
-        // Mostrar resultados finales
-        function showResults() {
-            document.getElementById('game-screen').classList.remove('active');
-            document.getElementById('result-screen').classList.add('active');
-            document.getElementById('final-stats').innerText = `Has obtenido ${score} de ${scenarios.length * 100} puntos posibles.`;
-        }
+    let isCorrect = (userSaysPhishing === q.isPhishing);
+    
+    // Registrar desempeño
+    performanceLog.push({
+        id: currentIdx + 1,
+        subject: q.subject,
+        time: timeSpent,
+        correct: isCorrect
+    });
+
+    if (isCorrect) {
+        score += 100;
+        fb.className = 'success-bg';
+        fb.innerHTML = `<b>✅ ¡Correcto!</b> (${timeSpent.toFixed(1)}s) ${q.feedback}`;
+    } else {
+        fb.className = 'error-bg';
+        fb.innerHTML = `<b>❌ Fallaste.</b> ${q.feedback}`;
+    }
+    document.getElementById('score').innerText = `Puntos: ${score}`;
+}
+
+function showResults() {
+    document.getElementById('game-screen').classList.remove('active');
+    document.getElementById('result-screen').classList.add('active');
+
+    // 1. Análisis de desempeño: Buscar el más tardado
+    const slowest = [...performanceLog].sort((a, b) => b.time - a.time)[0];
+    
+    // 2. Guardar en Ranking (LocalStorage)
+    saveToRanking(score);
+
+    // 3. Mostrar HTML
+    let analysisHTML = `
+        <div class="analysis-box">
+            <b>📊 Análisis de Desempeño:</b><br>
+            El escenario que más tiempo te tomó analizar fue: <i>"${slowest.subject}"</i> con <b>${slowest.time.toFixed(1)} segundos</b>.
+        </div>
+        <h3 style="margin-top:20px;">🏆 Ranking Global</h3>
+        <table class="ranking-table" id="rankingTable">
+            <thead>
+                <tr><th>Pos</th><th>Usuario</th><th>Puntos</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    `;
+    
+    document.getElementById('final-stats').innerHTML = `Puntaje Final: ${score} ${analysisHTML}`;
+    displayRanking();
+}
+
+function saveToRanking(finalScore) {
+    let ranking = JSON.parse(localStorage.getItem("phishingRanking")) || [];
+    ranking.push({
+        name: localStorage.getItem("currentUser"),
+        points: finalScore,
+        date: new Date().toLocaleDateString()
+    });
+    // Ordenar por puntos y guardar
+    ranking.sort((a, b) => b.points - a.points);
+    localStorage.setItem("phishingRanking", JSON.stringify(ranking.slice(0, 5))); // Top 5
+}
+
+function displayRanking() {
+    let ranking = JSON.parse(localStorage.getItem("phishingRanking")) || [];
+    const tbody = document.querySelector("#rankingTable tbody");
+    tbody.innerHTML = ranking.map((user, index) => `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${user.name}</td>
+            <td>${user.points}</td>
+        </tr>
+    `).join("");
+}
     </script>
 </body>
 </html>
