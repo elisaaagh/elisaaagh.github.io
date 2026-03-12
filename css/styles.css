@@ -1343,8 +1343,74 @@ font-size: 13px;
 color: #b388ff;
 border: 1px solid rgba(138,43,226,0.3);
 }
-/* ---------- QUIZ MEJORADO ---------- */
 
+/* Contenedor del Quiz */
+#quiz-container {
+    animation: fadeUp 0.8s ease;
+}
+
+/* Reutilizando tus estilos de progreso pero con tu paleta */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 10px 0 25px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c77dff, #00ffd5);
+    width: 0%;
+    transition: width 0.4s ease;
+    box-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+}
+
+/* Botones específicos del Quiz para que no choquen con tus botones generales */
+.btn-phishing {
+    background: #d93025 !important;
+    color: white;
+    flex: 1;
+}
+
+.btn-legit {
+    background: #1a73e8 !important;
+    color: white;
+    flex: 1;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Feedback que simpatice con tu estilo de tarjetas */
+#feedback {
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.success-bg { border-left: 5px solid #00ffd5 !important; color: #00ffd5; }
+.error-bg { border-left: 5px solid #ff4d4d !important; color: #ff4d4d; }
+
+/* La simulación de Gmail se mantiene clara para realismo */
+.gmail-wrapper {
+    background: #ffffff;
+    color: #202124;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: left;
+}
+
+.gmail-header { border-bottom: 1px solid #e0e0e0; background: #f8f9fa; }
+
+/* ---------- QUIZ MEJORADO ---------- */
+/*
 #progress {
   margin-bottom: 20px;
   font-size: 0.9rem;
@@ -1365,7 +1431,7 @@ border: 1px solid rgba(138,43,226,0.3);
   background: linear-gradient(90deg, #c77dff, #7b2cbf);
   width: 0%;
   transition: width 0.4s ease;
-}
+}*/
 
 /* Caja tipo correo real */
 .email-box {
@@ -1419,7 +1485,7 @@ border: 1px solid rgba(138,43,226,0.3);
   cursor: not-allowed;
 }
 
-/* Feedback profesional */
+/* Feedback profesional *//*
 #feedback {
   margin-top: 20px;
   padding: 15px;
@@ -1427,10 +1493,10 @@ border: 1px solid rgba(138,43,226,0.3);
   background: rgba(255,255,255,0.05);
   line-height: 1.6;
   font-size: 0.95rem;
-}
+}*/
 
 /* -------- SIMULACIÓN CORREO REAL -------- */
-
+/*
 .gmail-wrapper {
   background: white;
   color: #202124;
@@ -1482,15 +1548,15 @@ border: 1px solid rgba(138,43,226,0.3);
 .gmail-warning {
   color: #d93025;
   font-weight: 600;
-}
-
+}*/
+/*
 .gmail-link {
   color: #1a73e8;
   text-decoration: underline;
   cursor: pointer;
 }
 /* -------- Vista previa URL tipo navegador -------- */
-
+/*
 .url-preview {
   position: fixed;
   bottom: 15px;
@@ -1505,4 +1571,4 @@ border: 1px solid rgba(138,43,226,0.3);
   pointer-events: none;
   font-family: monospace;
   z-index: 9999;
-}
+}*/
