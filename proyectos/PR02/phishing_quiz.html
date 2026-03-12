@@ -359,25 +359,13 @@ let performanceLog = [];
 
 // --- 1. INICIO DEL QUIZ ---
 function startQuiz() {
-    let userName = "";
-    
-    // El bucle se repite mientras el nombre esté vacío, sea solo espacios o sea nulo
-    while (!userName || userName.trim() === "") {
-        userName = prompt("Para participar en el Ranking Global, por favor ingresa tu nombre:");
+        const userName = prompt("Introduce tu nombre para el Ranking Global:") || "Hacker_Anonimo";
+        sessionStorage.setItem("userName", userName);
         
-        // Si el usuario presiona "Cancelar", le asignamos un nombre por defecto y salimos del bucle
-        if (userName === null) {
-            userName = "Visitante_Anonimo";
-            break; 
-        }
+        document.getElementById('start-screen').classList.remove('active');
+        document.getElementById('game-screen').classList.add('active');
+        showQuestion();
     }
-    
-    sessionStorage.setItem("userName", userName.trim());
-    
-    document.getElementById('start-screen').classList.remove('active');
-    document.getElementById('game-screen').classList.add('active');
-    showQuestion();
-}
 
 // --- 2. MOSTRAR PREGUNTA ---
 function showQuestion() {
