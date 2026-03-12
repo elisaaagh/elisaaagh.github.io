@@ -10,74 +10,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        #quiz-container {
-            width: 100%;
-            margin: 0 auto;
-            color: #eaeaea; 
+        /* FIX DE VISIBILIDAD: Aseguramos que la sección sea visible sobre el fondo oscuro */
+        #quiz-section {
+            position: relative;
+            z-index: 10; /* Por encima de la matrix-bg */
+            margin-top: 40px;
+            min-height: 600px;
         }
 
-        .screen { display: none; }
-        .active { display: block; animation: fadeUp 0.5s ease; }
+        #quiz-container {
+            background: rgba(15, 15, 30, 0.85); /* Fondo semitransparente estilo tu página */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(199, 125, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 850px;
+            margin: 0 auto;
+            color: #fff;
+        }
 
-        .email-viewer {
-            background: #ffffff;
+        /* Pantallas */
+        .screen { display: none; }
+        .screen.active { display: block; animation: fadeUp 0.6s ease forwards; }
+
+        /* Gmail Simulation (Contraste para ver el phishing) */
+        .gmail-wrapper {
+            background: #fff;
             color: #202124;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             text-align: left;
         }
 
-        .email-header {
-            padding: 15px;
-            border-bottom: 1px solid #dadce0;
-            background: #f1f3f4;
-        }
+        .gmail-header { padding: 15px; background: #f1f3f4; border-bottom: 1px solid #ddd; }
+        .gmail-subject { font-size: 1.1rem; font-weight: 700; color: #202124; }
+        .gmail-meta { font-size: 0.85rem; color: #5f6368; }
+        .gmail-body { padding: 20px; color: #3c4043; min-height: 150px; }
 
-        .subject { font-size: 1.1rem; font-weight: 600; color: #202124; margin-bottom: 5px; }
-        .sender { font-size: 0.85rem; color: #5f6368; }
-
-        .email-body {
-            padding: 20px;
-            min-height: 150px;
-            line-height: 1.6;
-            color: #3c4043;
-        }
-
-        /* Botones de acción del Quiz */
-        .actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .btn-phishing { background: #d93025 !important; color: white; flex: 1; }
-        .btn-legit { background: #1a73e8 !important; color: white; flex: 1; }
+        /* Botones del Quiz */
+        .quiz-actions { display: flex; gap: 15px; margin-top: 25px; }
+        .btn-phish { background: #d93025; color: white; border: none; padding: 12px; border-radius: 6px; flex: 1; cursor: pointer; font-weight: bold; }
+        .btn-safe { background: #1a73e8; color: white; border: none; padding: 12px; border-radius: 6px; flex: 1; cursor: pointer; font-weight: bold; }
         
-        #feedback {
-            margin: 20px 0;
+        /* Feedback */
+        #feedback-box {
+            margin-top: 20px;
             padding: 15px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(199, 125, 255, 0.2);
+            display: none;
+            line-height: 1.5;
         }
+        .correct { background: rgba(0, 255, 200, 0.15); border: 1px solid #00ffcc; color: #00ffcc; }
+        .incorrect { background: rgba(217, 48, 37, 0.15); border: 1px solid #ff4d4d; color: #ff4d4d; }
 
-        .success-bg { border-left: 5px solid #00ffd5; color: #00ffd5; }
-        .error-bg { border-left: 5px solid #ff4d4d; color: #ff4d4d; }
+        /* Barra de Progreso */
+        .pg-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 15px 0; overflow: hidden; }
+        .pg-bar { height: 100%; background: #c77dff; width: 0%; transition: 0.4s; }
 
         .url-preview {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background: #202124;
-            color: #00ffd5;
-            padding: 4px 10px;
-            font-size: 12px;
-            border-radius: 4px;
-            opacity: 0;
-            z-index: 10000;
-            pointer-events: none;
+            position: fixed; bottom: 15px; left: 15px; background: #000; color: #00ffd5;
+            padding: 5px 10px; font-size: 12px; border-radius: 4px; opacity: 0; pointer-events: none; z-index: 9999;
         }
     </style>
 </head>
