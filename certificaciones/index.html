@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio – Certificaciones</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
 
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="topbar">
+        <div class="matrix-bg"></div>
+    <a href="https://www.upslp.edu.mx/upslp/">
+          <img src="../images/upslp.jpg" alt="Logo universidad" class="logo-uni">
+      </a>
+        <a href="../index.html" class="btn-volver-top">← Volver</a>
+        <a href="https://elisaaagh.github.io/">
+        <img src="../images/capi.png" alt="Foto estudiante" class="foto-alumna">
+    </a>
+    </div>
+
+    <header class="hero" id="hero">
+  <div class="hero-content">
+    <h1>Certificaciones</h1>
+  </div>
+</header>
+
+
+    <!-- NAV -->
+    <nav>
+      <a href="https://elisaaagh.github.io/">Inicio</a>
+      <a href="https://elisaaagh.github.io/actividades/index.html">Actividades</a>
+      <a href="https://elisaaagh.github.io/proyectos/index.html">Proyectos</a>
+      <div class="dropdown">
+    <a href="#">Road to hall of fame</a>
+    <div class="submenu">
+      <a href="https://elisaaagh.github.io/SQL_Injection/index.html">SQL Injection</a>
+    </div>
+  </div>
+        <a href="https://elisaaagh.github.io/certificaciones/index.html">Certificaciones</a>
+      <a href="https://elisaaagh.github.io/#contacto">Contacto</a>
+    </nav>
+
+<div class="section-divider"></div>
+
+    <!-- PARCIAL 1 -->
+    <div class="hero-content">
+        <h1>Reflexión personal sobre certificaciones</h1>
+    </div>
+    <section class="cards-container"  data-aos="fade-up">
+        
+        <a href="../parcial1/act1/index.html" class="card">
+            <h3 text-align="center">Cisco</h3>
+            <p>Introducción a la ciberseguridad.</p>
+        </a>
+
+        <a href="../parcial1/act2/index.html" class="card">
+            <h3 text-align="center">Cisco</h3>
+            <p>Conceptos básicos de redes.</p>
+        </a>
+
+        <a href="../parcial1/act3/index.html" class="card">
+            <h3 text-align="center">Cisco</h3>
+            <p>Dispositivos de red y configuración inicial.</p>
+        </a>
+
+        <a href="../parcial1/act4/index.html" class="card">
+            <h3 text-align="center">Cisco</h3>
+            <p>Seguridad en terminales.</p>
+        </a>
+
+        <a href="../parcial1/act5/index.html" class="card">
+            <h3 text-align="center">Cisco</h3>
+            <p>Administración de amenazas cibernéticas.</p>
+        </a>
+
+        <a href="../parcial1/act6/index.html" class="card">
+            <h3 text-align="center">Actividad 6</h3>
+            <p>Carrera profesional de Analista Junior en Ciberseguridad.</p>
+        </a>
+
+      <a href="../parcial1/act6/index.html" class="card">
+            <h3 text-align="center">Cisco</h3>
+            <p>Hacker ético.</p>
+        </a>
+
+    </section>
+  <div class="section-divider"></div>
+
+
+  <div class="section-divider"></div>
+  
+<footer>
+  <p>Elisa Alejandra Arellano Wratny                    © Portafolio Seguridad Informática                    UPSLP</p>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 450,
+      delay: 0,
+      offset: 10,      
+      once: true,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+    <script src="../js/particles.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const dropdownBtn = document.querySelector(".dropdown > a");
+
+  dropdownBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    const submenu = this.nextElementSibling;
+    submenu.classList.toggle("active");
+  });
+});
+</script>
+</body>
+</html>
